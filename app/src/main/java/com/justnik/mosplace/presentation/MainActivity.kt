@@ -19,13 +19,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadDistricts()
+
+        launchDistrictsFragment()
     }
 
-    private fun loadDistricts(){
-        scope.launch {
-            val districts = viewModel.loadDistricts()
-            Log.d("GetRequest", districts.toString())
-        }
+    private fun launchDistrictsFragment(){
+        val fragment = DistrictsFragment.newInstance()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
+
     }
 }

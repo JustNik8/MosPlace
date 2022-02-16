@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def okHttpVersion = '4.9.0'
     def retrofitVersion = '2.9.0'
 
