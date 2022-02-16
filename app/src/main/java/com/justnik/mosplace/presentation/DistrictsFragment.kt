@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
+import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.presentation.adapters.DistrictAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,8 @@ class DistrictsFragment : Fragment() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    var onDistrictCLickListener: ((District) -> Unit)? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +51,10 @@ class DistrictsFragment : Fragment() {
 
     private fun setUpRecyclerView() {
         binding.rvDistricts.adapter = rvAdapter
+
+        rvAdapter.onDistrictClickListener = {
+            onDistrictCLickListener?.invoke(it)
+        }
     }
 
     private fun loadDistricts() {

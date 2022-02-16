@@ -13,6 +13,8 @@ import com.justnik.mosplace.domain.entities.District
 class DistrictAdapter(private val context: Context) :
     ListAdapter<District, DistrictViewHolder>(DistrictDiffUtil) {
 
+    var onDistrictClickListener: ((District) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DistrictViewHolder {
         val binding = ItemDistrictBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -24,11 +26,17 @@ class DistrictAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: DistrictViewHolder, position: Int) {
         val binding = holder.binding
+        val district = getItem(position)
 
-        binding.district = getItem(position)
+        binding.district = district
 
         with(binding) {
             Glide.with(context).load(R.drawable.img_district_example).into(ivItemDistrictPhoto)
+
+            root.setOnClickListener {
+                onDistrictClickListener?.invoke(district)
+            }
         }
+
     }
 }
