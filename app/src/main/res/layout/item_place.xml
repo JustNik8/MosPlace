@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="place"
+            type="com.justnik.mosplace.domain.entities.Place" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_item_place_image"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:contentDescription="Photo of place"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/img_district_example" />
+
+            <TextView
+                android:id="@+id/tv_item_place_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{place.title}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Красная площадь" />
+
+            <TextView
+                android:id="@+id/tv_item_place_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:textSize="16sp"
+                tools:text="Уникальное место" />
+
+            <TextView
+                android:id="@+id/tv_item_place_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:text="@{place.description}"
+                tools:text="Красная площадь — главная площадь Москвы, расположена между Московским Кремлём и Китай-городом. Выходит к берегу Москвы-реки через пологий Васильевский спуск" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
