@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.domain.entities.District
-import com.justnik.mosplace.presentation.adapters.DistrictAdapter
+import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 class DistrictsFragment : Fragment() {
 
@@ -59,8 +61,12 @@ class DistrictsFragment : Fragment() {
 
     private fun loadDistricts() {
         scope.launch {
-            val districts = viewModel.loadDistricts()
-            rvAdapter.submitList(districts)
+            try {
+                val districts = viewModel.loadDistricts()
+                rvAdapter.submitList(districts)
+            } catch (e: UnknownHostException){
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

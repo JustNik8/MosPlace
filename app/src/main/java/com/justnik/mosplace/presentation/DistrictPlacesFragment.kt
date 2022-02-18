@@ -5,8 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DistrictPlacesFragment : Fragment() {
 
@@ -15,6 +20,16 @@ class DistrictPlacesFragment : Fragment() {
         get() = _binding!!
 
     private lateinit var district: District
+
+    private val rvAdapter: PlaceAdapter by lazy {
+        PlaceAdapter(requireContext())
+    }
+
+    private val viewModel: MosViewModel by lazy {
+        ViewModelProvider(this)[MosViewModel::class.java]
+    }
+
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +46,25 @@ class DistrictPlacesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.district = district
+        setUpRecyclerView()
+        launchPlaces()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setUpRecyclerView(){
+        binding.rvPlaces.adapter = rvAdapter
+    }
+
+    private fun launchPlaces(){
+        scope.launch {
+            val places = viewModel.loadPlacesByDistrictId(district.id)
+            rvAdapter.submitList(places)
+        }
     }
 
     companion object {

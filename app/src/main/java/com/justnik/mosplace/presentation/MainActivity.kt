@@ -1,5 +1,6 @@
 package com.justnik.mosplace.presentation
 
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         launchDistrictsFragment()
+        requestPlaces()
+
+    }
+
+    private fun requestPlaces(){
+        scope.launch {
+            val places = viewModel.loadPlacesByDistrictId(1)
+            Log.d("Places", places.toString())
+        }
     }
 
     private fun launchDistrictsFragment(){

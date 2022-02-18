@@ -1,7 +1,10 @@
 package com.justnik.mosplace.data.mappers
 
 import com.justnik.mosplace.data.network.model.DistrictDto
+import com.justnik.mosplace.data.network.model.PlaceDto
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.domain.entities.Place
+import com.justnik.mosplace.domain.entities.PlaceImage
 
 class Mapper {
     fun districtMapDtoToEntity(dto: DistrictDto): District {
@@ -11,4 +14,22 @@ class Mapper {
         )
     }
 
+    fun placeMapDtoToEntity(dto: PlaceDto): Place {
+        val placeImages = dto.images.map {
+            PlaceImage(
+                id = it.id,
+                imageUrl = it.imageUrl,
+                place = it.place
+            )
+        }
+
+        return Place(
+            id = dto.id,
+            images =  placeImages,
+            title = dto.title,
+            description = dto.description,
+            type = dto.type,
+            district = dto.district
+        )
+    }
 }
