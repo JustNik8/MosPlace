@@ -21,17 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         launchDistrictsFragment()
-        requestPlaces()
-
-    }
-
-    private fun requestPlaces(){
-        scope.launch {
-            val places = viewModel.loadPlacesByDistrictId(1)
-            Log.d("Places", places.toString())
-        }
     }
 
     private fun launchDistrictsFragment(){
