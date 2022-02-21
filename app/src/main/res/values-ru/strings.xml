@@ -7,4 +7,6 @@
     <string name="list_of_districts">Список округов</string>
     <string name="unique_place">Уникальное место</string>
     <string name="restaurant">Ресторан</string>
+    <string name="search">Поиск</string>
+    <string name="hint_search">Введите название округа</string>
 </resources>

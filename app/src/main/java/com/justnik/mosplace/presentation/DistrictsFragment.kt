@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
@@ -30,6 +32,7 @@ class DistrictsFragment : Fragment() {
     }
 
     private val scope = CoroutineScope(Dispatchers.Main)
+    private var allDistricts = listOf<District>()
 
     var onDistrictCLickListener: ((District) -> Unit)? = null
 
@@ -43,6 +46,8 @@ class DistrictsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
+        setUpToolBar()
+        observeViewModel()
         loadDistricts()
     }
 
@@ -59,15 +64,43 @@ class DistrictsFragment : Fragment() {
         }
     }
 
+    private fun observeViewModel(){
+        viewModel.districts.observe(viewLifecycleOwner){
+            rvAdapter.submitList(it)
+        }
+    }
+
     private fun loadDistricts() {
         scope.launch {
             try {
-                val districts = viewModel.loadDistricts()
-                rvAdapter.submitList(districts)
+                allDistricts = viewModel.loadDistricts()
+                rvAdapter.submitList(allDistricts)
             } catch (e: UnknownHostException){
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setUpToolBar(){
+        val menuItem = binding.toolbarDistricts.menu.findItem(R.id.action_search)
+        val searchView = menuItem.actionView as SearchView
+        searchView.queryHint = requireContext().resources.getString(R.string.hint_search)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String): Boolean {
+                if(p0 == ""){
+                    rvAdapter.submitList(allDistricts)
+                    return true
+                }
+                viewModel.filterDistricts(allDistricts, p0)
+                return true
+            }
+
+        })
     }
 
     companion object {

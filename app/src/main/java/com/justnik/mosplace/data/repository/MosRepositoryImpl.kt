@@ -22,15 +22,11 @@ class MosRepositoryImpl : MosRepository {
     }
 
     override suspend fun loadPlaces(id: Int): List<Place> {
-        val placesDto = ApiFactory.apiService.getPlacesByDistrictId(PLACE_BASE_URL + id)
+        val placesDto = ApiFactory.apiService.getPlacesByDistrictId(id)
         val places = placesDto.map {
             mapper.placeMapDtoToEntity(it)
         }
         return places
     }
 
-    companion object {
-        private const val PLACE_BASE_URL =
-            "https://mosplace.pythonanywhere.com/api/v1/places/district/"
-    }
 }
