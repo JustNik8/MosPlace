@@ -17,19 +17,9 @@
             android:id="@+id/toolbar_districts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:menu="@menu/menu_district"
+            app:title="@string/list_of_districts"
             />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_of_districts"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:paddingBottom="4dp"
-            android:paddingTop="8dp"
-            android:textAlignment="center"
-            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_districts"

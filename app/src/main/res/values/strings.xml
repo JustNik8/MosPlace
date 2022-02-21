@@ -8,4 +8,5 @@
     <string name="unique_place">Unique place</string>
     <string name="restaurant">Restaurant</string>
     <string name="search">Search</string>
+    <string name="hint_search">Type district here</string>
 </resources>

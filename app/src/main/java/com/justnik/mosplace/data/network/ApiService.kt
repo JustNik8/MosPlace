@@ -10,13 +10,14 @@ interface ApiService {
     @GET("places/districts/?format=json")
     suspend fun getDistrictList(): List<DistrictDto>
 
-    @GET
+    @GET("places/places/")
     suspend fun getPlacesByDistrictId(
-        @Url url: String,
+        @Query(QUERY_PARAM_DISTRICT_ID) districtId: Int,
         @Query(QUERY_PARAM_FORMAT) format: String = "json"
     ): List<PlaceDto>
 
     companion object {
         private const val QUERY_PARAM_FORMAT = "format"
+        private const val QUERY_PARAM_DISTRICT_ID = "district_id"
     }
 }
