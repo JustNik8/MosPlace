@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,8 @@ class DistrictPlacesFragment : Fragment() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    var onPlaceClickListener: ((Place) -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         district = arguments?.getParcelable(KEY_DISTRICT)
@@ -48,7 +51,6 @@ class DistrictPlacesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
         launchPlaces()
-
     }
 
     override fun onDestroy() {
@@ -58,6 +60,10 @@ class DistrictPlacesFragment : Fragment() {
 
     private fun setUpRecyclerView(){
         binding.rvPlaces.adapter = rvAdapter
+
+        rvAdapter.onPlaceClickListener = {
+            onPlaceClickListener?.invoke(it)
+        }
     }
 
     private fun launchPlaces(){

@@ -12,6 +12,9 @@ import com.justnik.mosplace.domain.parsePlaceType
 
 class PlaceAdapter(private val context: Context):
     ListAdapter<Place, PlaceViewHolder>(PlaceDiffUtil) {
+
+    var onPlaceClickListener: ((Place) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val binding = ItemPlaceBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -29,5 +32,9 @@ class PlaceAdapter(private val context: Context):
         binding.tvItemPlaceType.text = parsePlaceType(place.type, context)
 
         Glide.with(context).load(place.images[0].imageUrl).into(binding.ivItemPlaceImage)
+
+        binding.root.setOnClickListener {
+            onPlaceClickListener?.invoke(place)
+        }
     }
 }

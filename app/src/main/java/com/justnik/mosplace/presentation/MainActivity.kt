@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.R
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.domain.entities.Place
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,6 +38,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchDistrictPlacesFragment(district: District){
         val fragment = DistrictPlacesFragment.newInstance(district)
+
+        fragment.onPlaceClickListener = {
+            launchPlaceFragment(it)
+        }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun launchPlaceFragment(place: Place){
+        val fragment = PlaceFragment.newInstance(place)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, fragment)
