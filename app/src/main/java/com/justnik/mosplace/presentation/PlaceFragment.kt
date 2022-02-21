@@ -33,7 +33,16 @@ class PlaceFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.place = place
+
         setUpImageSlider()
+        fillDescription()
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setUpImageSlider(){
@@ -42,9 +51,9 @@ class PlaceFragment : Fragment() {
         binding.placeImageSlider.setSliderAdapter(placeImageAdapter)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun fillDescription(){
+        val textToShow = "${place.description}\n"
+        binding.tvPlaceDesc.text = textToShow.repeat(20)
     }
 
     companion object{
