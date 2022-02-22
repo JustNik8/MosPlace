@@ -52,17 +52,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/place_image_slider"
                 tools:text="Красная площадь" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/b_locate_place"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_circle"
+                app:icon="@drawable/ic_location"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_place_title" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_place_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="16sp"
                 android:text="@{place.fullDescription}"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_place_title"
+                app:layout_constraintTop_toBottomOf="@+id/b_locate_place"
                 tools:text="Красная площадь — главная площадь Москвы, расположена между Московским Кремлём и Китай-городом. Выходит к берегу Москвы-реки через пологий Васильевский спуск." />
 
             <androidx.appcompat.widget.AppCompatTextView
