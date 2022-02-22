@@ -10,6 +10,7 @@ import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.FilterDistrictsUseCase
 import com.justnik.mosplace.domain.usecases.LoadDistrictsUseCase
 import com.justnik.mosplace.domain.usecases.LoadPlacesUseCase
+import com.justnik.mosplace.domain.usecases.OpenPlaceInMapUseCase
 
 class MosViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = MosRepositoryImpl()
@@ -17,6 +18,7 @@ class MosViewModel(application: Application) : AndroidViewModel(application) {
     private val loadPlacesUseCase = LoadPlacesUseCase(repository)
     private val loadDistrictsUseCase = LoadDistrictsUseCase(repository)
     private val filterDistrictsUseCase = FilterDistrictsUseCase()
+    private val openPlaceInMapUseCase = OpenPlaceInMapUseCase(application)
 
     private var _districts = MutableLiveData<List<District>>()
     val districts: LiveData<List<District>>
@@ -33,5 +35,9 @@ class MosViewModel(application: Application) : AndroidViewModel(application) {
 
     fun filterDistricts(allDistricts: List<District>, substring: String) {
         _districts.value = filterDistrictsUseCase(allDistricts, substring)
+    }
+
+    fun openPlaceInMap(placeName: String){
+        openPlaceInMapUseCase(placeName)
     }
 }
