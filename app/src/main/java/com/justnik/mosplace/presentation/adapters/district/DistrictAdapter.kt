@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemDistrictBinding
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.domain.getAbbreviationWithName
 
 
 class DistrictAdapter(private val context: Context) :
@@ -31,7 +32,15 @@ class DistrictAdapter(private val context: Context) :
         binding.district = district
 
         with(binding) {
-            Glide.with(context).load(R.drawable.img_district_example).into(ivItemDistrictPhoto)
+            if(district.imageUrl != null){
+                Glide.with(context).load(district.imageUrl).into(ivItemDistrictPhoto)
+            }
+            else {
+                Glide.with(context).load(R.drawable.img_district_example).into(ivItemDistrictPhoto)
+            }
+
+            val districtText = getAbbreviationWithName(district.abbreviation, district.title)
+            binding.tvItemDistrictName.text = districtText
 
             root.setOnClickListener {
                 onDistrictClickListener?.invoke(district)

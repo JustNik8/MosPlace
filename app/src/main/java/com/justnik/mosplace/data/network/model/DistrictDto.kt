@@ -10,5 +10,13 @@ data class DistrictDto (
 
     @SerializedName("title")
     @Expose
-    val title: String
+    val title: String,
+
+    @SerializedName("abbreviation")
+    @Expose
+    val abbreviation: String,
+
+    @SerializedName("image")
+    @Expose
+    val imageUrl: String?
 )

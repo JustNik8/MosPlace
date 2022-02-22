@@ -10,7 +10,9 @@ class Mapper {
     fun districtMapDtoToEntity(dto: DistrictDto): District {
         return District(
             id = dto.id,
-            title = dto.title
+            title = dto.title,
+            abbreviation = dto.abbreviation,
+            imageUrl = dto.imageUrl
         )
     }
 
