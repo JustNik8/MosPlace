@@ -9,4 +9,6 @@
     <string name="restaurant">Restaurant</string>
     <string name="search">Search</string>
     <string name="hint_search">Type district here</string>
+
+    <string name="rate_the_place">Rate the place</string>
 </resources>

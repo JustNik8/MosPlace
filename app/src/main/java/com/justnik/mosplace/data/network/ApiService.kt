@@ -7,17 +7,20 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface ApiService {
-    @GET("places/districts/?format=json")
-    suspend fun getDistrictList(): List<DistrictDto>
+    @GET("districts/?format=json")
+    suspend fun getDistrictList(
+        @Query(QUERY_PARAM_DISTRICT_ID) format: String = JSON
+    ): List<DistrictDto>
 
-    @GET("places/places/")
+    @GET("places")
     suspend fun getPlacesByDistrictId(
         @Query(QUERY_PARAM_DISTRICT_ID) districtId: Int,
-        @Query(QUERY_PARAM_FORMAT) format: String = "json"
+        @Query(QUERY_PARAM_FORMAT) format: String = JSON
     ): List<PlaceDto>
 
     companion object {
         private const val QUERY_PARAM_FORMAT = "format"
         private const val QUERY_PARAM_DISTRICT_ID = "district_id"
+        private const val JSON = "json"
     }
 }

@@ -18,9 +18,13 @@ data class PlaceDto (
     @Expose
     val title: String,
 
-    @SerializedName("description")
+    @SerializedName("short_description")
     @Expose
-    val description: String,
+    val shortDescription: String,
+
+    @SerializedName("full_description")
+    @Expose
+    val fullDescription: String,
 
     @SerializedName("type")
     @Expose

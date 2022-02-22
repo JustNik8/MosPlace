@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="@{place.description}"
+                android:text="@{place.shortDescription}"
                 tools:text="Красная площадь — главная площадь Москвы, расположена между Московским Кремлём и Китай-городом. Выходит к берегу Москвы-реки через пологий Васильевский спуск" />
 
         </LinearLayout>

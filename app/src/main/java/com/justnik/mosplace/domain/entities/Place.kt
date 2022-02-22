@@ -8,7 +8,8 @@ data class Place (
     val id: Int,
     val images: List<PlaceImage>,
     val title: String,
-    val description: String,
+    val shortDescription: String,
+    val fullDescription: String,
     val type: String,
     val district: Int
 ): Parcelable

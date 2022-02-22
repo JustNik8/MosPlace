@@ -36,7 +36,6 @@ class PlaceFragment : Fragment() {
         binding.place = place
 
         setUpImageSlider()
-        fillDescription()
     }
 
 
@@ -49,11 +48,6 @@ class PlaceFragment : Fragment() {
         val imageUrls = place.images.map { it.imageUrl }
         val placeImageAdapter = PlaceImageSliderAdapter(imageUrls, requireContext())
         binding.placeImageSlider.setSliderAdapter(placeImageAdapter)
-    }
-
-    private fun fillDescription(){
-        val textToShow = "${place.description}\n"
-        binding.tvPlaceDesc.text = textToShow.repeat(20)
     }
 
     companion object{

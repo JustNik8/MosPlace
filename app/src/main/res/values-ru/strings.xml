@@ -9,4 +9,5 @@
     <string name="restaurant">Ресторан</string>
     <string name="search">Поиск</string>
     <string name="hint_search">Введите название округа</string>
+    <string name="rate_the_place">Оценить место</string>
 </resources>

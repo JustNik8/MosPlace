@@ -1,16 +1,15 @@
 package com.justnik.mosplace.presentation
 
-import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.R
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val scope = CoroutineScope(Dispatchers.Default)

@@ -27,7 +27,8 @@ class Mapper {
             id = dto.id,
             images =  placeImages,
             title = dto.title,
-            description = dto.description,
+            shortDescription = dto.shortDescription,
+            fullDescription = dto.fullDescription,
             type = dto.type,
             district = dto.district
         )
