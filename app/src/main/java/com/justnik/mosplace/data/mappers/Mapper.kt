@@ -31,6 +31,8 @@ class Mapper {
             title = dto.title,
             shortDescription = dto.shortDescription,
             fullDescription = dto.fullDescription,
+            longitude = dto.longitude,
+            latitude = dto.latitude,
             type = dto.type,
             district = dto.district
         )

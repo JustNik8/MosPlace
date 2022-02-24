@@ -7,6 +7,7 @@ import android.util.Log
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.getAbbreviationWithName
 
+
 class OpenPlaceInMapUseCase(private val context: Context){
     operator fun invoke(place: Place){
         val latitude = place.latitude
