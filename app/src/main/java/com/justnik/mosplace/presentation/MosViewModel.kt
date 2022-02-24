@@ -36,7 +36,7 @@ class MosViewModel(application: Application) : AndroidViewModel(application) {
         _districts.value = filterDistrictsUseCase(allDistricts, substring)
     }
 
-    fun openPlaceInMap(placeName: String){
-        openPlaceInMapUseCase(placeName)
+    fun openPlaceInMap(place: Place){
+        openPlaceInMapUseCase(place)
     }
 }

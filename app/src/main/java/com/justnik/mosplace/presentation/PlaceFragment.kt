@@ -56,7 +56,7 @@ class PlaceFragment : Fragment() {
 
     private fun setLocateButtonClickListener(){
         binding.bLocatePlace.setOnClickListener {
-            viewModel.openPlaceInMap(place.title)
+            viewModel.openPlaceInMap(place)
         }
     }
 
