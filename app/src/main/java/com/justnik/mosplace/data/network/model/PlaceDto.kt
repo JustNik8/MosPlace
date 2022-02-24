@@ -26,6 +26,14 @@ data class PlaceDto (
     @Expose
     val fullDescription: String,
 
+    @SerializedName("longitude")
+    @Expose
+    val longitude: Double,
+
+    @SerializedName("latitude")
+    @Expose
+    val latitude: Double,
+
     @SerializedName("type")
     @Expose
     val type: String,

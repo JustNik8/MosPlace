@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.placeimages.PlaceImageSliderAdapter
@@ -40,7 +42,7 @@ class PlaceFragment : Fragment() {
         binding.place = place
 
         setUpImageSlider()
-        setLocateButtonClickListener()
+        setClickListeners()
     }
 
         override fun onDestroyView() {
@@ -54,12 +56,11 @@ class PlaceFragment : Fragment() {
         binding.placeImageSlider.setSliderAdapter(placeImageAdapter)
     }
 
-    private fun setLocateButtonClickListener(){
+    private fun setClickListeners() {
         binding.bLocatePlace.setOnClickListener {
-            viewModel.openPlaceInMap(place.title)
+            viewModel.openPlaceInMap(place)
         }
     }
-
     companion object{
         fun newInstance(place: Place): PlaceFragment {
             return PlaceFragment().apply {
