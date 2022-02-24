@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.justnik.mosplace.domain.entities.Place
+import com.justnik.mosplace.domain.getAbbreviationWithName
+
 
 class OpenPlaceInMapUseCase(private val context: Context){
     operator fun invoke(place: Place){

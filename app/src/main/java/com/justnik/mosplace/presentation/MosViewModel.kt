@@ -24,7 +24,6 @@ class MosViewModel(application: Application) : AndroidViewModel(application) {
     val districts: LiveData<List<District>>
         get() = _districts
 
-
     suspend fun loadDistricts(): List<District> {
         return loadDistrictsUseCase()
     }

@@ -61,50 +61,40 @@
                 app:icon="@drawable/ic_location"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toStartOf="@+id/materialButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_place_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:icon="@drawable/ic_rate_review"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/button_circle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/b_locate_place"
+                app:layout_constraintTop_toTopOf="@+id/b_locate_place" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_place_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@{place.fullDescription}"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/b_locate_place"
                 tools:text="Красная площадь — главная площадь Москвы, расположена между Московским Кремлём и Китай-городом. Выходит к берегу Москвы-реки через пологий Васильевский спуск." />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_title_rating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textAlignment="center"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:text="@string/rate_the_place"
-                app:layout_constraintTop_toBottomOf="@+id/tv_place_desc"
-                />
-
-            <RatingBar
-                android:id="@+id/rb_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:numStars="5"
-                android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_rating"
-                android:contentDescription="@string/rate_the_place"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
