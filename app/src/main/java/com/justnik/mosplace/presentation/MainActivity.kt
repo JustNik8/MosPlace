@@ -27,9 +27,25 @@ class MainActivity : AppCompatActivity() {
         binding.mainBottomNavigation.setOnItemSelectedListener {
             when (it.itemId){
                 R.id.page_main -> launchDistrictsFragment()
+                R.id.page_map -> launchMapFragment()
+                R.id.page_account -> launchAccountFragment()
             }
             true
         }
+    }
+
+    private fun launchAccountFragment() {
+        val fragment = AccountFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
+    }
+
+    private fun launchMapFragment() {
+        val fragment = MapFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .commit()
     }
 
     private fun launchDistrictsFragment() {

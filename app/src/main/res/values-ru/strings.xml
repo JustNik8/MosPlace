@@ -11,6 +11,6 @@
     <string name="hint_search">Введите название округа</string>
     <string name="rate_the_place">Оценить место</string>
     <string name="main">Главная</string>
-    <string name="map">Карты</string>
+    <string name="map">Карта</string>
     <string name="account">Аккаунт</string>
 </resources>
