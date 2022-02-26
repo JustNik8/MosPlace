@@ -11,4 +11,7 @@
     <string name="hint_search">Type district here</string>
 
     <string name="rate_the_place">Rate the place</string>
+    <string name="main">Main</string>
+    <string name="map">Map</string>
+    <string name="account">Account</string>
 </resources>
