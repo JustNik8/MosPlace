@@ -74,4 +74,7 @@ dependencies {
     //ImageSlider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
+    //Yandex API
+    implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
+
 }

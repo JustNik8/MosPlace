@@ -5,6 +5,7 @@ import com.justnik.mosplace.data.network.model.PlaceDto
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.entities.PlaceImage
+import com.yandex.mapkit.geometry.Point
 
 class Mapper {
     fun districtMapDtoToEntity(dto: DistrictDto): District {
@@ -36,5 +37,9 @@ class Mapper {
             type = dto.type,
             district = dto.district
         )
+    }
+
+    fun mapPlaceToPoint(place: Place): Point{
+        return Point(place.latitude, place.longitude)
     }
 }
