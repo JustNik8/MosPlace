@@ -23,6 +23,8 @@ class PlaceFragment : Fragment() {
         ViewModelProvider(this)[MosViewModel::class.java]
     }
 
+    var onReviewButtonClickListener: (() -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         place = arguments?.getParcelable(KEY_PLACE)
@@ -60,6 +62,10 @@ class PlaceFragment : Fragment() {
         binding.bLocatePlace.setOnClickListener {
             viewModel.openPlaceInMap(place)
         }
+
+        binding.bReview.setOnClickListener {
+            onReviewButtonClickListener?.invoke()
+        }
     }
     companion object{
         fun newInstance(place: Place): PlaceFragment {
@@ -71,6 +77,5 @@ class PlaceFragment : Fragment() {
         }
 
         private const val KEY_PLACE = "place"
-
     }
 }

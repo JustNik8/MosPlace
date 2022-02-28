@@ -7,6 +7,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityMainBinding
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
+import com.justnik.mosplace.presentation.review.ReviewFragment
 import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        MapKitFactory.setApiKey(ApiKeys.mapKit);
+        MapKitFactory.setApiKey(ApiKeys.mapKit)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -82,6 +83,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchPlaceFragment(place: Place) {
         val fragment = PlaceFragment.newInstance(place)
+        fragment.onReviewButtonClickListener = {
+            launchReviewFragment()
+        }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun launchReviewFragment(){
+        val fragment = ReviewFragment.newInstance()
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, fragment)

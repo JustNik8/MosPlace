@@ -9,8 +9,15 @@
     <string name="restaurant">Ресторан</string>
     <string name="search">Поиск</string>
     <string name="hint_search">Введите название округа</string>
-    <string name="rate_the_place">Оценить место</string>
+
+    <!-- Bottom navigation -->
     <string name="main">Главная</string>
     <string name="map">Карта</string>
     <string name="account">Аккаунт</string>
+    <string name="your_review">Ваш отзыв</string>
+    <string name="review_subtitle">Оценка и отзыв будут видны всем</string>
+    <string name="review">Отзыв</string>
+    <string name="save">Сохранить</string>
+    <string name="error_rating">Выберите правильную оценку</string>
+    <string name="error_empty_field">Пустое поле</string>
 </resources>
