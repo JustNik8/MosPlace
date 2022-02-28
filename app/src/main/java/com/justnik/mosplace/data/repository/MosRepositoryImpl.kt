@@ -1,5 +1,6 @@
 package com.justnik.mosplace.data.repository
 
+import com.google.android.gms.common.api.Api
 import com.justnik.mosplace.data.mappers.Mapper
 import com.justnik.mosplace.data.network.ApiFactory
 import com.justnik.mosplace.domain.MosRepository
@@ -28,5 +29,14 @@ class MosRepositoryImpl : MosRepository {
         }
         return places
     }
+
+    override suspend fun loadAllPlaces(): List<Place> {
+        val placesDto = ApiFactory.apiService.getAllPlaces()
+        val places = placesDto.map {
+            mapper.placeMapDtoToEntity(it)
+        }
+        return places
+    }
+
 
 }

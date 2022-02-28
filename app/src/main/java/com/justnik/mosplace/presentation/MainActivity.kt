@@ -2,11 +2,12 @@ package com.justnik.mosplace.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.justnik.mosplace.ApiKeys
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityMainBinding
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
+import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -16,11 +17,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        MapKitFactory.setApiKey(ApiKeys.mapKit);
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         observeBottomNavigation()
         binding.mainBottomNavigation.selectedItemId = R.id.page_main
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun observeBottomNavigation() {
