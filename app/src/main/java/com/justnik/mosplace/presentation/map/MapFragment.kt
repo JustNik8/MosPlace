@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation
+package com.justnik.mosplace.presentation.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,8 +22,8 @@ class MapFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: MosViewModel by lazy {
-        ViewModelProvider(this)[MosViewModel::class.java]
+    private val viewModel: MapViewModel by lazy {
+        ViewModelProvider(this)[MapViewModel::class.java]
     }
 
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -32,7 +32,7 @@ class MapFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MapKitFactory.initialize(requireContext());
+        MapKitFactory.initialize(requireContext())
     }
 
     override fun onCreateView(

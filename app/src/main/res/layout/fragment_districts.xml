@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.DistrictsFragment"
+        tools:context=".presentation.districts.DistrictsFragment"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar

@@ -1,13 +1,11 @@
-package com.justnik.mosplace.presentation
+package com.justnik.mosplace.presentation.place
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.placeimages.PlaceImageSliderAdapter
@@ -19,8 +17,8 @@ class PlaceFragment : Fragment() {
 
     private lateinit var place: Place
 
-    private val viewModel: MosViewModel by lazy {
-        ViewModelProvider(this)[MosViewModel::class.java]
+    private val viewModel: PlaceViewModel by lazy {
+        ViewModelProvider(this)[PlaceViewModel::class.java]
     }
 
     var onReviewButtonClickListener: (() -> Unit)? = null
