@@ -1,7 +1,6 @@
 package com.justnik.mosplace.presentation.adapters.placeimages
 
 import android.content.Context
-import android.view.ContentInfo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -11,7 +10,7 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 class PlaceImageSliderAdapter(
     private val imageUrls: List<String>,
     private val context: Context
-    ) : SliderViewAdapter<PlaceImageSliderAdapter.PlaceImageViewHolder>() {
+) : SliderViewAdapter<PlaceImageSliderAdapter.PlaceImageViewHolder>() {
 
 
     inner class PlaceImageViewHolder(val binding: ItemPlaceImageBinding) :
