@@ -3,9 +3,8 @@ package com.justnik.mosplace.data.mock
 import com.yandex.mapkit.geometry.Point
 
 class MockData {
-    fun getMockPoints(): List<Point>{
+    fun getMockPoints(): List<Point> {
         return listOf(
-            Point(55.75385693176504, 37.620776312722846),
             Point(55.749142601590094, 37.59078686767186),
             Point(55.715674679238994, 37.55377831116062),
             Point(55.70295664821407, 37.53082922620231),
