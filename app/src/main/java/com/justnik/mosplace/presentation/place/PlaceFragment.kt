@@ -39,8 +39,7 @@ class PlaceFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.place = place
-
+        setUpPlaceText()
         setUpImageSlider()
         setClickListeners()
     }
@@ -48,6 +47,13 @@ class PlaceFragment : Fragment() {
         override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpPlaceText(){
+        with(binding){
+            tvPlaceTitle.text = place.title
+            tvPlaceDesc.text = place.fullDescription
+        }
     }
 
     private fun setUpImageSlider(){

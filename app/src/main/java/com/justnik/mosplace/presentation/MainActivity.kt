@@ -16,6 +16,7 @@ import com.justnik.mosplace.presentation.review.ReviewFragment
 import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : AppCompatActivity() {
+
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!

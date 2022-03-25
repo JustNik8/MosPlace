@@ -10,7 +10,7 @@ import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.parsePlaceType
 
 
-class PlaceAdapter(private val context: Context):
+class PlaceAdapter(private val context: Context) :
     ListAdapter<Place, PlaceViewHolder>(PlaceDiffUtil) {
 
     var onPlaceClickListener: ((Place) -> Unit)? = null
@@ -28,13 +28,16 @@ class PlaceAdapter(private val context: Context):
         val binding = holder.binding
         val place = getItem(position)
 
-        binding.place = place
-        binding.tvItemPlaceType.text = parsePlaceType(place.type, context)
+        with(binding) {
+            tvItemPlaceTitle.text = place.title
+            tvItemPlaceType.text = parsePlaceType(place.type, context)
+            tvItemPlaceDesc.text = place.shortDescription
+
+            root.setOnClickListener {
+                onPlaceClickListener?.invoke(place)
+            }
+        }
 
         Glide.with(context).load(place.images[0].imageUrl).into(binding.ivItemPlaceImage)
-
-        binding.root.setOnClickListener {
-            onPlaceClickListener?.invoke(place)
-        }
     }
 }

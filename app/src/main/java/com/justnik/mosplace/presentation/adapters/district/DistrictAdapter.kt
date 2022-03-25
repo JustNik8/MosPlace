@@ -29,13 +29,11 @@ class DistrictAdapter(private val context: Context) :
         val binding = holder.binding
         val district = getItem(position)
 
-        binding.district = district
-
         with(binding) {
-            if(district.imageUrl != null){
+
+            if (district.imageUrl != null) {
                 Glide.with(context).load(district.imageUrl).into(ivItemDistrictPhoto)
-            }
-            else {
+            } else {
                 Glide.with(context).load(R.drawable.img_district_example).into(ivItemDistrictPhoto)
             }
 
