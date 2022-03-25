@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation
+package com.justnik.mosplace.presentation.account
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -8,7 +8,7 @@
         android:paddingEnd="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.DistrictPlacesFragment"
+        tools:context=".presentation.disctrictplaces.DistrictPlacesFragment"
         android:orientation="vertical">
 
 

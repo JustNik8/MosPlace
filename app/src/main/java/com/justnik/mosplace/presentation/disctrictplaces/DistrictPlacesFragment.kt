@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation
+package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,8 +26,8 @@ class DistrictPlacesFragment : Fragment() {
         PlaceAdapter(requireContext())
     }
 
-    private val viewModel: MosViewModel by lazy {
-        ViewModelProvider(this)[MosViewModel::class.java]
+    private val viewModel: DistrictPlacesViewModel by lazy {
+        ViewModelProvider(this)[DistrictPlacesViewModel::class.java]
     }
 
     private val scope = CoroutineScope(Dispatchers.Main)
