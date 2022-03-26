@@ -1,24 +1,14 @@
 package com.justnik.mosplace.data.mappers
 
-import com.justnik.mosplace.data.network.model.DistrictDto
 import com.justnik.mosplace.data.network.model.PlaceDto
-import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.entities.PlaceImage
 import com.yandex.mapkit.geometry.Point
 import javax.inject.Inject
 
-class Mapper @Inject constructor(){
-    fun districtMapDtoToEntity(dto: DistrictDto): District {
-        return District(
-            id = dto.id,
-            title = dto.title,
-            abbreviation = dto.abbreviation,
-            imageUrl = dto.imageUrl
-        )
-    }
+class PlaceMapper @Inject constructor(){
 
-    fun placeMapDtoToEntity(dto: PlaceDto): Place {
+    fun dtoToEntity(dto: PlaceDto): Place {
         val placeImages = dto.images.map {
             PlaceImage(
                 id = it.id,
@@ -40,7 +30,7 @@ class Mapper @Inject constructor(){
         )
     }
 
-    fun mapPlaceToPoint(place: Place): Point{
+    fun placeToPoint(place: Place): Point {
         return Point(place.latitude, place.longitude)
     }
 }

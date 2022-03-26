@@ -8,6 +8,6 @@ class LoadPlacesUseCase @Inject constructor(
     private val repository: MosRepository
 ) {
     suspend operator fun invoke(id: Int): List<Place> {
-        return repository.loadPlaces(id)
+        return repository.loadPlacesByDistrictId(id)
     }
 }

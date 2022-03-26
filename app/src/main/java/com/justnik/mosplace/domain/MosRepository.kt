@@ -5,6 +5,6 @@ import com.justnik.mosplace.domain.entities.Place
 
 interface MosRepository {
     suspend fun loadDistricts(): List<District>
-    suspend fun loadPlaces(id: Int): List<Place>
+    suspend fun loadPlacesByDistrictId(id: Int): List<Place>
     suspend fun loadAllPlaces(): List<Place>
 }
