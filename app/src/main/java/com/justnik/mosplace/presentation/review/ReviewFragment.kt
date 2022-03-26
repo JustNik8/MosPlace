@@ -14,6 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
+import com.justnik.mosplace.extensions.hideBottomNavigationView
+import com.justnik.mosplace.extensions.showBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +29,7 @@ class ReviewFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        setUpBottomBar()
+        hideBottomNavigationView(requireActivity().findViewById(R.id.main_bottom_navigation))
     }
 
     override fun onCreateView(
@@ -53,7 +55,7 @@ class ReviewFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        setUpBottomBar()
+        showBottomNavigationView(requireActivity().findViewById(R.id.main_bottom_navigation))
     }
 
     private fun readInput() {
@@ -108,14 +110,6 @@ class ReviewFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {}
         })
     }
-
-    private fun setUpBottomBar() {
-        val bottomBar =
-            requireActivity().findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
-
-        bottomBar.visibility = if (bottomBar.isVisible) View.GONE else View.VISIBLE
-    }
-
 
     companion object {
         @JvmStatic
