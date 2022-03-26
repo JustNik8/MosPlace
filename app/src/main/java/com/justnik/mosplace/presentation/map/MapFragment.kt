@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.data.mappers.Mapper
 import com.justnik.mosplace.data.mock.MockData
@@ -12,22 +13,23 @@ import com.justnik.mosplace.databinding.FragmentMapBinding
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MapFragment : Fragment() {
 
     private var _binding: FragmentMapBinding? = null
     private val binding
         get() = _binding!!
 
-    private val viewModel: MapViewModel by lazy {
-        ViewModelProvider(this)[MapViewModel::class.java]
-    }
+    private val viewModel: MapViewModel by viewModels()
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    //убрать маппер
     private val mapper = Mapper()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
+@AndroidEntryPoint
 class DistrictsFragment : Fragment() {
 
     private var _binding: FragmentDistrictsBinding? = null
@@ -27,9 +30,7 @@ class DistrictsFragment : Fragment() {
         DistrictAdapter(requireContext())
     }
 
-    private val viewModel: DistrictsViewModel by lazy {
-        ViewModelProvider(this)[DistrictsViewModel::class.java]
-    }
+    private val viewModel: DistrictsViewModel by viewModels()
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private var allDistricts = listOf<District>()

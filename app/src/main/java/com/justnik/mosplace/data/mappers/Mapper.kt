@@ -6,8 +6,9 @@ import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.entities.PlaceImage
 import com.yandex.mapkit.geometry.Point
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor(){
     fun districtMapDtoToEntity(dto: DistrictDto): District {
         return District(
             id = dto.id,

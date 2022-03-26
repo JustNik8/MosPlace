@@ -1,11 +1,13 @@
 package com.justnik.mosplace.presentation.review
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ReviewViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class ReviewViewModel @Inject constructor(): ViewModel() {
 
     private var _errorRating = MutableLiveData<Boolean>()
     val errorRating: LiveData<Boolean>
@@ -30,7 +32,7 @@ class ReviewViewModel(application: Application) : AndroidViewModel(application) 
             isInputValid = false
         }
 
-        if(isInputValid){
+        if (isInputValid) {
             _shouldCloseScreen.value = Unit
         }
     }
