@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.placeimages.PlaceImageSliderAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlaceFragment : Fragment() {
 
     private var _binding: FragmentPlaceBinding? = null
@@ -17,9 +19,7 @@ class PlaceFragment : Fragment() {
 
     private lateinit var place: Place
 
-    private val viewModel: PlaceViewModel by lazy {
-        ViewModelProvider(this)[PlaceViewModel::class.java]
-    }
+    private val viewModel: PlaceViewModel by viewModels()
 
     var onReviewButtonClickListener: (() -> Unit)? = null
 
@@ -44,19 +44,19 @@ class PlaceFragment : Fragment() {
         setClickListeners()
     }
 
-        override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private fun setUpPlaceText(){
-        with(binding){
+    private fun setUpPlaceText() {
+        with(binding) {
             tvPlaceTitle.text = place.title
             tvPlaceDesc.text = place.fullDescription
         }
     }
 
-    private fun setUpImageSlider(){
+    private fun setUpImageSlider() {
         val imageUrls = place.images.map { it.imageUrl }
         val placeImageAdapter = PlaceImageSliderAdapter(imageUrls, requireContext())
         binding.placeImageSlider.setSliderAdapter(placeImageAdapter)
@@ -71,7 +71,8 @@ class PlaceFragment : Fragment() {
             onReviewButtonClickListener?.invoke()
         }
     }
-    companion object{
+
+    companion object {
         fun newInstance(place: Place): PlaceFragment {
             return PlaceFragment().apply {
                 arguments = Bundle().apply {

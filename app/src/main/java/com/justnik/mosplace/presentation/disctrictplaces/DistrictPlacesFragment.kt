@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class DistrictPlacesFragment : Fragment() {
 
     private var _binding: FragmentDistrictPlacesBinding? = null
@@ -26,9 +29,7 @@ class DistrictPlacesFragment : Fragment() {
         PlaceAdapter(requireContext())
     }
 
-    private val viewModel: DistrictPlacesViewModel by lazy {
-        ViewModelProvider(this)[DistrictPlacesViewModel::class.java]
-    }
+    private val viewModel: DistrictPlacesViewModel by viewModels()
 
     private val scope = CoroutineScope(Dispatchers.Main)
 

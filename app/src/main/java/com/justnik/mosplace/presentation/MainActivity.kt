@@ -9,12 +9,15 @@ import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.account.AccountFragment
 import com.justnik.mosplace.presentation.disctrictplaces.DistrictPlacesFragment
+import com.justnik.mosplace.presentation.disctrictplaces.DistrictPlacesViewModel
 import com.justnik.mosplace.presentation.districts.DistrictsFragment
 import com.justnik.mosplace.presentation.map.MapFragment
 import com.justnik.mosplace.presentation.place.PlaceFragment
 import com.justnik.mosplace.presentation.review.ReviewFragment
 import com.yandex.mapkit.MapKitFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null

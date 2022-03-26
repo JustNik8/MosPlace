@@ -9,22 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     private var _binding: FragmentReviewBinding? = null
     private val binding
         get() = _binding!!
 
-    private val viewModel by lazy {
-        ViewModelProvider(this)[ReviewViewModel::class.java]
-    }
+    private val viewModel: ReviewViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

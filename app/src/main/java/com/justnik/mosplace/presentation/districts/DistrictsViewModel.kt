@@ -4,15 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.justnik.mosplace.data.repository.MosRepositoryImpl
+import com.justnik.mosplace.domain.MosRepository
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.usecases.FilterDistrictsUseCase
 import com.justnik.mosplace.domain.usecases.LoadDistrictsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DistrictsViewModel : ViewModel() {
-    private val repository = MosRepositoryImpl()
-
-    private val loadDistrictsUseCase = LoadDistrictsUseCase(repository)
-    private val filterDistrictsUseCase = FilterDistrictsUseCase()
+@HiltViewModel
+class DistrictsViewModel @Inject constructor(
+    private val loadDistrictsUseCase: LoadDistrictsUseCase,
+    private val filterDistrictsUseCase: FilterDistrictsUseCase
+): ViewModel() {
 
     private var _districts = MutableLiveData<List<District>>()
     val districts: LiveData<List<District>>
