@@ -29,10 +29,6 @@ class MapFragment : Fragment() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    //убрать маппер
-    @Inject
-    lateinit var placeMapper: PlaceMapper
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapKitFactory.initialize(requireContext())
@@ -67,7 +63,8 @@ class MapFragment : Fragment() {
             val placePoints = viewModel.loadAllPlaces()
 
             placePoints.forEach {
-                mapObjects.addPlacemark(placeMapper.placeToPoint(it))
+                val point = Point(it.latitude, it.longitude)
+                mapObjects.addPlacemark(point)
             }
 
             MockData().getMockPoints().forEach {
