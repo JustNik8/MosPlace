@@ -1,6 +1,7 @@
 package com.justnik.mosplace.data.repository
 
-import com.justnik.mosplace.data.mappers.Mapper
+import com.justnik.mosplace.data.mappers.DistrictMapper
+import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.ApiService
 import com.justnik.mosplace.domain.MosRepository
 import com.justnik.mosplace.domain.entities.District
@@ -8,7 +9,8 @@ import com.justnik.mosplace.domain.entities.Place
 import javax.inject.Inject
 
 class MosRepositoryImpl @Inject constructor(
-    private val mapper: Mapper,
+    private val placeMapper: PlaceMapper,
+    private val districtMapper: DistrictMapper,
     private val apiService: ApiService
 ): MosRepository {
 
@@ -17,17 +19,17 @@ class MosRepositoryImpl @Inject constructor(
         val districts = mutableListOf<District>()
 
         for (dto in districtsDto) {
-            val district = mapper.districtMapDtoToEntity(dto)
+            val district = districtMapper.dtoToEntity(dto)
             districts.add(district)
         }
 
         return districts
     }
 
-    override suspend fun loadPlaces(id: Int): List<Place> {
+    override suspend fun loadPlacesByDistrictId(id: Int): List<Place> {
         val placesDto = apiService.getPlacesByDistrictId(id)
         val places = placesDto.map {
-            mapper.placeMapDtoToEntity(it)
+            placeMapper.dtoToEntity(it)
         }
         return places
     }
@@ -35,7 +37,7 @@ class MosRepositoryImpl @Inject constructor(
     override suspend fun loadAllPlaces(): List<Place> {
         val placesDto = apiService.getAllPlaces()
         val places = placesDto.map {
-            mapper.placeMapDtoToEntity(it)
+            placeMapper.dtoToEntity(it)
         }
         return places
     }

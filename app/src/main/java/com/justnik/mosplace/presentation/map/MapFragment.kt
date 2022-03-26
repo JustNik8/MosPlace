@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.justnik.mosplace.data.mappers.Mapper
+import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.mock.MockData
 import com.justnik.mosplace.databinding.FragmentMapBinding
 import com.yandex.mapkit.MapKitFactory
@@ -17,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment() {
@@ -30,7 +30,8 @@ class MapFragment : Fragment() {
     private val scope = CoroutineScope(Dispatchers.Main)
 
     //убрать маппер
-    private val mapper = Mapper()
+    @Inject
+    lateinit var placeMapper: PlaceMapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class MapFragment : Fragment() {
             val placePoints = viewModel.loadAllPlaces()
 
             placePoints.forEach {
-                mapObjects.addPlacemark(mapper.mapPlaceToPoint(it))
+                mapObjects.addPlacemark(placeMapper.placeToPoint(it))
             }
 
             MockData().getMockPoints().forEach {
