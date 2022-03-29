@@ -29,8 +29,4 @@ class PlaceMapper @Inject constructor(){
             district = dto.district
         )
     }
-
-    fun placeToPoint(place: Place): Point {
-        return Point(place.latitude, place.longitude)
-    }
 }

@@ -33,8 +33,6 @@ class DistrictsFragment : Fragment() {
     private val viewModel: DistrictsViewModel by viewModels()
 
     private val scope = CoroutineScope(Dispatchers.Main)
-    private var allDistricts = listOf<District>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +75,7 @@ class DistrictsFragment : Fragment() {
     private fun loadDistricts() {
         scope.launch {
             try {
-                allDistricts = viewModel.loadDistricts()
+                val allDistricts = viewModel.loadDistricts()
                 rvAdapter.submitList(allDistricts)
             } catch (e: UnknownHostException) {
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
@@ -97,10 +95,10 @@ class DistrictsFragment : Fragment() {
 
             override fun onQueryTextChange(p0: String): Boolean {
                 if (p0 == "") {
-                    rvAdapter.submitList(allDistricts)
+                    rvAdapter.submitList(viewModel.getAllDistrictsList())
                     return true
                 }
-                viewModel.filterDistricts(allDistricts, p0)
+                viewModel.filterDistricts(p0)
                 return true
             }
 
