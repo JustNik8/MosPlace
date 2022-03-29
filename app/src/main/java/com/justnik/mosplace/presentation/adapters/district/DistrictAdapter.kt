@@ -43,6 +43,7 @@ class DistrictAdapter(private val context: Context) :
             root.setOnClickListener {
                 onDistrictClickListener?.invoke(district)
             }
+
         }
 
     }

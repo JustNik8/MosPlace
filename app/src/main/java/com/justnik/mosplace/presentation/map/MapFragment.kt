@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.mock.MockData
 import com.justnik.mosplace.databinding.FragmentMapBinding
 import com.yandex.mapkit.MapKitFactory
@@ -16,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment() {
@@ -92,10 +90,6 @@ class MapFragment : Fragment() {
 
 
     companion object {
-        fun newInstance(): MapFragment {
-            return MapFragment()
-        }
-
         private val MOSCOW_LOCATION_POINT = Point(55.753789, 37.6209230)
     }
 }

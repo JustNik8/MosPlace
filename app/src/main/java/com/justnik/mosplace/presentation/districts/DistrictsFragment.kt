@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.domain.entities.District
@@ -35,7 +35,6 @@ class DistrictsFragment : Fragment() {
     private val scope = CoroutineScope(Dispatchers.Main)
     private var allDistricts = listOf<District>()
 
-    var onDistrictCLickListener: ((District) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,12 +60,16 @@ class DistrictsFragment : Fragment() {
         binding.rvDistricts.adapter = rvAdapter
 
         rvAdapter.onDistrictClickListener = {
-            onDistrictCLickListener?.invoke(it)
+            findNavController().navigate(DistrictsFragmentDirections
+                .actionDistrictsFragmentToDistrictPlacesFragment(
+                    it
+                )
+            )
         }
     }
 
-    private fun observeViewModel(){
-        viewModel.districts.observe(viewLifecycleOwner){
+    private fun observeViewModel() {
+        viewModel.districts.observe(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
     }
@@ -76,24 +79,24 @@ class DistrictsFragment : Fragment() {
             try {
                 allDistricts = viewModel.loadDistricts()
                 rvAdapter.submitList(allDistricts)
-            } catch (e: UnknownHostException){
+            } catch (e: UnknownHostException) {
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setUpToolBar(){
+    private fun setUpToolBar() {
         val menuItem = binding.toolbarDistricts.menu.findItem(R.id.action_search)
         val searchView = menuItem.actionView as SearchView
         searchView.queryHint = requireContext().resources.getString(R.string.hint_search)
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(p0: String): Boolean {
-                if(p0 == ""){
+                if (p0 == "") {
                     rvAdapter.submitList(allDistricts)
                     return true
                 }
@@ -102,11 +105,5 @@ class DistrictsFragment : Fragment() {
             }
 
         })
-    }
-
-    companion object {
-        fun newInstance(): DistrictsFragment {
-            return DistrictsFragment()
-        }
     }
 }
