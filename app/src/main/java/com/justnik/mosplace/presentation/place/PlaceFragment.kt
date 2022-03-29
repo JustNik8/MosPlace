@@ -6,28 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
-import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.placeimages.PlaceImageSliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PlaceFragment : Fragment() {
 
+    private val args by navArgs<PlaceFragmentArgs>()
+
     private var _binding: FragmentPlaceBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var place: Place
+    private val place by lazy {
+        args.place
+    }
 
     private val viewModel: PlaceViewModel by viewModels()
-
-    var onReviewButtonClickListener: (() -> Unit)? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        place = arguments?.getParcelable(KEY_PLACE)
-            ?: throw RuntimeException("argument place is null")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,19 +65,9 @@ class PlaceFragment : Fragment() {
         }
 
         binding.bReview.setOnClickListener {
-            onReviewButtonClickListener?.invoke()
+            findNavController().navigate(
+                PlaceFragmentDirections.actionPlaceFragmentToReviewFragment()
+            )
         }
-    }
-
-    companion object {
-        fun newInstance(place: Place): PlaceFragment {
-            return PlaceFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_PLACE, place)
-                }
-            }
-        }
-
-        private const val KEY_PLACE = "place"
     }
 }

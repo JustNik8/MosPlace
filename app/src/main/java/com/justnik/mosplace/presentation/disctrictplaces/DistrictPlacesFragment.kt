@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
-import com.justnik.mosplace.domain.entities.District
-import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -19,11 +20,15 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class DistrictPlacesFragment : Fragment() {
 
+    private val args by navArgs<DistrictPlacesFragmentArgs>()
+
     private var _binding: FragmentDistrictPlacesBinding? = null
     private val binding: FragmentDistrictPlacesBinding
         get() = _binding!!
 
-    private lateinit var district: District
+    private val district by lazy {
+        args.district
+    }
 
     private val rvAdapter: PlaceAdapter by lazy {
         PlaceAdapter(requireContext())
@@ -32,14 +37,6 @@ class DistrictPlacesFragment : Fragment() {
     private val viewModel: DistrictPlacesViewModel by viewModels()
 
     private val scope = CoroutineScope(Dispatchers.Main)
-
-    var onPlaceClickListener: ((Place) -> Unit)? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        district = arguments?.getParcelable(KEY_DISTRICT)
-            ?: throw RuntimeException("Param district is null")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,39 +48,31 @@ class DistrictPlacesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
-        launchPlaces()
+        loadPlaces()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         binding.rvPlaces.adapter = rvAdapter
 
         rvAdapter.onPlaceClickListener = {
-            onPlaceClickListener?.invoke(it)
+            findNavController().navigate(
+                DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlaceFragment(
+                    it
+                )
+            )
         }
     }
 
-    private fun launchPlaces(){
+    private fun loadPlaces() {
         scope.launch {
             val places = viewModel.loadPlacesByDistrictId(district.id)
             rvAdapter.submitList(places)
         }
     }
-
-    companion object {
-        fun newInstance(district: District): DistrictPlacesFragment {
-            return DistrictPlacesFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_DISTRICT, district)
-                }
-            }
-        }
-
-        private const val KEY_DISTRICT = "district"
-    }
-
 }

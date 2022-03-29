@@ -7,10 +7,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
@@ -109,12 +107,5 @@ class ReviewFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {}
         })
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(): ReviewFragment {
-            return ReviewFragment()
-        }
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/districtsFragment">
+
+    <fragment
+        android:id="@+id/districtsFragment"
+        android:name="com.justnik.mosplace.presentation.districts.DistrictsFragment"
+        android:label="fragment_districts"
+        tools:layout="@layout/fragment_districts" >
+        <action
+            android:id="@+id/action_districtsFragment_to_districtPlacesFragment"
+            app:destination="@id/districtPlacesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/districtPlacesFragment"
+        android:name="com.justnik.mosplace.presentation.disctrictplaces.DistrictPlacesFragment"
+        android:label="fragment_district_places"
+        tools:layout="@layout/fragment_district_places" >
+        <action
+            android:id="@+id/action_districtPlacesFragment_to_placeFragment"
+            app:destination="@id/placeFragment" />
+        <argument
+            android:name="district"
+            app:argType="com.justnik.mosplace.domain.entities.District" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeFragment"
+        android:name="com.justnik.mosplace.presentation.place.PlaceFragment"
+        android:label="PlaceFragment"
+        tools:layout="@layout/fragment_place">
+        <action
+            android:id="@+id/action_placeFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.justnik.mosplace.presentation.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review"/>
+</navigation>

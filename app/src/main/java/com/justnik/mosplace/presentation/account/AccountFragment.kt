@@ -17,10 +17,4 @@ class AccountFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
-
-    companion object {
-        fun newInstance(): AccountFragment {
-            return AccountFragment()
-        }
-    }
 }
