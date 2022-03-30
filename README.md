@@ -9,7 +9,6 @@ of Moscow. The user can interact with a place. For example he can mark the place
 * [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) - For asynchronous work and more.
 * [Retrofit2](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 * [Hilt](https://dagger.dev/hilt/) - Dependency injection library. Hilt is built on top of [Dagger](https://dagger.dev/dev-guide/).
-* [MVVM](https://itsobes.ru/AndroidSobes/chto-takoe-mvvm/) - Application architecture design pattern.
 * [Android Architecture Components](https://developer.android.com/topic/architecture) - Is a suite of libraries to help developers follow best practices, reduce boilerplate code.
   * [View Binding](https://developer.android.com/topic/libraries/view-binding) - Is a feature that allows you to more easily write code that interacts with views.
   * [Navigation Component](https://developer.android.com/guide/navigation) - Allows you to simplify the implementation of navigation between screens in the application.
