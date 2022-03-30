@@ -17,3 +17,7 @@ of Moscow. The user can interact with a place. For example he can mark the place
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) -Class is designed to store and manage UI-related data in a lifecycle conscious way.
 * [Glide](https://github.com/bumptech/glide) -  is a fast and efficient open source media management and image loading framework for Android.
 * [Yandex MapKit](https://yandex.ru/dev/maps/mapkit/?from=mapsapi) - A software library that allows you to use Yandex cartographic data and technologies in mobile applications.
+
+# Architecture
+This app uses MVVM [architecture](https://developer.android.com/jetpack/guide#recommended-app-arch).
+![MVVM](https://miro.medium.com/max/960/0*-ZJZfLhup-7rg0cy.png)
