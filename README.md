@@ -13,8 +13,8 @@ Each user has a profile. In the profile, he can see achievements, progress indic
   * [View Binding](https://developer.android.com/topic/libraries/view-binding) - Is a feature that allows you to more easily write code that interacts with views.
   * [Navigation Component](https://developer.android.com/guide/navigation) - Allows you to simplify the implementation of navigation between screens in the application.
   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Is an observable data holder class..
-  * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) -Class is designed to store and manage UI-related data in a lifecycle conscious way.
-* [Glide](https://github.com/bumptech/glide) -  is a fast and efficient open source media management and image loading framework for Android.
+  * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Class is designed to store and manage UI-related data in a lifecycle conscious way.
+* [Glide](https://github.com/bumptech/glide) - Is a fast and efficient open source media management and image loading framework for Android.
 * [Yandex MapKit](https://yandex.ru/dev/maps/mapkit/?from=mapsapi) - A software library that allows you to use Yandex cartographic data and technologies in mobile applications.
 
 # Architecture
@@ -22,6 +22,7 @@ This app uses [MVVM](https://developer.android.com/jetpack/guide#recommended-app
 ![MVVM](https://miro.medium.com/max/960/0*-ZJZfLhup-7rg0cy.png)
 
 # License
+```
 Copyright 2022 Nikita Leontev 
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,3 +36,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
