@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
@@ -18,13 +19,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DistrictPlacesFragment : Fragment() {
+class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     private val args by navArgs<DistrictPlacesFragmentArgs>()
 
-    private var _binding: FragmentDistrictPlacesBinding? = null
-    private val binding: FragmentDistrictPlacesBinding
-        get() = _binding!!
+    private val binding: FragmentDistrictPlacesBinding by viewBinding()
 
     private val district by lazy {
         args.district
@@ -38,23 +37,9 @@ class DistrictPlacesFragment : Fragment() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDistrictPlacesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
         loadPlaces()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     private fun setUpRecyclerView() {

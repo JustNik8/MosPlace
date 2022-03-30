@@ -89,6 +89,9 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+
+    //ViewBindingPropertyDelegate
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 }
 
 kapt {

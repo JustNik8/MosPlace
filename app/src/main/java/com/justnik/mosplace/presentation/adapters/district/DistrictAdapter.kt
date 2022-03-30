@@ -38,13 +38,12 @@ class DistrictAdapter(private val context: Context) :
             }
 
             val districtText = getAbbreviationWithName(district.abbreviation, district.title)
-            binding.tvItemDistrictName.text = districtText
+            tvItemDistrictName.text = districtText
 
             root.setOnClickListener {
                 onDistrictClickListener?.invoke(district)
             }
 
         }
-
     }
 }

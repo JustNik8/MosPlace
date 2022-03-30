@@ -21,7 +21,9 @@ interface ApiService {
     ): List<PlaceDto>
 
     @GET("places")
-    suspend fun getAllPlaces(): List<PlaceDto>
+    suspend fun getAllPlaces(
+        @Query(QUERY_PARAM_FORMAT) format: String = JSON
+    ): List<PlaceDto>
 
     companion object {
         private const val QUERY_PARAM_FORMAT = "format"

@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.domain.entities.District
@@ -20,11 +21,9 @@ import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
 @AndroidEntryPoint
-class DistrictsFragment : Fragment() {
+class DistrictsFragment : Fragment(R.layout.fragment_districts) {
 
-    private var _binding: FragmentDistrictsBinding? = null
-    private val binding: FragmentDistrictsBinding
-        get() = _binding!!
+    private val binding: FragmentDistrictsBinding by viewBinding()
 
     private val rvAdapter: DistrictAdapter by lazy {
         DistrictAdapter(requireContext())
@@ -34,24 +33,11 @@ class DistrictsFragment : Fragment() {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDistrictsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
         setUpToolBar()
         observeViewModel()
         loadDistricts()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     private fun setUpRecyclerView() {

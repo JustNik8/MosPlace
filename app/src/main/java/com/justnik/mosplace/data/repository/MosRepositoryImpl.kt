@@ -41,6 +41,4 @@ class MosRepositoryImpl @Inject constructor(
         }
         return places
     }
-
-
 }

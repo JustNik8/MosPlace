@@ -8,6 +8,7 @@
     tools:context=".presentation.account.AccountFragment">
 
     <TextView
+        android:id="@+id/tv_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account"

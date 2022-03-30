@@ -18,3 +18,4 @@ data class PlaceImageDto (
     @Expose
     var place: Int
 )
+

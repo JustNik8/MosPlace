@@ -15,3 +15,4 @@
         android:title="@string/account"
         android:icon="@drawable/ic_account"/>
 </menu>
+
