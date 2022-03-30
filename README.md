@@ -18,7 +18,7 @@ of Moscow. The user can interact with a place. For example he can mark the place
 * [Yandex MapKit](https://yandex.ru/dev/maps/mapkit/?from=mapsapi) - A software library that allows you to use Yandex cartographic data and technologies in mobile applications.
 
 # Architecture
-This app uses MVVM [architecture](https://developer.android.com/jetpack/guide#recommended-app-arch).
+This app uses [MVVM](https://developer.android.com/jetpack/guide#recommended-app-arch) architecture.
 ![MVVM](https://miro.medium.com/max/960/0*-ZJZfLhup-7rg0cy.png)
 
 # License
