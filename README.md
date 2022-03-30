@@ -1,7 +1,7 @@
 # MosPlace
 # About
 An application was created for users, that likes achievements. The application contains various places, like landmarks, restaurants, parks, that are grouped by districts
-of Moscow. The user can interact with a place. For example he can mark the place as visited, rate, leave a review, attach photos. 
+of Moscow. The user can interact with a place. For example, he can mark the place as visited, rate, leave a review, attach photos. 
 У каждого пользователя есть профиль. В профиле он может видеть достижения, индикатор прогресса посещенных мест и т.д.
 
 # Technolohies
