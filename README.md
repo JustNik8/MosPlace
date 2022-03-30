@@ -4,7 +4,7 @@ List of districts | List of places| Map | Place
 ![](./assets/List_of_districts.jpg) | ![](./assets/List_of_places.jpg) | ![](./assets/Map.jpg) | ![](./assets/Place.jpg) |
 
 Review | Account
---- | --- | ---
+--- | ---
 ![](./assets/Review.jpg) | ![](./assets/Account.jpg) |
 
 # About
