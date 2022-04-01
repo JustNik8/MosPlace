@@ -1,9 +1,8 @@
 package com.justnik.mosplace.presentation.districts
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -12,13 +11,11 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
-import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
 
 @AndroidEntryPoint
 class DistrictsFragment : Fragment(R.layout.fragment_districts) {
@@ -44,10 +41,11 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         binding.rvDistricts.adapter = rvAdapter
 
         rvAdapter.onDistrictClickListener = {
-            findNavController().navigate(DistrictsFragmentDirections
-                .actionDistrictsFragmentToDistrictPlacesFragment(
-                    it
-                )
+            findNavController().navigate(
+                DistrictsFragmentDirections
+                    .actionDistrictsFragmentToDistrictPlacesFragment(
+                        it
+                    )
             )
         }
     }
@@ -63,7 +61,8 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
             try {
                 val allDistricts = viewModel.loadDistricts()
                 rvAdapter.submitList(allDistricts)
-            } catch (e: UnknownHostException) {
+
+            } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         }

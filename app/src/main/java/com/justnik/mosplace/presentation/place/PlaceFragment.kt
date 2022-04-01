@@ -1,9 +1,7 @@
 package com.justnik.mosplace.presentation.place
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -52,9 +50,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         }
 
         binding.bReview.setOnClickListener {
-            findNavController().navigate(
-                PlaceFragmentDirections.actionPlaceFragmentToReviewFragment()
-            )
+            findNavController().navigate(PlaceFragmentDirections.actionPlaceFragmentToReviewFragment())
         }
     }
 }

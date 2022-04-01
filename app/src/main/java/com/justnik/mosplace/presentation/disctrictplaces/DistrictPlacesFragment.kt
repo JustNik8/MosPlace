@@ -1,15 +1,12 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
@@ -40,6 +37,7 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
         loadPlaces()
+
     }
 
     private fun setUpRecyclerView() {

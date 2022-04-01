@@ -31,12 +31,12 @@
         android:name="com.justnik.mosplace.presentation.place.PlaceFragment"
         android:label="PlaceFragment"
         tools:layout="@layout/fragment_place">
-        <action
-            android:id="@+id/action_placeFragment_to_reviewFragment"
-            app:destination="@id/reviewFragment" />
         <argument
             android:name="place"
             app:argType="com.justnik.mosplace.domain.entities.Place" />
+        <action
+            android:id="@+id/action_placeFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"

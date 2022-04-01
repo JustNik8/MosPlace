@@ -24,22 +24,12 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
 
     private val viewModel: ReviewViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        hideBottomNavigationView(requireActivity().findViewById(R.id.main_bottom_navigation))
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         observeSaveButton()
         observeViewModel()
         addTextChangeListeners()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        showBottomNavigationView(requireActivity().findViewById(R.id.main_bottom_navigation))
     }
 
     private fun readInput() {
