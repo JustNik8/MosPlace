@@ -2,6 +2,7 @@ package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,12 +36,32 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     private val scope = CoroutineScope(Dispatchers.Main)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpRecyclerView()
+        setupRecyclerView()
         loadPlaces()
+        setupToolBar()
+    }
+
+    private fun setupToolBar() {
+        val toolbar = binding.toolbarPlaces
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_filter_list -> {
+                    Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
 
     }
 
-    private fun setUpRecyclerView() {
+    private fun setupRecyclerView() {
         binding.rvPlaces.adapter = rvAdapter
 
         rvAdapter.onPlaceClickListener = {
