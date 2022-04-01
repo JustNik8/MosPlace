@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".presentation.districts.DistrictsFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_districts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_district"
-        app:title="@string/list_of_districts" />
+        app:title="@string/districts" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_districts"
