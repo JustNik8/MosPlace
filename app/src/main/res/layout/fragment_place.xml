@@ -10,6 +10,19 @@
         android:layout_height="wrap_content"
         tools:context=".presentation.place.PlaceFragment">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/b_back_place"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_circle"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/place_image_slider"
             android:layout_width="0dp"

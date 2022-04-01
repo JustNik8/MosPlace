@@ -26,19 +26,19 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     private val viewModel: PlaceViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpPlaceText()
-        setUpImageSlider()
+        setupPlaceText()
+        setupImageSlider()
         setClickListeners()
     }
 
-    private fun setUpPlaceText() {
+    private fun setupPlaceText() {
         with(binding) {
             tvPlaceTitle.text = place.title
             tvPlaceDesc.text = place.fullDescription
         }
     }
 
-    private fun setUpImageSlider() {
+    private fun setupImageSlider() {
         val imageUrls = place.images.map { it.imageUrl }
         val placeImageAdapter = PlaceImageSliderAdapter(imageUrls, requireContext())
         binding.placeImageSlider.setSliderAdapter(placeImageAdapter)
@@ -51,6 +51,10 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
 
         binding.bReview.setOnClickListener {
             findNavController().navigate(PlaceFragmentDirections.actionPlaceFragmentToReviewFragment())
+        }
+
+        binding.bBackPlace.setOnClickListener{
+            findNavController().popBackStack()
         }
     }
 }
