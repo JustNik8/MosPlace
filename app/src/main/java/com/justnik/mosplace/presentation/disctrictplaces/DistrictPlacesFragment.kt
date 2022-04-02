@@ -1,9 +1,7 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +11,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
-import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.parsePlaceType
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +37,18 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
+    //todo It should be refactored
+    private val uniquePlace by lazy { parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext()) }
+    private val restaurant by lazy { parsePlaceType(PlaceTypes.RESTAURANT, requireContext()) }
+    private val park by lazy { parsePlaceType(PlaceTypes.PARK, requireContext()) }
+
+    //Items that will be shown in alert dialog
+    private val multiItems by lazy { arrayOf(uniquePlace, restaurant, park) }
+
+    //Array that contains if item is checked
+    private val checkedItems by lazy { BooleanArray(multiItems.size) { true } }
+    //todo It should be refactored
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
         loadPlaces()
@@ -47,8 +56,8 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         observeViewModel()
     }
 
-    private fun observeViewModel(){
-        viewModel.places.observe(viewLifecycleOwner){
+    private fun observeViewModel() {
+        viewModel.places.observe(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
     }
@@ -64,7 +73,7 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_filter_list -> {
-                    materialDialog()
+                    showMaterialDialog()
                     true
                 }
                 else -> false
@@ -73,35 +82,26 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     }
 
-    private fun materialDialog() {
-        val uniquePlace = parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext())
-        val restaurant = parsePlaceType(PlaceTypes.RESTAURANT, requireContext())
-        val park = parsePlaceType(PlaceTypes.PARK, requireContext())
+    private fun showMaterialDialog() {
 
-        //Items that will be shown in alert dialog
-        val multiItems = arrayOf(uniquePlace, restaurant, park)
-        //Array for items that will be checked
-        val checkedItems = BooleanArray(multiItems.size){true}
         //List which contains selected items
         val selectedItems = mutableListOf<String>()
 
         MaterialAlertDialogBuilder(requireContext())
-            .setNeutralButton("Select All"){ _, _ ->
-                for (i in checkedItems.indices){
-                    checkedItems[i] = true
-                }
+            .setTitle(requireContext().getString(R.string.places))
+            .setNeutralButton(requireContext().getString(R.string.select_all)) { _, _ ->
+                selectedItems.addAll(multiItems)
+                viewModel.filterPlacesByType(selectedItems)
             }
-            .setNegativeButton("Cancel"){ dialog, _ ->
-                dialog.cancel()
+            .setNegativeButton(requireContext().getString(R.string.cancel)) { _, _ ->
             }
-            .setPositiveButton("Apply"){ dialog, _ ->
-                for (i in checkedItems.indices){
-                    if (checkedItems[i]){
+            .setPositiveButton(requireContext().getString(R.string.apply)) { _, _ ->
+                for (i in checkedItems.indices) {
+                    if (checkedItems[i]) {
                         selectedItems.add(multiItems[i])
                     }
                 }
                 viewModel.filterPlacesByType(selectedItems)
-                dialog.cancel()
             }
             .setMultiChoiceItems(multiItems, checkedItems) { _, which, checked ->
                 checkedItems[which] = checked
