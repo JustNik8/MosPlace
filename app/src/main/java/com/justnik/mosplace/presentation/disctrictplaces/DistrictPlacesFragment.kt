@@ -90,6 +90,9 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(requireContext().getString(R.string.places))
             .setNeutralButton(requireContext().getString(R.string.select_all)) { _, _ ->
+                for (i in checkedItems.indices){
+                    checkedItems[i] = true
+                }
                 selectedItems.addAll(multiItems)
                 viewModel.filterPlacesByType(selectedItems)
             }
