@@ -22,4 +22,5 @@
     <string name="error_empty_field">Пустое поле</string>
     <string name="filter_list">Настроить список</string>
     <string name="places">Места</string>
+    <string name="park">Парк</string>
 </resources>
