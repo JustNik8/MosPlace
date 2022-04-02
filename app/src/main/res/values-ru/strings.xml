@@ -22,4 +22,8 @@
     <string name="error_empty_field">Пустое поле</string>
     <string name="filter_list">Настроить список</string>
     <string name="places">Места</string>
+    <string name="park">Парк</string>
+    <string name="select_all">Выбрать все</string>
+    <string name="cancel">Закрыть</string>
+    <string name="apply">Принять</string>
 </resources>

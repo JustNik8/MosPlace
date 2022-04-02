@@ -8,8 +8,13 @@
 
     <string name="unique_place">Unique place</string>
     <string name="restaurant">Restaurant</string>
+    <string name="park">Park</string>
     <string name="search">Search</string>
     <string name="hint_search">Type district here</string>
+
+    <string name="select_all">Select All</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
 
     <!-- Bottom navigation -->
     <string name="main">Main</string>
@@ -20,9 +25,9 @@
     <string name="review">Review</string>
     <string name="save">Save</string>
 
+    <!-- ReviewFragment -->
     <string name="error_rating">"Choose correct rating"</string>
     <string name="error_empty_field">Empty field</string>
     <string name="filter_list">Filter list</string>
 
-    <!-- ReviewFragment -->
 </resources>
