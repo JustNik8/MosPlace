@@ -37,18 +37,6 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     private val scope = CoroutineScope(Dispatchers.Main)
 
-    //todo It should be refactored
-    private val uniquePlace by lazy { parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext()) }
-    private val restaurant by lazy { parsePlaceType(PlaceTypes.RESTAURANT, requireContext()) }
-    private val park by lazy { parsePlaceType(PlaceTypes.PARK, requireContext()) }
-
-    //Items that will be shown in alert dialog
-    private val multiItems by lazy { arrayOf(uniquePlace, restaurant, park) }
-
-    //Array that contains if item is checked
-    private val checkedItems by lazy { BooleanArray(multiItems.size) { true } }
-    //todo It should be refactored
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
         loadPlaces()
@@ -83,7 +71,15 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun showMaterialDialog() {
+        val uniquePlace = parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext())
+        val restaurant = parsePlaceType(PlaceTypes.RESTAURANT, requireContext())
+        val park = parsePlaceType(PlaceTypes.PARK, requireContext())
 
+        //Items that will be shown in alert dialog
+        val multiItems = arrayOf(uniquePlace, restaurant, park)
+
+        //Array that contains if item is checked
+        val checkedItems = BooleanArray(multiItems.size) { true }
         //List which contains selected items
         val selectedItems = mutableListOf<String>()
 
