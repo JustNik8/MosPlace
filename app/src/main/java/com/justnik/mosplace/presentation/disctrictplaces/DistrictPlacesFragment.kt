@@ -61,7 +61,7 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_filter_list -> {
-                    showMaterialDialog()
+                    showAlertDialog()
                     true
                 }
                 else -> false
@@ -70,10 +70,16 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     }
 
-    private fun showMaterialDialog() {
+    private fun showAlertDialog() {
+        //type text
         val uniquePlace = parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext())
         val restaurant = parsePlaceType(PlaceTypes.RESTAURANT, requireContext())
         val park = parsePlaceType(PlaceTypes.PARK, requireContext())
+
+        //Text
+        val negativeButtonText = requireContext().getString(R.string.cancel)
+        val titleText = requireContext().getString(R.string.places)
+        val positiveButtonText = requireContext().getString(R.string.apply)
 
         //Items that will be shown in alert dialog
         val multiItems = arrayOf(uniquePlace, restaurant, park)
@@ -84,17 +90,10 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         val selectedItems = mutableListOf<String>()
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(requireContext().getString(R.string.places))
-            .setNeutralButton(requireContext().getString(R.string.select_all)) { _, _ ->
-                for (i in checkedItems.indices){
-                    checkedItems[i] = true
-                }
-                selectedItems.addAll(multiItems)
-                viewModel.filterPlacesByType(selectedItems)
+            .setTitle(titleText)
+            .setNegativeButton(negativeButtonText) { _, _ ->
             }
-            .setNegativeButton(requireContext().getString(R.string.cancel)) { _, _ ->
-            }
-            .setPositiveButton(requireContext().getString(R.string.apply)) { _, _ ->
+            .setPositiveButton(positiveButtonText) { _, _ ->
                 for (i in checkedItems.indices) {
                     if (checkedItems[i]) {
                         selectedItems.add(multiItems[i])

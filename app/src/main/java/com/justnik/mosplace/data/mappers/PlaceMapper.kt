@@ -6,6 +6,7 @@ import com.justnik.mosplace.domain.entities.PlaceImage
 import com.yandex.mapkit.geometry.Point
 import javax.inject.Inject
 
+//Всем Привет!!!
 class PlaceMapper @Inject constructor(){
 
     fun dtoToEntity(dto: PlaceDto): Place {

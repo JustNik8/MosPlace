@@ -23,7 +23,9 @@ class DistrictPlacesViewModel @Inject constructor(
 
     suspend fun loadPlacesByDistrictId(id: Int) {
         val places = loadPlacesUseCase(id)
-        allDistrictPlaces.addAll(places)
+        if(allDistrictPlaces.isEmpty()) {
+            allDistrictPlaces.addAll(places)
+        }
         _places.value = places
     }
 
