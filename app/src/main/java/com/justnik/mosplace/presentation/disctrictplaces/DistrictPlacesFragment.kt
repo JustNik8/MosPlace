@@ -1,5 +1,6 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -71,38 +72,42 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun showAlertDialog() {
-        //type text
-        val uniquePlace = parsePlaceType(PlaceTypes.UNIQUE_PLACE, requireContext())
-        val restaurant = parsePlaceType(PlaceTypes.RESTAURANT, requireContext())
-        val park = parsePlaceType(PlaceTypes.PARK, requireContext())
-
-        //Text
-        val negativeButtonText = requireContext().getString(R.string.cancel)
-        val titleText = requireContext().getString(R.string.places)
-        val positiveButtonText = requireContext().getString(R.string.apply)
+        //Text for buttons and title
+        val negativeButtonText = resources.getString(R.string.cancel)
+        val titleText = resources.getString(R.string.places)
+        val positiveButtonText = resources.getString(R.string.apply)
 
         //Items that will be shown in alert dialog
-        val multiItems = arrayOf(uniquePlace, restaurant, park)
+        val availableTypes = viewModel.getAvailableTypes()
 
-        //Array that contains if item is checked
-        val checkedItems = BooleanArray(multiItems.size) { true }
+        //Array that contains if item is selected
+        val selectedTypes = viewModel.getSelectedTypes()
         //List which contains selected items
         val selectedItems = mutableListOf<String>()
 
+        val sharedPref = requireActivity().getSharedPreferences(
+            getString(R.string.preference_key_types), Context.MODE_PRIVATE
+        )
+
+        //Build alert dialog
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(titleText)
             .setNegativeButton(negativeButtonText) { _, _ ->
             }
             .setPositiveButton(positiveButtonText) { _, _ ->
-                for (i in checkedItems.indices) {
-                    if (checkedItems[i]) {
-                        selectedItems.add(multiItems[i])
+                for (i in selectedTypes.indices) {
+                    if (selectedTypes[i]) {
+                        selectedItems.add(availableTypes[i])
+                    }
+                    with(sharedPref.edit()) {
+                        putBoolean(availableTypes[i], selectedTypes[i])
+                        apply()
                     }
                 }
                 viewModel.filterPlacesByType(selectedItems)
             }
-            .setMultiChoiceItems(multiItems, checkedItems) { _, which, checked ->
-                checkedItems[which] = checked
+            .setMultiChoiceItems(availableTypes, selectedTypes) { _, which, checked ->
+                selectedTypes[which] = checked
             }
             .show()
     }

@@ -15,4 +15,6 @@ interface DataModule {
     @Binds
     @Singleton
     fun bindMosRepository(impl: MosRepositoryImpl): MosRepository
+
+
 }
