@@ -9,5 +9,16 @@
         android:id="@+id/mapFragment"
         android:name="com.justnik.mosplace.presentation.map.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/fragment_map"/>
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_place"
+            app:destination="@id/place">
+
+            <argument
+                android:name="place"
+                app:argType="com.justnik.mosplace.domain.entities.Place" />
+
+        </action>
+    </fragment>
+    <include app:graph="@navigation/place" />
 </navigation>

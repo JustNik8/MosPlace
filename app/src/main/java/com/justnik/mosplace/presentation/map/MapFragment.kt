@@ -37,7 +37,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
     private val tapListener = MapObjectTapListener { mapObject, point ->
         val place = mapObject.userData as Place
-        Log.d("RRR", place.toString())
+        findNavController().navigate(MapFragmentDirections.actionMapFragmentToPlace(place))
         true
     }
 
