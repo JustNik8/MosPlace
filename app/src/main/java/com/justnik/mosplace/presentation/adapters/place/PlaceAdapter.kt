@@ -37,7 +37,8 @@ class PlaceAdapter(private val context: Context) :
                 onPlaceClickListener?.invoke(place)
             }
         }
-
-        Glide.with(context).load(place.images[0].imageUrl).into(binding.ivItemPlaceImage)
+        if (place.images.isNotEmpty()) {
+            Glide.with(context).load(place.images[0].imageUrl).into(binding.ivItemPlaceImage)
+        }
     }
 }
