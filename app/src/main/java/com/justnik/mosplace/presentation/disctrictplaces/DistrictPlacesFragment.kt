@@ -49,6 +49,11 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         viewModel.places.observe(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            val pbVisibility = if (it) View.VISIBLE else View.GONE
+            binding.pbDistrictPlaces.visibility = pbVisibility
+        }
     }
 
     private fun setupToolBar() {

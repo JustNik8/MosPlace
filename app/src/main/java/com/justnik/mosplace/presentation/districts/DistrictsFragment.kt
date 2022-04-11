@@ -57,8 +57,8 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner){
-            val visibility = if (it) View.VISIBLE else View.GONE
-            binding.pbDistricts.visibility = visibility
+            val pbVisibility = if (it) View.VISIBLE else View.GONE
+            binding.pbDistricts.visibility = pbVisibility
         }
     }
 
