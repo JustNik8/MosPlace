@@ -27,10 +27,15 @@ class DistrictPlacesViewModel @Inject constructor(
     val places: LiveData<List<Place>>
         get() = _places
 
+    private var _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     private val allDistrictPlaces = mutableListOf<Place>()
 
     suspend fun loadPlacesByDistrictId(id: Int) {
         val places = loadPlacesUseCase(id)
+        _isLoading.value = false
         if (allDistrictPlaces.isEmpty()) {
             allDistrictPlaces.addAll(places)
         }
