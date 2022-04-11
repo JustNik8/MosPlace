@@ -19,6 +19,10 @@ class DistrictsViewModel @Inject constructor(
     val districts: LiveData<List<District>>
         get() = _districts
 
+    private var _isLoading = MutableLiveData<Boolean>(true)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     private var allDistricts = mutableListOf<District>()
 
     fun filterDistricts(substring: String) {
@@ -27,8 +31,10 @@ class DistrictsViewModel @Inject constructor(
 
     suspend fun loadDistricts() {
         val districts = loadDistrictsUseCase()
+        _isLoading.value = false
+
         _districts.value = districts
-        if (allDistricts.isEmpty()){
+        if (allDistricts.isEmpty()) {
             allDistricts.addAll(districts)
         }
 

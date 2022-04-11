@@ -55,6 +55,11 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         viewModel.districts.observe(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            val visibility = if (it) View.VISIBLE else View.GONE
+            binding.pbDistricts.visibility = visibility
+        }
     }
 
     private fun loadDistricts() {
