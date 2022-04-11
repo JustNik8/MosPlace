@@ -117,9 +117,7 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
         rvAdapter.onPlaceClickListener = {
             findNavController().navigate(
-                DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlaceFragment(
-                    it
-                )
+                DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlace(it)
             )
         }
     }
