@@ -1,7 +1,6 @@
 package com.justnik.mosplace.presentation.districts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -47,6 +46,8 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
                         it
                     )
             )
+            val menuItem = binding.toolbarDistricts.menu.findItem(R.id.action_search)
+            menuItem.collapseActionView()
         }
     }
 
@@ -59,8 +60,7 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
     private fun loadDistricts() {
         scope.launch {
             try {
-                val allDistricts = viewModel.loadDistricts()
-                rvAdapter.submitList(allDistricts)
+                viewModel.loadDistricts()
 
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()

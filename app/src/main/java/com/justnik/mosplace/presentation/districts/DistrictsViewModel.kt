@@ -19,15 +19,19 @@ class DistrictsViewModel @Inject constructor(
     val districts: LiveData<List<District>>
         get() = _districts
 
-    private var allDistricts = listOf<District>()
+    private var allDistricts = mutableListOf<District>()
 
     fun filterDistricts(substring: String) {
         _districts.value = filterDistrictsUseCase(allDistricts, substring)
     }
 
-    suspend fun loadDistricts(): List<District> {
-        allDistricts = loadDistrictsUseCase()
-        return allDistricts
+    suspend fun loadDistricts() {
+        val districts = loadDistrictsUseCase()
+        _districts.value = districts
+        if (allDistricts.isEmpty()){
+            allDistricts.addAll(districts)
+        }
+
     }
 
     fun getAllDistrictsList() = allDistricts
