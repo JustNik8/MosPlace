@@ -85,9 +85,10 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 mark.addTapListener(tapListener)
             }
 
-            MockData().getMockPoints().forEach {
-                mapObjects.addPlacemark(it)
-            }
+            //mock data for map placemarks
+//            MockData().getMockPoints().forEach {
+//                mapObjects.addPlacemark(it)
+//            }
         }
     }
 
