@@ -2,19 +2,18 @@ package com.justnik.mosplace.presentation.districts
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DistrictsFragment : Fragment(R.layout.fragment_districts) {
@@ -27,13 +26,11 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
 
     private val viewModel: DistrictsViewModel by viewModels()
 
-    private val scope = CoroutineScope(Dispatchers.Main)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
         setUpToolBar()
         observeViewModel()
-        loadDistricts()
+        viewModel.loadDistricts()
     }
 
     private fun setUpRecyclerView() {
@@ -56,19 +53,14 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
             rvAdapter.submitList(it)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner){
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             val pbVisibility = if (it) View.VISIBLE else View.GONE
             binding.pbDistricts.visibility = pbVisibility
         }
-    }
 
-    private fun loadDistricts() {
-        scope.launch {
-            try {
-                viewModel.loadDistricts()
-
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+        viewModel.showError.observe(viewLifecycleOwner) {
+            if (it) {
+                Snackbar.make(binding.root, "Error Occurred", Snackbar.LENGTH_LONG).show()
             }
         }
     }

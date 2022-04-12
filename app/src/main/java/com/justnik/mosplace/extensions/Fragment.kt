@@ -8,12 +8,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.justnik.mosplace.R
 
-fun Fragment.hideBottomNavigationView(bottomNavigationView: BottomNavigationView) {
-    bottomNavigationView.visibility = View.GONE
-}
-
-fun Fragment.showBottomNavigationView(bottomNavigationView: BottomNavigationView) {
-    bottomNavigationView.visibility = View.VISIBLE
-}
+//fun Fragment.hideBottomNavigationView(bottomNavigationView: BottomNavigationView) {
+//    bottomNavigationView.visibility = View.GONE
+//}
+//
+//fun Fragment.showBottomNavigationView(bottomNavigationView: BottomNavigationView) {
+//    bottomNavigationView.visibility = View.VISIBLE
+//}
 
 

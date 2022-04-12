@@ -9,15 +9,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
-import com.justnik.mosplace.domain.parsePlaceType
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
@@ -36,13 +34,11 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     private val viewModel: DistrictPlacesViewModel by viewModels()
 
-    private val scope = CoroutineScope(Dispatchers.Main)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
-        loadPlaces()
         setupToolBar()
         observeViewModel()
+        viewModel.loadPlacesByDistrictId(district.id)
     }
 
     private fun observeViewModel() {
@@ -50,9 +46,15 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             rvAdapter.submitList(it)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner){
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             val pbVisibility = if (it) View.VISIBLE else View.GONE
             binding.pbDistrictPlaces.visibility = pbVisibility
+        }
+
+        viewModel.showError.observe(viewLifecycleOwner){
+            if(it){
+                Snackbar.make(binding.root, "Error Occurred", Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -124,12 +126,6 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             findNavController().navigate(
                 DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlace(it)
             )
-        }
-    }
-
-    private fun loadPlaces() {
-        scope.launch {
-            viewModel.loadPlacesByDistrictId(district.id)
         }
     }
 }
