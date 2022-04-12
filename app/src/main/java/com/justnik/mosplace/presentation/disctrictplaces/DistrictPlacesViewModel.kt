@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.di.TypePreferences
 import com.justnik.mosplace.domain.entities.Place
@@ -13,6 +14,7 @@ import com.justnik.mosplace.domain.usecases.FilterPlacesByTypeUseCase
 import com.justnik.mosplace.domain.usecases.LoadPlacesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,15 +33,25 @@ class DistrictPlacesViewModel @Inject constructor(
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private val _showError = MutableLiveData<Boolean>(false)
+    val showError: LiveData<Boolean>
+        get() = _showError
+
     private val allDistrictPlaces = mutableListOf<Place>()
 
-    suspend fun loadPlacesByDistrictId(id: Int) {
-        val places = loadPlacesUseCase(id)
-        _isLoading.value = false
-        if (allDistrictPlaces.isEmpty()) {
-            allDistrictPlaces.addAll(places)
+    fun loadPlacesByDistrictId(id: Int) {
+        viewModelScope.launch {
+            try {
+                val places = loadPlacesUseCase(id)
+                _isLoading.value = false
+                if (allDistrictPlaces.isEmpty()) {
+                    allDistrictPlaces.addAll(places)
+                }
+                filterPlacesByType(getStringSelectedTypes())
+            } catch (e: Exception){
+                _showError.value = true
+            }
         }
-        filterPlacesByType(getStringSelectedTypes())
     }
 
     fun filterPlacesByType(types: List<String>) {

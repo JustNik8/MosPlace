@@ -13,8 +13,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
-import com.justnik.mosplace.extensions.hideBottomNavigationView
-import com.justnik.mosplace.extensions.showBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
