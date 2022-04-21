@@ -10,10 +10,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
+import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.presentation.adapters.district.DistrictAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 @AndroidEntryPoint
 class DistrictsFragment : Fragment(R.layout.fragment_districts) {
@@ -30,7 +29,6 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         setUpRecyclerView()
         setUpToolBar()
         observeViewModel()
-        viewModel.loadDistricts()
     }
 
     private fun setUpRecyclerView() {
@@ -49,18 +47,17 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
     }
 
     private fun observeViewModel() {
-        viewModel.districts.observe(viewLifecycleOwner) {
+        viewModel.districts.observeFlow(viewLifecycleOwner) {
             rvAdapter.submitList(it)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            val pbVisibility = if (it) View.VISIBLE else View.GONE
-            binding.pbDistricts.visibility = pbVisibility
+        viewModel.isLoading.observeFlow(viewLifecycleOwner){ isLoading ->
+            binding.pbDistricts.visibility = if(isLoading) View.VISIBLE else View.GONE
         }
 
-        viewModel.showError.observe(viewLifecycleOwner) {
-            if (it) {
-                Snackbar.make(binding.root, "Error Occurred", Snackbar.LENGTH_LONG).show()
+        viewModel.showError.observeFlow(viewLifecycleOwner){ error ->
+            if (error) {
+                Snackbar.make(binding.root, "Error", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
@@ -77,13 +74,13 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
 
             override fun onQueryTextChange(p0: String): Boolean {
                 if (p0 == "") {
-                    rvAdapter.submitList(viewModel.getAllDistrictsList())
+                    viewModel.filterDistricts(null)
                     return true
                 }
                 viewModel.filterDistricts(p0)
                 return true
             }
-
         })
     }
 }
+

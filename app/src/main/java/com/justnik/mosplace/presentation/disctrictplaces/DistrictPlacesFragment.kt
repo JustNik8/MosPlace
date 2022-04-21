@@ -12,6 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
+import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -42,17 +43,17 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun observeViewModel() {
-        viewModel.places.observe(viewLifecycleOwner) {
-            rvAdapter.submitList(it)
+        viewModel.places.observeFlow(viewLifecycleOwner) { places ->
+            rvAdapter.submitList(places)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            val pbVisibility = if (it) View.VISIBLE else View.GONE
+        viewModel.isLoading.observeFlow(viewLifecycleOwner) { isLoading ->
+            val pbVisibility = if (isLoading) View.VISIBLE else View.GONE
             binding.pbDistrictPlaces.visibility = pbVisibility
         }
 
-        viewModel.showError.observe(viewLifecycleOwner){
-            if(it){
+        viewModel.showError.observeFlow(viewLifecycleOwner){ error->
+            if(error){
                 Snackbar.make(binding.root, "Error Occurred", Snackbar.LENGTH_LONG).show()
             }
         }
@@ -76,6 +77,16 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             }
         }
 
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvPlaces.adapter = rvAdapter
+
+        rvAdapter.onPlaceClickListener = {
+            findNavController().navigate(
+                DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlace(it)
+            )
+        }
     }
 
     private fun showAlertDialog() {
@@ -117,15 +128,5 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
                 selectedTypes[which] = checked
             }
             .show()
-    }
-
-    private fun setupRecyclerView() {
-        binding.rvPlaces.adapter = rvAdapter
-
-        rvAdapter.onPlaceClickListener = {
-            findNavController().navigate(
-                DistrictPlacesFragmentDirections.actionDistrictPlacesFragmentToPlace(it)
-            )
-        }
     }
 }
