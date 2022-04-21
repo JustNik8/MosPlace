@@ -48,7 +48,7 @@ class DistrictPlacesViewModel @Inject constructor(
                 val places = loadPlacesUseCase(id)
                 _isLoading.value = false
                 if (allDistrictPlaces.isEmpty()) {
-                    allDistrictPlaces.addAll(places)
+                    //allDistrictPlaces.addAll(places)
                 }
                 filterPlacesByType(getStringSelectedTypes())
             } catch (e: Exception) {

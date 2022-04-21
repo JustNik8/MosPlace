@@ -14,31 +14,34 @@ class MosRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ): MosRepository {
 
-    override suspend fun loadDistricts(): List<District> {
-        val districtsDto = apiService.getDistrictList()
-        val districts = mutableListOf<District>()
-
-        for (dto in districtsDto) {
-            val district = districtMapper.dtoToEntity(dto)
-            districts.add(district)
+    override suspend fun loadDistricts(): Resource<List<District>> {
+        return try {
+            val districtsDto = apiService.getDistrictList()
+            val districts = districtsDto.map { dto ->  districtMapper.dtoToEntity(dto)}
+            Resource.Success(districts)
         }
-
-        return districts
+        catch (e: Exception){
+            Resource.Error("Error")
+        }
     }
 
-    override suspend fun loadPlacesByDistrictId(id: Int): List<Place> {
-        val placesDto = apiService.getPlacesByDistrictId(id)
-        val places = placesDto.map {
-            placeMapper.dtoToEntity(it)
+    override suspend fun loadPlacesByDistrictId(id: Int): Resource<List<Place>> {
+        return try {
+            val placesDto = apiService.getPlacesByDistrictId(id)
+            val places = placesDto.map { placeMapper.dtoToEntity(it) }
+            Resource.Success(places)
+        } catch (e: Exception){
+            Resource.Error("Error")
         }
-        return places
     }
 
-    override suspend fun loadAllPlaces(): List<Place> {
-        val placesDto = apiService.getAllPlaces()
-        val places = placesDto.map {
-            placeMapper.dtoToEntity(it)
+    override suspend fun loadAllPlaces(): Resource<List<Place>> {
+        return try {
+            val placesDto = apiService.getAllPlaces()
+            val places = placesDto.map { placeMapper.dtoToEntity(it) }
+            Resource.Success(places)
+        } catch (e: Exception){
+            Resource.Error("Error")
         }
-        return places
     }
 }

@@ -73,23 +73,23 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     }
 
     private fun addPlacemarks() {
-        scope.launch {
-            val placePoints = viewModel.loadAllPlaces()
-
-            placePoints.forEach {
-                val point = Point(it.latitude, it.longitude)
-                val viewProvider = ViewProvider(getImageViewByPlaceType(it.type))
-
-                val mark = mapObjects.addPlacemark(point, viewProvider)
-                mark.userData = it
-                mark.addTapListener(tapListener)
-            }
-
-            //mock data for map placemarks
-//            MockData().getMockPoints().forEach {
-//                mapObjects.addPlacemark(it)
+//        scope.launch {
+//            val placePoints = viewModel.loadAllPlaces()
+//
+//            placePoints.forEach {
+//                val point = Point(it.latitude, it.longitude)
+//                val viewProvider = ViewProvider(getImageViewByPlaceType(it.type))
+//
+//                val mark = mapObjects.addPlacemark(point, viewProvider)
+//                mark.userData = it
+//                mark.addTapListener(tapListener)
 //            }
-        }
+//
+//            //mock data for map placemarks
+////            MockData().getMockPoints().forEach {
+////                mapObjects.addPlacemark(it)
+////            }
+//        }
     }
 
     private fun getImageViewByPlaceType(type: String): ImageView {
