@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
@@ -15,6 +16,7 @@ import com.justnik.mosplace.data.mock.MockData
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentMapBinding
 import com.justnik.mosplace.domain.entities.Place
+import com.justnik.mosplace.helpers.observeFlow
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
@@ -41,8 +43,6 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         true
     }
 
-    private val scope = CoroutineScope(Dispatchers.Main)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapKitFactory.initialize(requireContext())
@@ -68,27 +68,18 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         mapView.map.move(
             CameraPosition(MOSCOW_LOCATION_POINT, 10f, 0f, 0f)
         )
-
         addPlacemarks()
     }
 
     private fun addPlacemarks() {
-        scope.launch {
-            val placePoints = viewModel.loadAllPlaces()
-
-            placePoints.forEach {
-                val point = Point(it.latitude, it.longitude)
-                val viewProvider = ViewProvider(getImageViewByPlaceType(it.type))
-
+        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+            uiState.places.forEach{ place ->
+                val point = Point(place.latitude, place.longitude)
+                val viewProvider = ViewProvider(getImageViewByPlaceType(place.type))
                 val mark = mapObjects.addPlacemark(point, viewProvider)
-                mark.userData = it
+                mark.userData = place
                 mark.addTapListener(tapListener)
             }
-
-            //mock data for map placemarks
-//            MockData().getMockPoints().forEach {
-//                mapObjects.addPlacemark(it)
-//            }
         }
     }
 

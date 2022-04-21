@@ -47,17 +47,16 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
     }
 
     private fun observeViewModel() {
-        viewModel.districts.observeFlow(viewLifecycleOwner) {
-            rvAdapter.submitList(it)
-        }
+        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+            val isLoading = uiState.isLoading
+            binding.pbDistricts.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-        viewModel.isLoading.observeFlow(viewLifecycleOwner){ isLoading ->
-            binding.pbDistricts.visibility = if(isLoading) View.VISIBLE else View.GONE
-        }
-
-        viewModel.showError.observeFlow(viewLifecycleOwner){ error ->
-            if (error) {
-                Snackbar.make(binding.root, "Error", Snackbar.LENGTH_SHORT).show()
+            when (uiState.error){
+                is UiState.Error.NetworkError -> {
+                    val errorText = requireActivity().getString(uiState.error.errorResId)
+                    Snackbar.make(binding.root, errorText, Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {rvAdapter.submitList(uiState.districts)}
             }
         }
     }

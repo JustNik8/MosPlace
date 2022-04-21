@@ -43,18 +43,16 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun observeViewModel() {
-        viewModel.places.observeFlow(viewLifecycleOwner) { places ->
-            rvAdapter.submitList(places)
-        }
+        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+            val isLoading = uiState.isLoading
+            binding.pbDistrictPlaces.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-        viewModel.isLoading.observeFlow(viewLifecycleOwner) { isLoading ->
-            val pbVisibility = if (isLoading) View.VISIBLE else View.GONE
-            binding.pbDistrictPlaces.visibility = pbVisibility
-        }
-
-        viewModel.showError.observeFlow(viewLifecycleOwner){ error->
-            if(error){
-                Snackbar.make(binding.root, "Error Occurred", Snackbar.LENGTH_LONG).show()
+            when (uiState.error){
+                is UiState.Error.NetworkError -> {
+                    val errorText = requireActivity().getString(uiState.error.errorResId)
+                    Snackbar.make(binding.root, errorText, Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {rvAdapter.submitList(uiState.places)}
             }
         }
     }

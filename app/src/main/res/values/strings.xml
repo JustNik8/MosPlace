@@ -29,4 +29,6 @@
     <string name="error_empty_field">Empty field</string>
     <string name="filter_list">Filter list</string>
 
+    <string name="error_network">Network problems</string>
+
 </resources>

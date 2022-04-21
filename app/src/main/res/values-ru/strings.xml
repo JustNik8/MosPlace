@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MosPlace</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="districts">Список округов</string>
     <string name="unique_place">Уникальное место</string>
@@ -26,4 +24,5 @@
     <string name="select_all">Выбрать все</string>
     <string name="cancel">Закрыть</string>
     <string name="apply">Принять</string>
+    <string name="error_network">Проблемы с сетью</string>
 </resources>
