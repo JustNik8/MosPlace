@@ -14,6 +14,11 @@ import com.justnik.mosplace.domain.usecases.FilterPlacesByTypeUseCase
 import com.justnik.mosplace.domain.usecases.LoadPlacesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,19 +30,17 @@ class DistrictPlacesViewModel @Inject constructor(
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
-    private val _places = MutableLiveData<List<Place>>()
-    val places: LiveData<List<Place>>
-        get() = _places
-
-    private var _isLoading = MutableLiveData<Boolean>(true)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
-
-    private val _showError = MutableLiveData<Boolean>(false)
-    val showError: LiveData<Boolean>
-        get() = _showError
-
     private val allDistrictPlaces = mutableListOf<Place>()
+
+    private val _places =
+        MutableSharedFlow<List<Place>>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val places = _places.asSharedFlow()
+
+    private var _isLoading = MutableStateFlow(true)
+    val isLoading = _isLoading.asStateFlow()
+
+    private val _showError = MutableSharedFlow<Boolean>()
+    val showError = _showError.asSharedFlow()
 
     fun loadPlacesByDistrictId(id: Int) {
         viewModelScope.launch {
@@ -48,15 +51,17 @@ class DistrictPlacesViewModel @Inject constructor(
                     allDistrictPlaces.addAll(places)
                 }
                 filterPlacesByType(getStringSelectedTypes())
-            } catch (e: Exception){
-                _showError.value = true
+            } catch (e: Exception) {
+                _showError.emit(true)
             }
         }
     }
 
     fun filterPlacesByType(types: List<String>) {
-        val places = filterPlacesByTypeUseCase(allDistrictPlaces, types)
-        _places.value = places
+        viewModelScope.launch {
+            val places = filterPlacesByTypeUseCase(allDistrictPlaces, types)
+            _places.emit(places)
+        }
     }
 
     fun getAvailableTypes(): Array<String> {
@@ -88,5 +93,4 @@ class DistrictPlacesViewModel @Inject constructor(
         }
         return stringSelectedTypes
     }
-
 }
