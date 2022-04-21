@@ -11,7 +11,6 @@ class PlaceViewModel @Inject constructor(
     private val openPlaceInMapUseCase: OpenPlaceInMapUseCase
 ) : ViewModel() {
 
-    fun openPlaceInMap(place: Place) {
-        openPlaceInMapUseCase(place)
-    }
+    fun openPlaceInMap(place: Place) = openPlaceInMapUseCase(place)
+
 }
