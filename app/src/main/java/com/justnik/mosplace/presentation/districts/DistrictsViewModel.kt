@@ -47,8 +47,11 @@ class DistrictsViewModel @Inject constructor(
             _uiState.value = UiState(isLoading = true)
             when (val resource = loadDistrictsUseCase()){
                 is Resource.Success -> {
-                    _uiState.value = UiState(districts = resource.data ?: listOf())
-                    allDistricts.addAll(resource.data ?: listOf())
+                    val districts = resource.data ?: listOf()
+                    _uiState.value = UiState(districts = districts)
+                    if (allDistricts.isEmpty()) {
+                        allDistricts.addAll(resource.data ?: listOf())
+                    }
                 }
                 is Resource.Error -> {
                     _uiState.value = UiState(error = UiState.Error.NetworkError)
