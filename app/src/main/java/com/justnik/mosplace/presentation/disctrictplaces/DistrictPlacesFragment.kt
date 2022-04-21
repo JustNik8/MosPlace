@@ -49,10 +49,8 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
             when (uiState.error){
                 is UiState.Error.NetworkError -> {
-                    Snackbar.make(binding.root, "Network Error", Snackbar.LENGTH_SHORT).show()
-                }
-                is UiState.Error.ServerError -> {
-                    Snackbar.make(binding.root, "Server Error", Snackbar.LENGTH_SHORT).show()
+                    val errorText = requireActivity().getString(uiState.error.errorResId)
+                    Snackbar.make(binding.root, errorText, Snackbar.LENGTH_SHORT).show()
                 }
                 else -> {rvAdapter.submitList(uiState.places)}
             }

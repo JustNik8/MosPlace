@@ -2,8 +2,10 @@ package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.data.repository.Resource
 import com.justnik.mosplace.di.TypePreferences
@@ -43,7 +45,7 @@ class DistrictPlacesViewModel @Inject constructor(
                     }
                 }
                 is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError)
+                    _uiState.value = UiState(error = UiState.Error.NetworkError())
                 }
             }
         }
@@ -92,8 +94,7 @@ data class UiState(
     val error: Error? = null,
     val places: List<Place> = listOf()
 ) {
-    sealed class Error {
-        object NetworkError : Error()
-        object ServerError : Error()
+    sealed class Error(@StringRes val errorResId: Int){
+        class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
     }
 }

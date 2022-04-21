@@ -1,19 +1,18 @@
 package com.justnik.mosplace.presentation.districts
 
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.justnik.mosplace.R
 import com.justnik.mosplace.data.repository.Resource
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.usecases.FilterDistrictsUseCase
 import com.justnik.mosplace.domain.usecases.LoadDistrictsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Error
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,7 +53,7 @@ class DistrictsViewModel @Inject constructor(
                     }
                 }
                 is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError)
+                    _uiState.value = UiState(error = UiState.Error.NetworkError())
                 }
             }
         }
@@ -67,8 +66,7 @@ data class UiState(
     val error: Error? = null,
     val districts: List<District> = listOf()
 ) {
-    sealed class Error{
-        object NetworkError : Error()
-        object ServerError : Error()
+    sealed class Error(@StringRes val errorResId: Int){
+        class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
     }
 }
