@@ -41,7 +41,7 @@ class DistrictsViewModel @Inject constructor(
         }
     }
 
-    private fun loadDistricts(){
+    fun loadDistricts(){
         viewModelScope.launch {
             _uiState.value = UiState(isLoading = true)
             when (val resource = loadDistrictsUseCase()){

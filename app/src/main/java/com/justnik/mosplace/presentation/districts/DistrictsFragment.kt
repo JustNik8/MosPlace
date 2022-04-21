@@ -29,6 +29,13 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         setUpRecyclerView()
         setUpToolBar()
         observeViewModel()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.bTryAgain.setOnClickListener {
+            viewModel.loadDistricts()
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -54,9 +61,12 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
             when (uiState.error){
                 is UiState.Error.NetworkError -> {
                     val errorText = requireActivity().getString(uiState.error.errorResId)
-                    Snackbar.make(binding.root, errorText, Snackbar.LENGTH_SHORT).show()
+                    showErrorUi(errorText)
                 }
-                else -> {rvAdapter.submitList(uiState.districts)}
+                else -> {
+                    rvAdapter.submitList(uiState.districts)
+                    showMainUi()
+                }
             }
         }
     }
@@ -80,6 +90,25 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
                 return true
             }
         })
+    }
+
+    private fun showMainUi(){
+        //Hide error views
+        binding.ivNoInternet.visibility = View.GONE
+        binding.tvError.visibility = View.GONE
+        binding.bTryAgain.visibility = View.GONE
+        //Show district list
+        binding.rvDistricts.visibility = View.VISIBLE
+    }
+
+    private fun showErrorUi(errorText: String) {
+        //Show error views
+        binding.ivNoInternet.visibility = View.VISIBLE
+        binding.tvError.visibility = View.VISIBLE
+        binding.bTryAgain.visibility = View.VISIBLE
+        binding.tvError.text = errorText
+        //Hide district list
+        binding.rvDistricts.visibility = View.GONE
     }
 }
 
