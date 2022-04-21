@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
+import com.justnik.mosplace.helpers.observeFlow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,7 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
     }
 
     private fun observeViewModel() {
-        viewModel.errorRating.observe(viewLifecycleOwner) {
+        viewModel.errorRating.observeFlow(viewLifecycleOwner) {
             if (it) {
                 val errorText = resources.getString(R.string.error_rating)
 
@@ -55,7 +56,7 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
             }
         }
 
-        viewModel.errorReviewText.observe(viewLifecycleOwner) {
+        viewModel.errorReviewText.observeFlow(viewLifecycleOwner) {
             val etReview = binding.etReview
 
             if (it) {
@@ -67,7 +68,7 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
             }
         }
 
-        viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
+        viewModel.shouldCloseScreen.observeFlow(viewLifecycleOwner) {
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
