@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
+import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemPlaceBinding
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.parsePlaceType
@@ -39,6 +40,9 @@ class PlaceAdapter(private val context: Context) :
         }
         if (place.images.isNotEmpty()) {
             Glide.with(context).load(place.images[0].imageUrl).into(binding.ivItemPlaceImage)
+        }
+        else {
+            Glide.with(context).load(R.drawable.no_image).into(binding.ivItemPlaceImage)
         }
     }
 }

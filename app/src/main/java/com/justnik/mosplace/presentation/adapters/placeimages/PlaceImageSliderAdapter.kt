@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemPlaceImageBinding
 import com.smarteist.autoimageslider.SliderViewAdapter
 
@@ -17,7 +18,7 @@ class PlaceImageSliderAdapter(
         ViewHolder(binding.root)
 
     override fun getCount(): Int {
-        return imageUrls.size
+        return if (imageUrls.isNotEmpty()) imageUrls.size else 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): PlaceImageViewHolder {
@@ -33,6 +34,12 @@ class PlaceImageSliderAdapter(
     override fun onBindViewHolder(viewHolder: PlaceImageViewHolder, position: Int) {
         val binding = viewHolder.binding
 
-        Glide.with(context).load(imageUrls[position]).into(binding.ivSliderPlaceImage)
+        with (binding) {
+            if (imageUrls.isNotEmpty()) {
+                Glide.with(context).load(imageUrls[position]).into(ivSliderPlaceImage)
+            } else{
+                Glide.with(context).load(R.drawable.no_image).into(ivSliderPlaceImage)
+            }
+        }
     }
 }

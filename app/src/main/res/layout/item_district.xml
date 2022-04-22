@@ -13,13 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_district_photo"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:contentDescription="Photo Of District"
             android:scaleType="centerCrop"
-            tools:src="@drawable/img_district_example" />
+            tools:src="@drawable/no_image" />
 
         <TextView
             android:id="@+id/tv_item_district_name"
