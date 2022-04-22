@@ -8,7 +8,6 @@
     <string name="search">Поиск</string>
     <string name="hint_search">Введите название округа</string>
 
-    <!-- Bottom navigation -->
     <string name="main">Главная</string>
     <string name="map">Карта</string>
     <string name="account">Аккаунт</string>
@@ -24,5 +23,7 @@
     <string name="select_all">Выбрать все</string>
     <string name="cancel">Закрыть</string>
     <string name="apply">Принять</string>
+
     <string name="error_network">Проблемы с сетью</string>
+    <string name="try_again">Попробовать снова</string>
 </resources>
