@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemDistrictBinding
@@ -12,7 +13,10 @@ import com.justnik.mosplace.domain.getAbbreviationWithName
 
 
 class DistrictAdapter(private val context: Context) :
-    ListAdapter<District, DistrictViewHolder>(DistrictDiffUtil) {
+    ListAdapter<District, DistrictAdapter.DistrictViewHolder>(DistrictDiffUtil) {
+
+    class DistrictViewHolder(val binding: ItemDistrictBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     var onDistrictClickListener: ((District) -> Unit)? = null
 

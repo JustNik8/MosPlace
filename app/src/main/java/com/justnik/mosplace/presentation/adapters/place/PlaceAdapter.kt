@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemPlaceBinding
@@ -12,7 +13,10 @@ import com.justnik.mosplace.domain.parsePlaceType
 
 
 class PlaceAdapter(private val context: Context) :
-    ListAdapter<Place, PlaceViewHolder>(PlaceDiffUtil) {
+    ListAdapter<Place, PlaceAdapter.PlaceViewHolder>(PlaceDiffUtil) {
+
+    inner class PlaceViewHolder(val binding: ItemPlaceBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     var onPlaceClickListener: ((Place) -> Unit)? = null
 
