@@ -31,5 +31,18 @@
 
     <string name="error_network">Network problems</string>
     <string name="try_again">Try again</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="finish">Finish</string>
+
+    <!-- On Boarding -->
+    <string name="screen1_title" translatable="false">MosPlace</string>
+    <string name="screen1_desc">The application contains various places, like landmarks, restaurants, parks, that are grouped by districts of Moscow. </string>
+
+    <string name="screen2_title">Choose district</string>
+    <string name="screen2_desc">You can open district by tapping on card</string>
+
+    <string name="screen3_title">Choose place</string>
+    <string name="screen3_desc">You can open place by tapping on card</string>
 
 </resources>
