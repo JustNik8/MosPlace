@@ -26,4 +26,16 @@
 
     <string name="error_network">Проблемы с сетью</string>
     <string name="try_again">Попробовать снова</string>
+    <string name="next">Далее</string>
+    <string name="skip">Пропустить</string>
+    <string name="finish">Завершить</string>
+
+    <!-- On Boarding -->
+    <string name="screen1_desc">Приложение содержит различные места, такие как достопримечательности, рестораны, парки, которые сгруппированы по районам Москвы.</string>
+
+    <string name="screen2_desc">Вы можете открыть район, нажав на карточку</string>
+    <string name="screen2_title">Выберите округ</string>
+
+    <string name="screen3_title">Выберите место</string>
+    <string name="screen3_desc">Вы можете открыть место, нажав на карточку</string>
 </resources>

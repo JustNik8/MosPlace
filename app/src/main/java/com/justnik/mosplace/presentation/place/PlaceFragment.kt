@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PlaceFragment : Fragment(R.layout.fragment_place) {
 
-    private val args by navArgs<PlaceFragmentArgs>()
+    private val args: PlaceFragmentArgs by navArgs()
 
     private val binding: FragmentPlaceBinding by viewBinding()
 

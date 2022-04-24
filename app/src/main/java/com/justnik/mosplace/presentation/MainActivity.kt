@@ -1,5 +1,6 @@
 package com.justnik.mosplace.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityMainBinding
+import com.justnik.mosplace.helpers.UserPrefs
+import com.justnik.mosplace.presentation.onboarding.OnBoardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +31,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //showOnBoarding()
         setupBottomNav()
+    }
+
+    private fun showOnBoarding(){
+        val userPrefs = UserPrefs(this)
+        if (!userPrefs.isOnBoardingFinished){
+            val intent = Intent(this, OnBoardingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupBottomNav() {
