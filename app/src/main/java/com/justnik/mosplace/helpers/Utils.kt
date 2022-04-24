@@ -1,9 +1,8 @@
-package com.justnik.mosplace.domain
+package com.justnik.mosplace.helpers
 
 import android.content.Context
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.PlaceTypes
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 fun parsePlaceType(type: String, context: Context): String {
     val res = context.resources
@@ -14,5 +13,6 @@ fun parsePlaceType(type: String, context: Context): String {
         else -> ""
     }
 }
+
 
 fun getAbbreviationWithName(abbreviation: String, name: String) = "$abbreviation: $name"

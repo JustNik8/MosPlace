@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemDistrictBinding
 import com.justnik.mosplace.domain.entities.District
-import com.justnik.mosplace.domain.getAbbreviationWithName
+import com.justnik.mosplace.helpers.getAbbreviationWithName
 
 
 class DistrictAdapter(private val context: Context) :

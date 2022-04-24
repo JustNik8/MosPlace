@@ -1,7 +1,7 @@
 package com.justnik.mosplace.domain.usecases
 
 import com.justnik.mosplace.domain.entities.District
-import com.justnik.mosplace.domain.getAbbreviationWithName
+import com.justnik.mosplace.helpers.getAbbreviationWithName
 import javax.inject.Inject
 
 class FilterDistrictsUseCase @Inject constructor(){

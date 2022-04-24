@@ -2,7 +2,7 @@ package com.justnik.mosplace.domain.usecases
 
 import android.content.Context
 import com.justnik.mosplace.domain.entities.Place
-import com.justnik.mosplace.domain.parsePlaceType
+import com.justnik.mosplace.helpers.parsePlaceType
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

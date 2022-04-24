@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ItemPlaceBinding
 import com.justnik.mosplace.domain.entities.Place
-import com.justnik.mosplace.domain.parsePlaceType
+import com.justnik.mosplace.helpers.parsePlaceType
 
 
 class PlaceAdapter(private val context: Context) :
