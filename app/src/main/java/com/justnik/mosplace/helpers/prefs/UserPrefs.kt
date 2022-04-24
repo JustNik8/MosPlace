@@ -1,9 +1,7 @@
-package com.justnik.mosplace.helpers
+package com.justnik.mosplace.helpers.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
 
 class UserPrefs (private val context: Context) {
 

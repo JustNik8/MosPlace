@@ -11,7 +11,7 @@ class FilterPlacesByTypeUseCase @Inject constructor(
 ) {
     operator fun invoke(places: List<Place>, types: List<String>): List<Place> {
         return places.filter {
-            val type = parsePlaceType(it.type, context)
+            val type = it.type
             type in types
         }
     }

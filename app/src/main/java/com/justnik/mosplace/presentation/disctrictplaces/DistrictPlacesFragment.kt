@@ -11,12 +11,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.parsePlaceType
+import com.justnik.mosplace.helpers.prefs.PlaceTypePrefs
 import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.processNextEventInCurrentThread
 
 @AndroidEntryPoint
 class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
@@ -98,22 +102,22 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun showAlertDialog() {
+        val placeTypePrefs = PlaceTypePrefs(requireContext())
+
         //Text for buttons and title
         val negativeButtonText = resources.getString(R.string.cancel)
         val titleText = resources.getString(R.string.places)
         val positiveButtonText = resources.getString(R.string.apply)
 
-        //Items that will be shown in alert dialog
-        val availableTypes = viewModel.getAvailableTypes()
+        val prefsTypes = placeTypePrefs.selectedPrefsTypes
 
-        //Array that contains if item is selected
-        val selectedTypes = viewModel.getSelectedTypes()
-        //List which contains selected items
-        val selectedItems = mutableListOf<String>()
+        //Items that will be shown in alert dialog Only for showing in alert dialog
+        val availableTypes = prefsTypes.map {
+            parsePlaceType(it.typeName, requireContext())
+        }.toTypedArray()
 
-        val sharedPref = requireActivity().getSharedPreferences(
-            getString(R.string.preference_key_types), Context.MODE_PRIVATE
-        )
+        //Array to show selected items. Only for showing in alert dialog
+        val selectedTypes = prefsTypes.map { it.selected }.toBooleanArray()
 
         //Build alert dialog
         MaterialAlertDialogBuilder(requireContext())
@@ -121,19 +125,15 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             .setNegativeButton(negativeButtonText) { _, _ ->
             }
             .setPositiveButton(positiveButtonText) { _, _ ->
-                for (i in selectedTypes.indices) {
-                    if (selectedTypes[i]) {
-                        selectedItems.add(availableTypes[i])
-                    }
-                    with(sharedPref.edit()) {
-                        putBoolean(availableTypes[i], selectedTypes[i])
-                        apply()
-                    }
+                prefsTypes.onEach {
+                    placeTypePrefs.setTypeSelection(it)
                 }
+
+                val selectedItems = prefsTypes.filter { it.selected }.map { it.typeName }
                 viewModel.filterPlacesByType(selectedItems)
             }
             .setMultiChoiceItems(availableTypes, selectedTypes) { _, which, checked ->
-                selectedTypes[which] = checked
+                prefsTypes[which].selected = checked
             }
             .show()
     }
