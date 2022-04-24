@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import by.kirich1409.viewbindingdelegate.viewBinding
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.justnik.mosplace.R
@@ -13,30 +13,39 @@ import com.justnik.mosplace.domain.entities.OnBoardingItem
 import com.justnik.mosplace.helpers.UserPrefs
 import com.justnik.mosplace.presentation.MainActivity
 
-class OnBoardingActivity : AppCompatActivity(R.layout.activity_on_boarding) {
+class OnBoardingActivity : AppCompatActivity() {
 
-    private val binding: ActivityOnBoardingBinding by viewBinding()
-
-    private val pagerAdapter by lazy {
-        OnBoardingAdapter(this, createItems())
+    private val binding: ActivityOnBoardingBinding by lazy {
+        ActivityOnBoardingBinding.inflate(layoutInflater)
     }
 
-    private val userPrefs: UserPrefs by lazy {
-        UserPrefs(this)
-    }
+    private val pagerAdapter by lazy { OnBoardingAdapter(this, createItems()) }
+
+    private val userPrefs: UserPrefs by lazy { UserPrefs(this) }
+
+    private var showSplashScreen = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        checkOnBoardingIfFinished()
+        installSplashScreen().apply {
+            setKeepOnScreenCondition{
+                showSplashScreen
+            }
+        }
+
+        setContentView(binding.root)
+
+        checkOnBoardingIsFinished()
         setupPager()
         setClickListeners()
     }
 
-    private fun checkOnBoardingIfFinished(){
-        if (userPrefs.isOnBoardingFinished){
+    private fun checkOnBoardingIsFinished() {
+        if (userPrefs.isOnBoardingFinished) {
             openMainActivity()
         }
+        showSplashScreen = false
     }
 
     private fun setupPager() {
@@ -70,8 +79,11 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_on_boarding) {
                 setNextButtonText(tab.position, pagerAdapter.itemCount)
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {/*Do nothing*/}
-            override fun onTabReselected(tab: TabLayout.Tab?) { /*Do nothing*/ }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {/*Do nothing*/
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) { /*Do nothing*/
+            }
         })
     }
 
@@ -81,7 +93,7 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_on_boarding) {
         //Check if current position is last index
         if (currentPosition == itemCount - 1) {
             binding.bNext.text = getString(R.string.finish)
-        //Check if current position is penultimate index
+            //Check if current position is penultimate index
         } else if (currentPosition == itemCount - 2) {
             binding.bNext.text = getString(R.string.next)
         }
@@ -100,5 +112,4 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_on_boarding) {
             OnBoardingItem(getString(R.string.screen3_title), getString(R.string.screen3_desc))
         )
     }
-
 }
