@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.adapters.placeimages
+package com.justnik.mosplace.presentation.place
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.adapters.district
+package com.justnik.mosplace.presentation.districts
 
 import android.content.Context
 import android.view.LayoutInflater

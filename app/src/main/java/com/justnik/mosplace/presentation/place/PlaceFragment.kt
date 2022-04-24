@@ -9,7 +9,6 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
-import com.justnik.mosplace.presentation.adapters.placeimages.PlaceImageSliderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

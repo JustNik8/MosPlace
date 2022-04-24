@@ -1,6 +1,5 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,18 +8,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.parsePlaceType
 import com.justnik.mosplace.helpers.prefs.PlaceTypePrefs
-import com.justnik.mosplace.presentation.adapters.place.PlaceAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.processNextEventInCurrentThread
 
 @AndroidEntryPoint
 class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {

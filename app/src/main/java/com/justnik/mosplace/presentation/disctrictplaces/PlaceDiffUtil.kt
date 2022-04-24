@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.adapters.place
+package com.justnik.mosplace.presentation.disctrictplaces
 
 import androidx.recyclerview.widget.DiffUtil
 import com.justnik.mosplace.domain.entities.Place
