@@ -42,7 +42,7 @@ class DistrictAdapter(private val context: Context) :
             if (district.imageUrl != null) {
                 Glide.with(context).load(district.imageUrl).into(ivItemDistrictPhoto)
             } else {
-                Glide.with(context).load(R.drawable.img_district_example).into(ivItemDistrictPhoto)
+                Glide.with(context).load(R.drawable.no_image).into(ivItemDistrictPhoto)
             }
 
             val districtText = getAbbreviationWithName(district.abbreviation, district.title)
