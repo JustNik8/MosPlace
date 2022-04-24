@@ -15,6 +15,7 @@
         tools:src="@drawable/no_image" />
 
     <TextView
+        android:textAlignment="center"
         android:id="@+id/tv_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
         tools:text="Some title" />
 
     <TextView
+        android:textAlignment="center"
         android:id="@+id/tv_item_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

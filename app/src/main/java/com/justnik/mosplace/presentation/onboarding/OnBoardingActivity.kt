@@ -95,9 +95,9 @@ class OnBoardingActivity : AppCompatActivity(R.layout.activity_on_boarding) {
 
     private fun createItems(): List<OnBoardingItem> {
         return listOf(
-            OnBoardingItem("Title1", "Description1"),
-            OnBoardingItem("Title2", "Description2"),
-            OnBoardingItem("Title3", "Description3")
+            OnBoardingItem(getString(R.string.screen1_title), getString(R.string.screen1_desc)),
+            OnBoardingItem(getString(R.string.screen2_title), getString(R.string.screen2_desc)),
+            OnBoardingItem(getString(R.string.screen3_title), getString(R.string.screen3_desc))
         )
     }
 
