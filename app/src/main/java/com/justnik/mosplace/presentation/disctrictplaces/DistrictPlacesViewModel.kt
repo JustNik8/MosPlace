@@ -1,20 +1,15 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.data.repository.Resource
-import com.justnik.mosplace.di.TypePreferences
 import com.justnik.mosplace.domain.entities.Place
-import com.justnik.mosplace.helpers.parsePlaceType
 import com.justnik.mosplace.domain.usecases.FilterPlacesByTypeUseCase
 import com.justnik.mosplace.domain.usecases.LoadPlacesUseCase
+import com.justnik.mosplace.helpers.prefs.PlaceTypePrefs
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -24,8 +19,7 @@ import javax.inject.Inject
 class DistrictPlacesViewModel @Inject constructor(
     private val loadPlacesUseCase: LoadPlacesUseCase,
     private val filterPlacesByTypeUseCase: FilterPlacesByTypeUseCase,
-    @TypePreferences private val typePreferences: SharedPreferences,
-    @ApplicationContext private val context: Context
+    private val placeTypePrefs: PlaceTypePrefs
 ) : ViewModel() {
 
     private val allDistrictPlaces = mutableListOf<Place>()
@@ -34,18 +28,23 @@ class DistrictPlacesViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     fun loadPlacesByDistrictId(id: Int) {
-        viewModelScope.launch {
-            _uiState.value = UiState(isLoading = true)
-            when (val resource = loadPlacesUseCase(id)) {
-                is Resource.Success -> {
-                    val places = resource.data ?: listOf()
-                    _uiState.value = UiState(places = places)
-                    if (allDistrictPlaces.isEmpty()) {
-                        allDistrictPlaces.addAll(places)
+        if (allDistrictPlaces.isEmpty()) {
+            viewModelScope.launch {
+                _uiState.value = UiState(isLoading = true)
+                when (val resource = loadPlacesUseCase(id)) {
+                    is Resource.Success -> {
+                        val places = resource.data ?: listOf()
+                        if (allDistrictPlaces.isEmpty()) {
+                            allDistrictPlaces.addAll(places)
+                        }
+                        val selectedTypes = placeTypePrefs.selectedPrefsTypes
+                            .filter { it.selected }
+                            .map { it.typeName }
+                        filterPlacesByType(selectedTypes)
                     }
-                }
-                is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError())
+                    is Resource.Error -> {
+                        _uiState.value = UiState(error = UiState.Error.NetworkError())
+                    }
                 }
             }
         }
@@ -58,35 +57,6 @@ class DistrictPlacesViewModel @Inject constructor(
         }
     }
 
-    fun getAvailableTypes(): Array<String> {
-        val uniquePlace = parsePlaceType(PlaceTypes.UNIQUE_PLACE, context)
-        val restaurant = parsePlaceType(PlaceTypes.RESTAURANT, context)
-        val park = parsePlaceType(PlaceTypes.PARK, context)
-        return arrayOf(uniquePlace, restaurant, park)
-    }
-
-    fun getSelectedTypes(): BooleanArray {
-        val types = getAvailableTypes()
-        val selectedTypes = BooleanArray(types.size)
-        for (i in types.indices) {
-            val type = types[i]
-            val defaultValue = true
-            selectedTypes[i] = typePreferences.getBoolean(type, defaultValue)
-        }
-        return selectedTypes
-    }
-
-    private fun getStringSelectedTypes(): List<String> {
-        val selectedTypes = getSelectedTypes()
-        val availableTypes = getAvailableTypes()
-        val stringSelectedTypes = mutableListOf<String>()
-        for (i in selectedTypes.indices) {
-            if (selectedTypes[i]) {
-                stringSelectedTypes.add(availableTypes[i])
-            }
-        }
-        return stringSelectedTypes
-    }
 }
 
 data class UiState(
@@ -94,7 +64,7 @@ data class UiState(
     val error: Error? = null,
     val places: List<Place> = listOf()
 ) {
-    sealed class Error(@StringRes val errorResId: Int){
+    sealed class Error(@StringRes val errorResId: Int) {
         class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
     }
 }

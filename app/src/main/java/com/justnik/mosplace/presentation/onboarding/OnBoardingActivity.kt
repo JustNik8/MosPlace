@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityOnBoardingBinding
 import com.justnik.mosplace.domain.entities.OnBoardingItem
-import com.justnik.mosplace.helpers.UserPrefs
+import com.justnik.mosplace.helpers.prefs.UserPrefs
 import com.justnik.mosplace.presentation.MainActivity
 
 class OnBoardingActivity : AppCompatActivity() {
