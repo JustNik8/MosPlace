@@ -38,8 +38,15 @@
 
     <string name="screen3_title">Выберите место</string>
     <string name="screen3_desc">Вы можете открыть место, нажав на карточку</string>
+
     <string name="log_in">Войти</string>
-    <string name="create_account">Создать аккаунт</string>
     <string name="password">Пароль</string>
-    <string name="email_or_prone">Почта или телефон</string>
+    <string name="email">Почта</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="don_t_have_an_account">Нет аккаунта?</string>
+    <string name="register_here">Зарегистрироваться</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="registration">Регистрация</string>
+    <string name="username">Имя пользователя</string>
+    <string name="confirm_password">Подтвердите пароль</string>
 </resources>

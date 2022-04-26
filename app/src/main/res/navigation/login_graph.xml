@@ -10,29 +10,21 @@
         android:label="OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding">
         <action
-            android:id="@+id/action_onBoardingFragment_to_authFragment"
-            app:destination="@id/authFragment"
-            app:launchSingleTop="true"
+            android:id="@+id/action_onBoardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
             app:popUpTo="@id/login_graph"
             app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/authFragment"
-        android:name="com.justnik.mosplace.presentation.start.auth.AuthFragment"
-        android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth" >
-        <action
-            android:id="@+id/action_authFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_authFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.justnik.mosplace.presentation.start.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:popUpTo="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.justnik.mosplace.presentation.start.registration.RegistrationFragment"

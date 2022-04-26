@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityStartBinding
@@ -60,7 +59,7 @@ class StartActivity : AppCompatActivity() {
 
     private fun setStartDestination() {
         if (userPrefs.isOnBoardingFinished) {
-            navGraph.setStartDestination(R.id.authFragment)
+            navGraph.setStartDestination(R.id.loginFragment)
         } else {
             navGraph.setStartDestination(R.id.onBoardingFragment)
         }

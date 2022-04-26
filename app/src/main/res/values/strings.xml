@@ -46,10 +46,16 @@
     <string name="screen3_desc">You can open place by tapping on card</string>
 
     <string name="log_in">Log in</string>
-    <string name="create_account">Create account</string>
     <string name="password">Password</string>
-    <string name="email_or_prone">Email or prone</string>
+    <string name="email">Email</string>
     <string name="mosplace" translatable="false">MosPlace</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create account</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register_here">Register here</string>
+    <string name="registration">Registration</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
 
 
 </resources>

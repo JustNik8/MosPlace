@@ -66,7 +66,7 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     private fun finishOnBoarding() {
         userPrefs.isOnBoardingFinished = true
-        val direction = OnBoardingFragmentDirections.actionOnBoardingFragmentToAuthFragment()
+        val direction = OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment()
         findNavController().navigate(direction)
     }
 
