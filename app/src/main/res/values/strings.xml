@@ -47,6 +47,9 @@
 
     <string name="log_in">Log in</string>
     <string name="create_account">Create account</string>
+    <string name="password">Password</string>
+    <string name="email_or_prone">Email or prone</string>
+    <string name="mosplace" translatable="false">MosPlace</string>
 
 
 </resources>

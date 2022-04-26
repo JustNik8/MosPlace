@@ -1,12 +1,9 @@
 package com.justnik.mosplace.presentation.start.auth
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentAuthBinding
@@ -17,10 +14,10 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.bLogin.setOnClickListener {
-            Toast.makeText(requireContext(), "Login Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_authFragment_to_loginFragment)
         }
         binding.bRegistration.setOnClickListener {
-            Toast.makeText(requireContext(), "Registration Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_authFragment_to_registrationFragment)
         }
     }
 }

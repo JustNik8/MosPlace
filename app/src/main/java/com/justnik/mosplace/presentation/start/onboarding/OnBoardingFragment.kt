@@ -66,7 +66,8 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     private fun finishOnBoarding() {
         userPrefs.isOnBoardingFinished = true
-        findNavController().navigate(R.id.action_onBoardingFragment_to_authFragment)
+        val direction = OnBoardingFragmentDirections.actionOnBoardingFragmentToAuthFragment()
+        findNavController().navigate(direction)
     }
 
     private fun setupGetStartedButton(currentPosition: Int, itemCount: Int) {
@@ -94,21 +95,9 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     private fun createItems(): List<OnBoardingItem> {
         return listOf(
-            OnBoardingItem(
-                getString(R.string.screen1_title),
-                getString(R.string.screen1_desc),
-                R.drawable.human_running
-            ),
-            OnBoardingItem(
-                getString(R.string.screen2_title),
-                getString(R.string.screen2_desc),
-                R.drawable.human_sitting
-            ),
-            OnBoardingItem(
-                getString(R.string.screen3_title),
-                getString(R.string.screen3_desc),
-                R.drawable.human_standing
-            )
+            OnBoardingItem(getString(R.string.screen1_title), getString(R.string.screen1_desc), R.drawable.human_running),
+            OnBoardingItem(getString(R.string.screen2_title), getString(R.string.screen2_desc), R.drawable.human_sitting),
+            OnBoardingItem(getString(R.string.screen3_title), getString(R.string.screen3_desc), R.drawable.human_standing)
         )
     }
 }

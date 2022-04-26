@@ -40,4 +40,6 @@
     <string name="screen3_desc">Вы можете открыть место, нажав на карточку</string>
     <string name="log_in">Войти</string>
     <string name="create_account">Создать аккаунт</string>
+    <string name="password">Пароль</string>
+    <string name="email_or_prone">Почта или телефон</string>
 </resources>
