@@ -33,7 +33,7 @@
     <string name="try_again">Try again</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-    <string name="finish">Finish</string>
+    <string name="get_started">Get started</string>
 
     <!-- On Boarding -->
     <string name="screen1_title" translatable="false">MosPlace</string>
@@ -44,5 +44,9 @@
 
     <string name="screen3_title">Choose place</string>
     <string name="screen3_desc">You can open place by tapping on card</string>
+
+    <string name="log_in">Log in</string>
+    <string name="create_account">Create account</string>
+
 
 </resources>
