@@ -3,14 +3,21 @@ package com.justnik.mosplace.presentation.start.registration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentRegistrationBinding
 import com.justnik.mosplace.helpers.observeFlow
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
@@ -26,50 +33,67 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private fun setClickListener() {
         binding.bCreateAccount.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val username = binding.etUsername.text.toString()
-            val pass = binding.etPass.text.toString()
-            val confirmPass = binding.etConfirmPass.text.toString()
-            viewModel.validateInput(email, username, pass, confirmPass)
+            viewModel.onEvent(RegistrationFormEvent.Submit)
         }
     }
 
     private fun observeViewModel() {
-        viewModel.emailErrorState.observeFlow(viewLifecycleOwner) {
-            binding.tilEmail.error = it
+        lifecycleScope.launch {
+            viewModel.validationEvents.collect { event ->
+                when (event) {
+                    is RegistrationViewModel.ValidationEvent.Success -> {
+                        showAlertDialog("An account created", event.successMessage)
+                    }
+                    is RegistrationViewModel.ValidationEvent.Error -> {
+                        showAlertDialog("Failed to create an account", event.errorMessage)
+                    }
+                }
+            }
         }
 
-        viewModel.usernameErrorState.observeFlow(viewLifecycleOwner) {
-            binding.tilUsername.error = it
-        }
-
-        viewModel.passErrorState.observeFlow(viewLifecycleOwner) {
-            binding.tilPass.error = it
-        }
-
-        viewModel.confirmPassErrorState.observeFlow(viewLifecycleOwner) {
-            binding.tilConfirmPass.error = it
-        }
-
-        viewModel.passwordsAreSame.observeFlow(viewLifecycleOwner) {
-            binding.tilPass.error = it
-            binding.tilConfirmPass.error = it
+        viewModel.registrationFormState.observeFlow(viewLifecycleOwner) {
+            with(binding) {
+                //Log.d("RRR", it.toString())
+                tilEmail.error = it.emailError
+                tilUsername.error = it.usernameError
+                tilPassword.error = it.passwordError
+                tilRepeatedPassword.error = it.repeatedPasswordError
+            }
         }
     }
 
+    private fun showAlertDialog(title: String, message: String, successful: Boolean = false) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Got it") { _, _ ->
+                if (successful){
+                    findNavController().popBackStack()
+                }
+            }
+            .show()
+
+    }
+
     private fun addTextChangeListeners() {
-        binding.etEmail.addTextChangedListener(TextWatcherWrapper { viewModel.resetEmailError() })
-        binding.etUsername.addTextChangedListener(TextWatcherWrapper { viewModel.resetUsernameError() })
+        with(binding) {
+            etEmail.addTextChangedListener(TextWatcherWrapper {
+                viewModel.onEvent(RegistrationFormEvent.EmailChanged(etEmail.text.toString()))
+            })
 
-        binding.etPass.addTextChangedListener(TextWatcherWrapper{
-            viewModel.resetPassError()
-            viewModel.resetPasswordsNotSameError()
-        })
+            etUsername.addTextChangedListener(TextWatcherWrapper {
+                viewModel.onEvent(RegistrationFormEvent.UsernameChanged(etUsername.text.toString()))
+            })
 
-        binding.etConfirmPass.addTextChangedListener(TextWatcherWrapper{
-            viewModel.resetConfirmPassError()
-            viewModel.resetPasswordsNotSameError()
-        })
+            etPassword.addTextChangedListener(TextWatcherWrapper {
+                viewModel.onEvent(RegistrationFormEvent.PasswordChanged(etPassword.text.toString()))
+            })
+            etRepeatedPassword.addTextChangedListener(TextWatcherWrapper {
+                viewModel.onEvent(RegistrationFormEvent.RepeatedPasswordChanged(
+                    etRepeatedPassword.text.toString()
+                ))
+            })
+        }
     }
 }
 
