@@ -10,12 +10,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentRegistrationBinding
 import com.justnik.mosplace.helpers.observeFlow
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private val binding: FragmentRegistrationBinding by viewBinding()
     private val viewModel: RegistrationViewModel by viewModels()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setClickListener()
@@ -72,7 +73,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     }
 }
 
-class TextWatcherWrapper(private val block: () -> Unit) : TextWatcher {
+private class TextWatcherWrapper(private val block: () -> Unit) : TextWatcher {
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

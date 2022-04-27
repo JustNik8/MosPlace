@@ -11,8 +11,9 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityStartBinding
 import com.justnik.mosplace.helpers.prefs.UserPrefs
 import com.justnik.mosplace.presentation.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
 
     private val binding: ActivityStartBinding by lazy {

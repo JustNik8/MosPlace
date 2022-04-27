@@ -9,18 +9,18 @@ import retrofit2.http.Url
 
 
 interface ApiService {
-    @GET("districts")
+    @GET("api/v1/districts")
     suspend fun getDistrictList(
         @Query(QUERY_PARAM_FORMAT) format: String = JSON
     ): List<DistrictDto>
 
-    @GET("places")
+    @GET("api/v1/places")
     suspend fun getPlacesByDistrictId(
         @Query(QUERY_PARAM_DISTRICT_ID) districtId: Int,
         @Query(QUERY_PARAM_FORMAT) format: String = JSON
     ): List<PlaceDto>
 
-    @GET("places")
+    @GET("api/v1/places")
     suspend fun getAllPlaces(
         @Query(QUERY_PARAM_FORMAT) format: String = JSON
     ): List<PlaceDto>
