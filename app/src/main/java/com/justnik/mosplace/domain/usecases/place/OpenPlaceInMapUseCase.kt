@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain.usecases
+package com.justnik.mosplace.domain.usecases.place
 
 import android.content.Context
 import android.content.Intent

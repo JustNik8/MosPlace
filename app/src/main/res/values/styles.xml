@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.App.AuthButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:backgroundTint">#FF000000</item>
-        <item name="android:alpha">0.8</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="cornerRadius">16dp</item>
-    </style>
+
 </resources>

@@ -3,9 +3,7 @@ package com.justnik.mosplace.presentation.start.registration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -42,10 +40,16 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             viewModel.validationEvents.collect { event ->
                 when (event) {
                     is RegistrationViewModel.ValidationEvent.Success -> {
-                        showAlertDialog("An account created", event.successMessage)
+                        showAlertDialog(
+                            getString(R.string.account_created),
+                            event.successMessage.asString(requireContext())
+                        )
                     }
                     is RegistrationViewModel.ValidationEvent.Error -> {
-                        showAlertDialog("Failed to create an account", event.errorMessage)
+                        showAlertDialog(
+                            getString(R.string.account_failed),
+                            event.errorMessage.asString(requireContext())
+                        )
                     }
                 }
             }
@@ -53,11 +57,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
         viewModel.registrationFormState.observeFlow(viewLifecycleOwner) {
             with(binding) {
-                //Log.d("RRR", it.toString())
-                tilEmail.error = it.emailError
-                tilUsername.error = it.usernameError
-                tilPassword.error = it.passwordError
-                tilRepeatedPassword.error = it.repeatedPasswordError
+                tilEmail.error = it.emailError?.asString(requireContext())
+                tilUsername.error = it.usernameError?.asString(requireContext())
+                tilPassword.error = it.passwordError?.asString(requireContext())
+                tilRepeatedPassword.error = it.repeatedPasswordError?.asString(requireContext())
             }
         }
     }
@@ -67,7 +70,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton("Got it") { _, _ ->
-                if (successful){
+                if (successful) {
                     findNavController().popBackStack()
                 }
             }
@@ -89,9 +92,11 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 viewModel.onEvent(RegistrationFormEvent.PasswordChanged(etPassword.text.toString()))
             })
             etRepeatedPassword.addTextChangedListener(TextWatcherWrapper {
-                viewModel.onEvent(RegistrationFormEvent.RepeatedPasswordChanged(
-                    etRepeatedPassword.text.toString()
-                ))
+                viewModel.onEvent(
+                    RegistrationFormEvent.RepeatedPasswordChanged(
+                        etRepeatedPassword.text.toString()
+                    )
+                )
             })
         }
     }

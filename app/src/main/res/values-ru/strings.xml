@@ -49,4 +49,13 @@
     <string name="registration">Регистрация</string>
     <string name="username">Имя пользователя</string>
     <string name="confirm_password">Подтвердите пароль</string>
+    <string name="email_blank_error">Почта не может быть пустой</string>
+    <string name="email_invalid_error">Недествительная почта</string>
+    <string name="passwords_dont_match_error">Пароли не совпадают</string>
+    <string name="username_blank_error">Имя пользователя не может быть пустым</string>
+    <string name="unknown_error">Неизвестная ошибка!</string>
+    <string name="confirm_email">Подтвердите почту</string>
+    <string name="account_created">Аккаунт создан</string>
+    <string name="account_failed">Не удалось создать аккаунт</string>
+    <string name="password_length_error">Пароль должен содержать минимум %d знаков</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.justnik.mosplace.data.repository
 
-import com.google.gson.JsonObject
 import com.justnik.mosplace.data.network.AuthService
 import com.justnik.mosplace.data.network.authmodel.UserFullInfo
 import com.justnik.mosplace.domain.AuthRepository
@@ -16,7 +15,7 @@ class AuthRepositoryImpl @Inject constructor(
         return try {
             val json = authService.createUser(userFullInfo)
             Resource.Success(json)
-        } catch (e: HttpException){
+        } catch (e: HttpException) {
             val json = JSONObject(e.response()?.errorBody()?.string())
             Resource.Error(message = e.message(), data = json, errorCode = e.code())
         } catch (e: Exception) {

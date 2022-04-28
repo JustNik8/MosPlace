@@ -2,7 +2,7 @@ package com.justnik.mosplace.presentation.place
 
 import androidx.lifecycle.ViewModel
 import com.justnik.mosplace.domain.entities.Place
-import com.justnik.mosplace.domain.usecases.OpenPlaceInMapUseCase
+import com.justnik.mosplace.domain.usecases.place.OpenPlaceInMapUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

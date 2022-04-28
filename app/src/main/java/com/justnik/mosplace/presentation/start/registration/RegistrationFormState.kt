@@ -1,12 +1,14 @@
 package com.justnik.mosplace.presentation.start.registration
 
+import com.justnik.mosplace.domain.usecases.UiText
+
 data class RegistrationFormState (
     val email: String = "",
-    val emailError: String? = null,
+    val emailError: UiText? = null,
     val username: String = "",
-    val usernameError: String? = null,
+    val usernameError: UiText? = null,
     val password: String = "",
-    val passwordError: String? = null,
+    val passwordError: UiText? = null,
     val repeatedPassword: String = "",
-    val repeatedPasswordError: String? = null
+    val repeatedPasswordError: UiText? = null
 )

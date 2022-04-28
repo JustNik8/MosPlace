@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain.usecases
+package com.justnik.mosplace.domain.usecases.place
 
 import com.justnik.mosplace.domain.entities.Place
 import javax.inject.Inject

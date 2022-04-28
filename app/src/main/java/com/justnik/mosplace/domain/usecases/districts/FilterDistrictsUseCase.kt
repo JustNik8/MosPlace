@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain.usecases
+package com.justnik.mosplace.domain.usecases.districts
 
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.helpers.getAbbreviationWithName
