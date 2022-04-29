@@ -1,8 +1,10 @@
 package com.justnik.mosplace.presentation.start.registration
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.mappers.JsonMapper
 import com.justnik.mosplace.data.network.authmodel.UserFullInfo
 import com.justnik.mosplace.data.repository.Resource
 import com.justnik.mosplace.domain.usecases.UiText
@@ -13,7 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import org.json.JSONObject
+import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +25,8 @@ class RegistrationViewModel @Inject constructor(
     private val validateEmail: ValidateEmail,
     private val validateUsername: ValidateUsername,
     private val validatePassword: ValidatePassword,
-    private val validateRepeatedPassword: ValidateRepeatedPassword
+    private val validateRepeatedPassword: ValidateRepeatedPassword,
+    private val jsonMapper: JsonMapper
 ) : ViewModel() {
 
     private var _registrationFormState = MutableStateFlow(RegistrationFormState())
@@ -102,26 +106,18 @@ class RegistrationViewModel @Inject constructor(
                     validationEventChannel.send(ValidationEvent.Success(UiText.StringResource(R.string.confirm_email)))
                 }
                 is Resource.Error -> {
-                    if (response.errorCode == 400){
-                        try {
-                            val jsonArr = response.data?.getJSONArray("password")
-                            jsonArr?.let { arr ->
-                                val message = Array(arr.length()) {
-                                    arr[it]
-                                }.joinToString().replace(", ", "\n")
-                                validationEventChannel.send(ValidationEvent.Error(UiText.DynamicText(message)))
-                            }
-                        } catch (e : Exception){
-                            validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
-                        }
+                    val data = response.data
+                    data?.let { errorJson ->
+                        val message = jsonMapper.jsonToString(errorJson)
+                        validationEventChannel.send(ValidationEvent.Error(UiText.DynamicText(message)))
+                        return@launch
                     }
-                    else{
-                        validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
-                    }
+                    validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
                 }
             }
         }
     }
+
 
     sealed class ValidationEvent {
         class Success(val successMessage: UiText) : ValidationEvent()

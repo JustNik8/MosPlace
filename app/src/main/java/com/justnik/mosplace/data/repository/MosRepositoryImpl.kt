@@ -1,11 +1,13 @@
 package com.justnik.mosplace.data.repository
 
+import android.util.Log
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.ApiService
 import com.justnik.mosplace.domain.MosRepository
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class MosRepositoryImpl @Inject constructor(
@@ -20,7 +22,7 @@ class MosRepositoryImpl @Inject constructor(
             val districts = districtsDto.map { dto ->  districtMapper.dtoToEntity(dto)}
             Resource.Success(districts)
         }
-        catch (e: Exception){
+        catch (e: HttpException){
             Resource.Error("Error")
         }
     }

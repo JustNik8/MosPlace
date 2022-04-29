@@ -42,7 +42,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                     is RegistrationViewModel.ValidationEvent.Success -> {
                         showAlertDialog(
                             getString(R.string.account_created),
-                            event.successMessage.asString(requireContext())
+                            event.successMessage.asString(requireContext()),
+                            successful = true
                         )
                     }
                     is RegistrationViewModel.ValidationEvent.Error -> {
@@ -69,7 +70,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("Got it") { _, _ ->
+            .setPositiveButton(getString(R.string.got_it)) { _, _ ->
                 if (successful) {
                     findNavController().popBackStack()
                 }

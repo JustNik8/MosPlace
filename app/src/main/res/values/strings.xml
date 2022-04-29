@@ -67,5 +67,6 @@
     <string name="confirm_email">Confirm email</string>
     <string name="account_created">An account created</string>
     <string name="account_failed">Failed to create an account</string>
+    <string name="got_it">Got it</string>
 
 </resources>
