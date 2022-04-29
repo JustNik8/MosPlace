@@ -1,6 +1,9 @@
 package com.justnik.mosplace.data.network.authmodel
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 open class UserBriefInfo (
-    val username: String,
+    val email: String,
     val password: String
 )

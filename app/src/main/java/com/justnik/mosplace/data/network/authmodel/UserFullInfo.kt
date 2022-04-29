@@ -1,5 +1,5 @@
 package com.justnik.mosplace.data.network.authmodel
 
-class UserFullInfo(username: String, password: String, val email: String) :
-    UserBriefInfo(username, password) {
+class UserFullInfo(email: String, password: String, val username: String) :
+    UserBriefInfo(email, password) {
 }
