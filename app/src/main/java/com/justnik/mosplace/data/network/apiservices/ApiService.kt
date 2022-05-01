@@ -1,11 +1,9 @@
-package com.justnik.mosplace.data.network
+package com.justnik.mosplace.data.network.apiservices
 
 import com.justnik.mosplace.data.network.model.DistrictDto
 import com.justnik.mosplace.data.network.model.PlaceDto
-import com.justnik.mosplace.domain.entities.Place
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 
 interface ApiService {

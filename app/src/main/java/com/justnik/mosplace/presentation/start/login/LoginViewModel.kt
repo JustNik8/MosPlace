@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.authmodel.LoginInfo
-import com.justnik.mosplace.data.repository.Resource
+import com.justnik.mosplace.data.repositories.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
