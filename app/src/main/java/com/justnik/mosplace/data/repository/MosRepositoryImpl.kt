@@ -1,10 +1,12 @@
 package com.justnik.mosplace.data.repository
 
 import android.util.Log
+import com.justnik.mosplace.R
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.ApiService
 import com.justnik.mosplace.domain.MosRepository
+import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
 import retrofit2.HttpException
@@ -23,7 +25,7 @@ class MosRepositoryImpl @Inject constructor(
             Resource.Success(districts)
         }
         catch (e: HttpException){
-            Resource.Error("Error")
+            Resource.Error(UiText.StringResource(R.string.unknown_error))
         }
     }
 
@@ -33,7 +35,7 @@ class MosRepositoryImpl @Inject constructor(
             val places = placesDto.map { placeMapper.dtoToEntity(it) }
             Resource.Success(places)
         } catch (e: Exception){
-            Resource.Error("Error")
+            Resource.Error(UiText.StringResource(R.string.unknown_error))
         }
     }
 
@@ -43,7 +45,7 @@ class MosRepositoryImpl @Inject constructor(
             val places = placesDto.map { placeMapper.dtoToEntity(it) }
             Resource.Success(places)
         } catch (e: Exception){
-            Resource.Error("Error")
+            Resource.Error(UiText.StringResource(R.string.unknown_error))
         }
     }
 }

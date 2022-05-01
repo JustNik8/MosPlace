@@ -2,10 +2,12 @@ package com.justnik.mosplace.presentation.start
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityStartBinding
@@ -34,6 +36,10 @@ class StartActivity : AppCompatActivity() {
         navController.navInflater.inflate(R.navigation.login_graph)
     }
 
+    val authorizedCallback = {
+        openMainActivity()
+    }
+
     private var showSplashScreen = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +55,9 @@ class StartActivity : AppCompatActivity() {
         checkAuthorization()
     }
 
+
     private fun checkAuthorization() {
-        if (userPrefs.isUserAuthorized) {
+        if (userPrefs.jwtAccessToken != null) {
             openMainActivity()
         } else {
             setStartDestination()
@@ -71,5 +78,9 @@ class StartActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    companion object {
+        const val AUTHORIZED_KEY = "authorized"
     }
 }

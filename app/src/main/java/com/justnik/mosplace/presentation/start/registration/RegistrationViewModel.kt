@@ -1,13 +1,12 @@
 package com.justnik.mosplace.presentation.start.registration
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.mappers.JsonMapper
-import com.justnik.mosplace.data.network.authmodel.UserFullInfo
+import com.justnik.mosplace.data.network.authmodel.UserInfo
 import com.justnik.mosplace.data.repository.Resource
-import com.justnik.mosplace.domain.usecases.UiText
+import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -15,8 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
@@ -96,20 +93,19 @@ class RegistrationViewModel @Inject constructor(
             return
         }
         viewModelScope.launch {
+            val email = registrationFormState.value.email
             val username = registrationFormState.value.username
             val password = registrationFormState.value.password
-            val email = registrationFormState.value.email
-            val userFullInfo = UserFullInfo(username, password, email)
+            val userFullInfo = UserInfo(email, password, username)
             val response = createUserUseCase(userFullInfo)
             when (response) {
                 is Resource.Success -> {
                     validationEventChannel.send(ValidationEvent.Success(UiText.StringResource(R.string.confirm_email)))
                 }
                 is Resource.Error -> {
-                    val data = response.data
-                    data?.let { errorJson ->
-                        val message = jsonMapper.jsonToString(errorJson)
-                        validationEventChannel.send(ValidationEvent.Error(UiText.DynamicText(message)))
+                    val message = response.message
+                    if (message != null){
+                        validationEventChannel.send(ValidationEvent.Error(message))
                         return@launch
                     }
                     validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))

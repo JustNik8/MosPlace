@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain.usecases
+package com.justnik.mosplace.domain
 
 import android.content.Context
 import androidx.annotation.StringRes

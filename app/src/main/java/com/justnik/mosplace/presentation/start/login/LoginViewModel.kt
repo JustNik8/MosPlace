@@ -2,27 +2,31 @@ package com.justnik.mosplace.presentation.start.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.domain.usecases.UiText
+import com.justnik.mosplace.R
+import com.justnik.mosplace.data.network.authmodel.LoginInfo
+import com.justnik.mosplace.data.repository.Resource
+import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
 import com.justnik.mosplace.domain.usecases.auth.ValidatePassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val validateEmail: ValidateEmail,
-    private val validatePassword: ValidatePassword
-): ViewModel() {
+    private val validatePassword: ValidatePassword,
+    private val loginUserUseCase: LoginUserUseCase
+) : ViewModel() {
     private var _loginFormState = MutableStateFlow(LoginFormState())
     val loginFormState = _loginFormState.asStateFlow()
 
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
+
 
     fun onEvent(event: LoginFormEvent) {
         when (event) {
@@ -45,7 +49,7 @@ class LoginViewModel @Inject constructor(
         val passwordResult = validatePassword(loginFormState.value.password)
 
         val hasError = listOf(emailResult, passwordResult).any { !it.successful }
-        if (hasError){
+        if (hasError) {
             _loginFormState.value = loginFormState.value.copy(
                 emailError = emailResult.errorMessage,
                 passwordError = passwordResult.errorMessage
@@ -53,8 +57,30 @@ class LoginViewModel @Inject constructor(
             return
         }
 
+
+        loginUser()
+
+    }
+
+    private fun loginUser() {
+        val email = loginFormState.value.email
+        val password = loginFormState.value.password
+        val loginInfo = LoginInfo(email, password)
         viewModelScope.launch {
-            validationEventChannel.send(ValidationEvent.Success(UiText.DynamicText("Great")))
+            val response = loginUserUseCase(loginInfo)
+            when (response) {
+                is Resource.Success -> {
+                    validationEventChannel.send(ValidationEvent.Success(UiText.DynamicText("Success")))
+                }
+                is Resource.Error -> {
+                    val message = response.message
+                    message?.let {
+                        validationEventChannel.send(ValidationEvent.Error(it))
+                        return@launch
+                    }
+                    validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
+                }
+            }
         }
     }
 
