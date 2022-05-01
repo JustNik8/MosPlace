@@ -11,7 +11,7 @@
         android:id="@+id/iv_item_on_boarding"
         android:layout_width="260dp"
         android:layout_height="260dp"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         tools:src="@drawable/no_image" />
 
     <TextView

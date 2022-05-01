@@ -1,14 +1,13 @@
 package com.justnik.mosplace.presentation.districts
 
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.repository.Resource
 import com.justnik.mosplace.domain.entities.District
-import com.justnik.mosplace.domain.usecases.FilterDistrictsUseCase
-import com.justnik.mosplace.domain.usecases.LoadDistrictsUseCase
+import com.justnik.mosplace.domain.usecases.districts.FilterDistrictsUseCase
+import com.justnik.mosplace.domain.usecases.districts.LoadDistrictsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

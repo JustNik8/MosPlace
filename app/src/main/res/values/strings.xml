@@ -33,7 +33,7 @@
     <string name="try_again">Try again</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-    <string name="finish">Finish</string>
+    <string name="get_started">Get started</string>
 
     <!-- On Boarding -->
     <string name="screen1_title" translatable="false">MosPlace</string>
@@ -44,5 +44,29 @@
 
     <string name="screen3_title">Choose place</string>
     <string name="screen3_desc">You can open place by tapping on card</string>
+
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="mosplace" translatable="false">MosPlace</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create account</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register_here">Register here</string>
+    <string name="registration">Registration</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
+
+    <!-- Errors -->
+    <string name="email_blank_error">Email can\'t be blank</string>
+    <string name="email_invalid_error">Invalid email</string>
+    <string name="password_length_error">The password needs to consist of at least %d characters</string>
+    <string name="passwords_dont_match_error">The passwords don\'t match</string>
+    <string name="username_blank_error">Username can\'t be blank</string>
+    <string name="unknown_error">Unknown error!</string>
+    <string name="confirm_email">Confirm email</string>
+    <string name="account_created">An account created</string>
+    <string name="account_failed">Failed to create an account</string>
+    <string name="got_it">Got it</string>
 
 </resources>

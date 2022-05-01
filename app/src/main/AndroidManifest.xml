@@ -17,7 +17,7 @@
         android:theme="@style/Theme.MosPlace">
 
         <activity
-            android:name=".presentation.onboarding.OnBoardingActivity"
+            android:name=".presentation.start.StartActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Staring">
             <intent-filter>

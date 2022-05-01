@@ -1,6 +1,7 @@
 package com.justnik.mosplace.di
 
 import com.justnik.mosplace.data.network.ApiService
+import com.justnik.mosplace.data.network.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,7 @@ object NetworkModule {
     @BaseUrl
     @Singleton
     @Provides
-    fun provideBaseUrl(): String = "https://mosplace.pythonanywhere.com/api/v1/"
+    fun provideBaseUrl(): String = "https://mosplace.pythonanywhere.com/"
 
     @Singleton
     @Provides
@@ -54,5 +55,11 @@ object NetworkModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
 }

@@ -1,6 +1,8 @@
 package com.justnik.mosplace.di
 
+import com.justnik.mosplace.data.repository.AuthRepositoryImpl
 import com.justnik.mosplace.data.repository.MosRepositoryImpl
+import com.justnik.mosplace.domain.AuthRepository
 import com.justnik.mosplace.domain.MosRepository
 import dagger.Binds
 import dagger.Module
@@ -16,5 +18,7 @@ interface DataModule {
     @Singleton
     fun bindMosRepository(impl: MosRepositoryImpl): MosRepository
 
-
+    @Binds
+    @Singleton
+    fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 }

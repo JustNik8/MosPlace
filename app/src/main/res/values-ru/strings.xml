@@ -28,7 +28,7 @@
     <string name="try_again">Попробовать снова</string>
     <string name="next">Далее</string>
     <string name="skip">Пропустить</string>
-    <string name="finish">Завершить</string>
+    <string name="get_started">Начать</string>
 
     <!-- On Boarding -->
     <string name="screen1_desc">Приложение содержит различные места, такие как достопримечательности, рестораны, парки, которые сгруппированы по районам Москвы.</string>
@@ -38,4 +38,25 @@
 
     <string name="screen3_title">Выберите место</string>
     <string name="screen3_desc">Вы можете открыть место, нажав на карточку</string>
+
+    <string name="log_in">Войти</string>
+    <string name="password">Пароль</string>
+    <string name="email">Почта</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="don_t_have_an_account">Нет аккаунта?</string>
+    <string name="register_here">Зарегистрироваться</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="registration">Регистрация</string>
+    <string name="username">Имя пользователя</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="email_blank_error">Почта не может быть пустой</string>
+    <string name="email_invalid_error">Недествительная почта</string>
+    <string name="passwords_dont_match_error">Пароли не совпадают</string>
+    <string name="username_blank_error">Имя пользователя не может быть пустым</string>
+    <string name="unknown_error">Неизвестная ошибка!</string>
+    <string name="confirm_email">Подтвердите почту</string>
+    <string name="account_created">Аккаунт создан</string>
+    <string name="account_failed">Не удалось создать аккаунт</string>
+    <string name="password_length_error">Пароль должен содержать минимум %d знаков</string>
+    <string name="got_it">Понятно</string>
 </resources>

@@ -1,9 +1,8 @@
-package com.justnik.mosplace.presentation.onboarding
+package com.justnik.mosplace.presentation.start.onboarding
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
@@ -33,7 +32,7 @@ class OnBoardingAdapter(private val context: Context, private val items: List<On
         with(binding) {
             tvItemTitle.text = item.title
             tvItemDesc.text = item.desc
-            Glide.with(context).load(R.drawable.no_image).into(ivItemOnBoarding)
+            Glide.with(context).load(item.drawableId).into(ivItemOnBoarding)
         }
     }
 
