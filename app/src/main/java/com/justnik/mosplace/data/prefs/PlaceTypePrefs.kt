@@ -1,4 +1,4 @@
-package com.justnik.mosplace.helpers.prefs
+package com.justnik.mosplace.data.prefs
 
 import android.content.Context
 import com.justnik.mosplace.data.network.PlaceTypes

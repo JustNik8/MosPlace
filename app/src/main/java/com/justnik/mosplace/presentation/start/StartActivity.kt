@@ -2,16 +2,14 @@ package com.justnik.mosplace.presentation.start
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.ActivityStartBinding
-import com.justnik.mosplace.helpers.prefs.UserPrefs
+import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentOnBoardingBinding
 import com.justnik.mosplace.domain.entities.OnBoardingItem
-import com.justnik.mosplace.helpers.prefs.UserPrefs
+import com.justnik.mosplace.data.prefs.UserPrefs
 
 class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 

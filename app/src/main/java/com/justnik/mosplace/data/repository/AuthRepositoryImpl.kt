@@ -10,7 +10,7 @@ import com.justnik.mosplace.data.network.authmodel.LoginInfo
 import com.justnik.mosplace.data.network.authmodel.UserInfo
 import com.justnik.mosplace.domain.AuthRepository
 import com.justnik.mosplace.domain.UiText
-import com.justnik.mosplace.helpers.prefs.UserPrefs
+import com.justnik.mosplace.data.prefs.UserPrefs
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

@@ -8,7 +8,7 @@ import com.justnik.mosplace.data.repository.Resource
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.place.FilterPlacesByTypeUseCase
 import com.justnik.mosplace.domain.usecases.place.LoadPlacesUseCase
-import com.justnik.mosplace.helpers.prefs.PlaceTypePrefs
+import com.justnik.mosplace.data.prefs.PlaceTypePrefs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

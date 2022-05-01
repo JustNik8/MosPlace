@@ -12,7 +12,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.parsePlaceType
-import com.justnik.mosplace.helpers.prefs.PlaceTypePrefs
+import com.justnik.mosplace.data.prefs.PlaceTypePrefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
