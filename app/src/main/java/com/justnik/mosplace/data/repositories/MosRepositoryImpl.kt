@@ -1,10 +1,9 @@
-package com.justnik.mosplace.data.repository
+package com.justnik.mosplace.data.repositories
 
-import android.util.Log
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
-import com.justnik.mosplace.data.network.ApiService
+import com.justnik.mosplace.data.network.apiservices.ApiService
 import com.justnik.mosplace.domain.MosRepository
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.District

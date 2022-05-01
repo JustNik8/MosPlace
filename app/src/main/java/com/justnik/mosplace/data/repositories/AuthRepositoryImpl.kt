@@ -1,13 +1,15 @@
-package com.justnik.mosplace.data.repository
+package com.justnik.mosplace.data.repositories
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.mappers.JsonMapper
-import com.justnik.mosplace.data.network.AuthService
+import com.justnik.mosplace.data.network.apiservices.AuthService
 import com.justnik.mosplace.data.network.authmodel.JWT
 import com.justnik.mosplace.data.network.authmodel.LoginInfo
 import com.justnik.mosplace.data.network.authmodel.UserInfo
+import com.justnik.mosplace.data.network.authmodel.UserResponse
 import com.justnik.mosplace.domain.AuthRepository
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.data.prefs.UserPrefs
@@ -55,6 +57,26 @@ class AuthRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.Error(message = UiText.StringResource(R.string.unknown_error))
+        }
+    }
+
+    override suspend fun loadUser(accessToken: String): Resource<UserResponse> {
+        return try {
+            val response = authService.getUser("JWT $accessToken")
+            if (response.isSuccessful){
+                val json = response.body()
+                Log.d("RRR", json.toString())
+
+                Resource.Success(json ?: throw RuntimeException())
+            }
+            else {
+                val json = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
+                Log.d("RRR", json.toString())
+                Resource.Error(message = UiText.DynamicText("Error"))
+            }
+        } catch (e: Exception){
+            e.printStackTrace()
+            Resource.Error(message = UiText.DynamicText("Error"))
         }
     }
 

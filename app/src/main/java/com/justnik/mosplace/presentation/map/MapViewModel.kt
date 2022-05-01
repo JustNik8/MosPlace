@@ -2,7 +2,7 @@ package com.justnik.mosplace.presentation.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.data.repository.Resource
+import com.justnik.mosplace.data.repositories.Resource
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.place.LoadAllPlacesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.data.repository
+package com.justnik.mosplace.data.repositories
 
 import com.justnik.mosplace.domain.UiText
 

@@ -59,4 +59,7 @@
     <string name="account_failed">Не удалось создать аккаунт</string>
     <string name="password_length_error">Пароль должен содержать минимум %d знаков</string>
     <string name="got_it">Понятно</string>
+    <string name="settings">Настройки</string>
+    <string name="theme">Тема</string>
+    <string name="achievements">Достижения</string>
 </resources>
