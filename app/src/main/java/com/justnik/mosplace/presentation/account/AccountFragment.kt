@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.databinding.FragmentAccountBinding
@@ -34,7 +35,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         val menuItem = binding.accountToolbar.menu.findItem(R.id.action_logout)
 
         menuItem.setOnMenuItemClickListener {
-            logout()
+            showAlertDialog()
             true
         }
     }
@@ -78,7 +79,17 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 menuItem.setIcon(R.drawable.ic_mode_dark)
             }
         }
+    }
 
+    private fun showAlertDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Log out")
+            .setMessage("Are you sure you want out of the account?")
+            .setPositiveButton("Yes") { _, _ ->
+                logout()
+            }
+            .setNegativeButton("No") { _, _ -> }
+            .show()
     }
 
     private fun logout() {
