@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="Widget.Mosplace.ThemeButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="iconPadding">12dp</item>
+    </style>
 </resources>
