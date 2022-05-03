@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.Mosplace.ThemeButton" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="Widget.Mosplace.ThemeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="android:textAlignment">textStart</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorOnBackground</item>
         <item name="iconPadding">12dp</item>
+        <item name="iconTint">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Theme.Mosplace.BottomDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Mosplace.BottomSheetStyle</item>
+        <item name="android:navigationBarColor">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Widget.Mosplace.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@color/transparent</item>
     </style>
 </resources>

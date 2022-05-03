@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate.*
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.SettingsPrefs
 import com.justnik.mosplace.databinding.DialogThemeBinding
 
@@ -15,6 +16,11 @@ class ThemeDialog : BottomSheetDialogFragment() {
     private val binding: DialogThemeBinding by viewBinding(createMethod = CreateMethod.INFLATE)
 
     private val settingsPrefs by lazy { SettingsPrefs(requireContext()) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_TITLE, R.style.Theme_Mosplace_BottomDialog)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
