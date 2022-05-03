@@ -68,7 +68,10 @@
     <string name="account_failed">Failed to create an account</string>
     <string name="got_it">Got it</string>
     <string name="settings">Settings</string>
-    <string name="theme">Theme</string>
     <string name="achievements">Achievements</string>
+    <string name="theme">Theme</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
+    <string name="automatically">Automatically</string>
 
 </resources>

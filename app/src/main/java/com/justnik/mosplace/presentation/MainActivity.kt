@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.prefs.SettingsPrefs
 import com.justnik.mosplace.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
