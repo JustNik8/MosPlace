@@ -1,16 +1,15 @@
 package com.justnik.mosplace.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavGraph
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.prefs.SettingsPrefs
+import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding: ActivityMainBinding by viewBinding()
+    private val userPrefs by lazy { UserPrefs(this) }
 
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(
@@ -46,12 +46,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     when (it.itemId) {
                         R.id.main -> refresh(R.id.districtsFragment)
                         R.id.map -> refresh(R.id.mapFragment)
-                        R.id.account -> refresh(R.id.accountFragment)
+                        R.id.account -> refresh(R.id.accountContainerFragment)
                     }
                 }
             }
         }
     }
+
+
 
     private fun refresh(@IdRes destinationId: Int) {
         findNavController(R.id.main_container)

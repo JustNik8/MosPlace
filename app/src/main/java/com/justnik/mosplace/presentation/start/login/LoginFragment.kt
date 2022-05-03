@@ -1,5 +1,6 @@
 package com.justnik.mosplace.presentation.start.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentLoginBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.presentation.MainActivity
 import com.justnik.mosplace.presentation.start.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -38,8 +40,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             viewModel.validationEvents.collect { event ->
                 when (event) {
                     is LoginViewModel.ValidationEvent.Success -> {
-                        (requireActivity() as StartActivity).authorizedCallback()
-
+                        val parentActivity = requireActivity()
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        parentActivity.startActivity(intent)
+                        parentActivity.finish()
                     }
                     is LoginViewModel.ValidationEvent.Error -> {
                         showAlertDialog(

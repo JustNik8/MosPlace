@@ -6,32 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".presentation.account.AccountFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/account_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_account"
-        app:title="@string/account" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_avatar"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="16dp"
         app:cardCornerRadius="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_avatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/no_image"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/no_image" />
     </com.google.android.material.card.MaterialCardView>
 
 
