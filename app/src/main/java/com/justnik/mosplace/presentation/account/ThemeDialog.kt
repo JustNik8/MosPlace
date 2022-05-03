@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.*
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,6 +17,8 @@ class ThemeDialog : BottomSheetDialogFragment() {
     private val binding: DialogThemeBinding by viewBinding(createMethod = CreateMethod.INFLATE)
 
     private val settingsPrefs by lazy { SettingsPrefs(requireContext()) }
+
+    var darkModeCallback: ((darkModeCode: Int) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +42,25 @@ class ThemeDialog : BottomSheetDialogFragment() {
             bLightMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_NO)
                 settingsPrefs.darkModeCode = MODE_NIGHT_NO
+                closeDialog()
             }
             bDarkMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_YES)
                 settingsPrefs.darkModeCode = MODE_NIGHT_YES
+                closeDialog()
             }
             bAutoMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
                 settingsPrefs.darkModeCode = MODE_NIGHT_FOLLOW_SYSTEM
+                closeDialog()
             }
         }
+    }
+
+    private fun closeDialog(){
+        val darkModeCode = AppCompatDelegate.getDefaultNightMode()
+        darkModeCallback?.invoke(darkModeCode)
+        dismiss()
     }
 
     companion object {
