@@ -62,4 +62,8 @@
     <string name="settings">Настройки</string>
     <string name="theme">Тема</string>
     <string name="achievements">Достижения</string>
+    <string name="dark">Темная</string>
+    <string name="light">Светлая</string>
+    <string name="automatically">Автоматически</string>
+
 </resources>

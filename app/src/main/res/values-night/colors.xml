@@ -10,12 +10,12 @@
     <color name="colorSecondaryLight">#FF7539</color>
     <color name="colorOnSecondary">#FF000000</color>
 
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorBackgroundDark">#cccccc</color>
-    <color name="colorBackgroundLight">#ffffff</color>
-    <color name="colorOnBackground">#747474</color>
+    <color name="colorBackground">#292929</color>
+    <color name="colorBackgroundDark">#202020</color>
+    <color name="colorBackgroundLight">#4A4A4A</color>
+    <color name="colorOnBackground">#FFFFFF</color>
 
-    <color name="colorSlider">#cccccc</color>
+    <color name="colorSlider">#4A4A4A</color>
 
     <color name="transparent">#00000000</color>
     <color name="AppIconBackground">#C3DDF4</color>

@@ -6,9 +6,9 @@
     android:animateLayoutChanges="true"
     android:background="@drawable/bg_rounded"
     android:paddingTop="8dp"
-    app:behavior_peekHeight="100dp"
     android:paddingBottom="36dp"
     app:behavior_hideable="true"
+    app:behavior_peekHeight="100dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <View
@@ -16,6 +16,7 @@
         android:layout_width="48dp"
         android:layout_height="8dp"
         android:background="@drawable/circle"
+        android:backgroundTint="@color/colorSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/theme"
+        android:textColor="@color/colorOnBackground"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/b_cancel"
@@ -38,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title_theme"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintTop_toTopOf="@+id/tv_title_theme" />
@@ -61,44 +64,41 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="@color/black"
+        android:background="@color/colorBackgroundDark"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_theme" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_light_mode"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.Mosplace.ThemeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_mode_light"
-        android:text="@string/light_mode"
-        android:textAlignment="textStart"
+        app:icon="@drawable/ic_mode_light"
+        android:text="@string/light"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_dark_mode"
+        style="@style/Widget.Mosplace.ThemeButton"
         android:layout_width="0dp"
-        android:layout_marginTop="8dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_mode_dark"
-        android:text="@string/dark_mode"
-        android:textAlignment="textStart"
+        android:layout_marginTop="8dp"
+        app:icon="@drawable/ic_mode_dark"
+        android:text="@string/dark"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
         app:layout_constraintTop_toBottomOf="@+id/b_light_mode" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_auto_mode"
+        style="@style/Widget.Mosplace.ThemeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:drawableLeft="@drawable/ic_mode_auto"
+        app:icon="@drawable/ic_mode_auto"
         android:text="@string/automatically"
-        android:textAlignment="textStart"
         app:layout_constraintEnd_toStartOf="@+id/right_guideline"
         app:layout_constraintStart_toStartOf="@+id/left_guideline"
         app:layout_constraintTop_toBottomOf="@+id/b_dark_mode" />
