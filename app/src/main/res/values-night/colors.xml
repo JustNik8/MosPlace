@@ -3,12 +3,12 @@
     <color name="colorPrimary">#42a5f4</color>
     <color name="colorPrimaryDark">#0077c1</color>
     <color name="colorPrimaryLight">#80d6ff</color>
-    <color name="colorOnPrimary">#FF000000</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
 
     <color name="colorSecondary">#F95428</color>
     <color name="colorSecondaryDark">#C30000</color>
     <color name="colorSecondaryLight">#FF7539</color>
-    <color name="colorOnSecondary">#FF000000</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
 
     <color name="colorBackground">#292929</color>
     <color name="colorBackgroundDark">#202020</color>

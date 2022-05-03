@@ -65,5 +65,6 @@
     <string name="dark">Темная</string>
     <string name="light">Светлая</string>
     <string name="automatically">Автоматически</string>
+    <string name="logout">Выйти</string>
 
 </resources>

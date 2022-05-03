@@ -31,7 +31,6 @@ import kotlinx.coroutines.launch
 class MapFragment : Fragment(R.layout.fragment_map) {
 
     private val binding: FragmentMapBinding by viewBinding()
-
     private val viewModel: MapViewModel by viewModels()
 
     private val mapView by lazy { binding.mapView }

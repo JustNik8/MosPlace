@@ -1,6 +1,6 @@
 package com.justnik.mosplace.presentation.account
 
-import android.content.res.Configuration
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.databinding.FragmentAccountBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.showSingle
+import com.justnik.mosplace.presentation.start.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,11 +21,22 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private val binding: FragmentAccountBinding by viewBinding()
     private val viewModel: AccountViewModel by viewModels()
+    private val userPrefs by lazy { UserPrefs(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeViewModel()
         setThemeIcon(AppCompatDelegate.getDefaultNightMode())
         setupThemeButtonClickListener()
+        setUpLogoutButtonClickListener()
+    }
+
+    private fun setUpLogoutButtonClickListener() {
+        val menuItem = binding.accountToolbar.menu.findItem(R.id.action_logout)
+
+        menuItem.setOnMenuItemClickListener {
+            logout()
+            true
+        }
     }
 
     private fun setupThemeButtonClickListener() {
@@ -51,7 +64,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         }
     }
 
-    private fun setThemeIcon(darkModeCode: Int){
+    private fun setThemeIcon(darkModeCode: Int) {
         val menuItem = binding.accountToolbar.menu.findItem(R.id.action_theme)
 
         when (darkModeCode) {
@@ -68,4 +81,13 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     }
 
+    private fun logout() {
+        userPrefs.jwtAccessToken = null
+        userPrefs.jwtRefreshToken = null
+
+        val parentActivity = requireActivity()
+        val intent = Intent(requireActivity(), StartActivity::class.java)
+        parentActivity.startActivity(intent)
+        parentActivity.finish()
+    }
 }

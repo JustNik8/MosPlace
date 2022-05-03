@@ -66,8 +66,6 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     private fun setupToolBar() {
         val toolbar = binding.toolbarPlaces
-
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
