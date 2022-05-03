@@ -3,11 +3,13 @@ package com.justnik.mosplace.presentation.start
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.prefs.SettingsPrefs
 import com.justnik.mosplace.databinding.ActivityStartBinding
 import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.presentation.MainActivity
@@ -21,6 +23,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     private val userPrefs: UserPrefs by lazy { UserPrefs(this) }
+    private val settingsPrefs by lazy { SettingsPrefs(this) }
 
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(
@@ -42,6 +45,7 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setDarkMode()
 
         installSplashScreen().apply {
             setKeepOnScreenCondition {
@@ -50,8 +54,14 @@ class StartActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+
         checkAuthorization()
     }
+
+    private fun setDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(settingsPrefs.darkModeCode)
+    }
+
 
 
     private fun checkAuthorization() {
