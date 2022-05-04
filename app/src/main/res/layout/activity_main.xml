@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/main_toolbar"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/colorOnPrimary"
+        tools:title="Mosplace"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_container"

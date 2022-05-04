@@ -15,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentLoginBinding
+import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.presentation.MainActivity
 import com.justnik.mosplace.presentation.start.StartActivity

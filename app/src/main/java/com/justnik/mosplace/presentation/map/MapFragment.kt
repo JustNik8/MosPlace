@@ -16,7 +16,9 @@ import com.justnik.mosplace.data.mock.MockData
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentMapBinding
 import com.justnik.mosplace.domain.entities.Place
+import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.showSupportActionBar
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
@@ -45,6 +47,11 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapKitFactory.initialize(requireContext())
+        hideSupportActionBar()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpMapView()
     }
 
     override fun onStart() {
@@ -59,9 +66,11 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         MapKitFactory.getInstance().onStop()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpMapView()
+    override fun onDestroy() {
+        super.onDestroy()
+        showSupportActionBar()
     }
+
 
     private fun setUpMapView() {
         mapView.map.move(
