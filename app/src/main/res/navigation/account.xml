@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.justnik.mosplace.presentation.start.registration.RegistrationFragment"
+        android:name="com.justnik.mosplace.presentation.registration.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.justnik.mosplace.presentation.start.login.LoginFragment"
+        android:name="com.justnik.mosplace.presentation.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
             app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/AccountFragment"
+        android:id="@+id/accountFragment"
         android:name="com.justnik.mosplace.presentation.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />

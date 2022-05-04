@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.fragment.app.FragmentContainerView android:id="@+id/account_container"
+    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.account.AccountContainerFragment">
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/account_toolbar"
-        style="@style/Widget.Mosplace.Toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/account" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/account_container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true" />
-
-</LinearLayout>
+    app:defaultNavHost="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />

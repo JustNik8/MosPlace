@@ -8,9 +8,8 @@
     
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/main_toolbar"
-        android:background="@color/colorPrimary"
-        app:titleTextColor="@color/colorOnPrimary"
         tools:title="Mosplace"
+        style="@style/Widget.Mosplace.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"/>
 

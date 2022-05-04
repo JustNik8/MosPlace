@@ -29,6 +29,13 @@ class AccountViewModel @Inject constructor(
         loadUser()
     }
 
+    fun isAuthorized(): Boolean = userPrefs.jwtAccessToken != null
+
+    fun logout(){
+        userPrefs.jwtAccessToken = null
+        userPrefs.jwtRefreshToken = null
+    }
+
     private fun loadUser() {
         viewModelScope.launch {
             val accessToken = userPrefs.jwtAccessToken ?: return@launch

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.start.login
+package com.justnik.mosplace.presentation.login
 
 sealed class LoginFormEvent{
     data class EmailChanged(val email: String) : LoginFormEvent()

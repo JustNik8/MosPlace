@@ -16,6 +16,7 @@ import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.parsePlaceType
 import com.justnik.mosplace.data.prefs.PlaceTypePrefs
+import com.justnik.mosplace.helpers.setTitle
 import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +43,11 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         observeViewModel()
         viewModel.loadPlacesByDistrictId(district.id)
         setClickListener()
-        setTitle()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.places)
     }
 
 
@@ -95,8 +100,6 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             )
         }
     }
-
-    private fun setTitle() = (requireActivity() as MainActivity).setTitle(R.string.places)
 
     private fun showAlertDialog() {
         val placeTypePrefs = PlaceTypePrefs(requireContext())

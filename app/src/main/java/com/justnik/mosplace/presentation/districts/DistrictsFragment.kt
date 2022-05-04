@@ -13,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.setTitle
 import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +35,11 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         observeViewModel()
         setClickListener()
         setHasOptionsMenu(true)
-        setTitle()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.districts)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -106,11 +111,6 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
                 }
             }
         }
-    }
-
-
-    private fun setTitle() {
-        (requireActivity() as MainActivity).setTitle(R.string.districts)
     }
 
     private fun showMainUi(){

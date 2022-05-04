@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.start.registration
+package com.justnik.mosplace.presentation.registration
 
 sealed class RegistrationFormEvent {
     data class EmailChanged(val email: String) : RegistrationFormEvent()

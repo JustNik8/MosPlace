@@ -5,13 +5,11 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +18,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     NavController.OnDestinationChangedListener {
 
     private val binding: ActivityMainBinding by viewBinding()
-    private val userPrefs by lazy { UserPrefs(this) }
 
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(
@@ -62,12 +59,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
             .popBackStack(destinationId, false)
     }
 
+
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(destination.id != R.id.districtsFragment)
+        val isDestinationDistricts = destination.id == R.id.districtsFragment
+        val isDestinationMap = destination.id == R.id.mapFragment
+        val notDisplayUpButton =
+            isDestinationDistricts || isDestinationMap
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(!notDisplayUpButton)
     }
 
 }

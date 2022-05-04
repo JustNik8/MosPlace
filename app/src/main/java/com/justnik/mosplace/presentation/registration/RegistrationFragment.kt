@@ -1,9 +1,9 @@
-package com.justnik.mosplace.presentation.start.registration
+package com.justnik.mosplace.presentation.registration
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentRegistrationBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.setTitle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -28,6 +29,17 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         setClickListener()
         observeViewModel()
         addTextChangeListeners()
+        setHasOptionsMenu(true)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setTitle(R.string.registration)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().popBackStack()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setClickListener() {
