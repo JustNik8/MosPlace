@@ -90,12 +90,12 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun showAlertDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Log out")
-            .setMessage("Are you sure you want out of the account?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setTitle(getString(R.string.logout))
+            .setMessage(getString(R.string.leave_account_message))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 logout()
             }
-            .setNegativeButton("No") { _, _ -> }
+            .setNegativeButton(getString(R.string.no)) { _, _ -> }
             .show()
     }
 

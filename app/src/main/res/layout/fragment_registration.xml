@@ -18,6 +18,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:backgroundTint="@color/colorBackground"
             android:layout_marginBottom="-32dp"
             app:cardCornerRadius="32dp">
 
