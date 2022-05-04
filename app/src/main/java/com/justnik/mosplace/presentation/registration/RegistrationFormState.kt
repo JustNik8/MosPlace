@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.start.registration
+package com.justnik.mosplace.presentation.registration
 
 import com.justnik.mosplace.domain.UiText
 

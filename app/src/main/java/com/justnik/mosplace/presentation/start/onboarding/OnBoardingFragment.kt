@@ -11,6 +11,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentOnBoardingBinding
 import com.justnik.mosplace.domain.entities.OnBoardingItem
 import com.justnik.mosplace.data.prefs.UserPrefs
+import com.justnik.mosplace.presentation.start.StartActivity
 
 class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
@@ -66,8 +67,7 @@ class OnBoardingFragment : Fragment(R.layout.fragment_on_boarding) {
 
     private fun finishOnBoarding() {
         userPrefs.isOnBoardingFinished = true
-        val direction = OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment()
-        findNavController().navigate(direction)
+        (activity as StartActivity?)?.onBoardingFinishedCallback?.invoke()
     }
 
     private fun setupGetStartedButton(currentPosition: Int, itemCount: Int) {

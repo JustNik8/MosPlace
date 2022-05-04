@@ -1,13 +1,18 @@
-package com.justnik.mosplace.presentation.start.login
+package com.justnik.mosplace.presentation.login
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,7 +20,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentLoginBinding
 import com.justnik.mosplace.helpers.observeFlow
-import com.justnik.mosplace.presentation.start.StartActivity
+import com.justnik.mosplace.helpers.setTitle
+import com.justnik.mosplace.helpers.showSingle
+import com.justnik.mosplace.presentation.account.ThemeDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,12 +32,40 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val binding: FragmentLoginBinding by viewBinding()
     private val viewModel: LoginViewModel by viewModels()
+    private var loginMenu: Menu? = null
 
+    private val navController: NavController by lazy {
+        findNavController()
+    }
+
+    private val navGraph: NavGraph by lazy {
+        navController.navInflater.inflate(R.navigation.account)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setClickListeners()
         observeViewModel()
         addTextChangeListeners()
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        loginMenu = menu
+        inflater.inflate(R.menu.menu_not_authorized, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.action_theme -> {
+                showThemeDialog()
+            }
+        }
+        return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setTitle(R.string.account)
     }
 
     private fun observeViewModel() {
@@ -38,8 +73,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             viewModel.validationEvents.collect { event ->
                 when (event) {
                     is LoginViewModel.ValidationEvent.Success -> {
-                        (requireActivity() as StartActivity).authorizedCallback()
-
+                        navGraph.setStartDestination(R.id.accountFragment)
+                        findNavController().graph = navGraph
                     }
                     is LoginViewModel.ValidationEvent.Error -> {
                         showAlertDialog(
@@ -58,7 +93,42 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
+        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+            if (uiState.isLoading){
+                binding.bLogIn.isEnabled = false
+                binding.bLogIn.setIconResource(R.drawable.ic_login)
+            }
+            else {
+                binding.bLogIn.isEnabled = true
+                binding.bLogIn.icon = null
+            }
+        }
     }
+
+    private fun showThemeDialog() {
+        val themeDialog = ThemeDialog().apply {
+            darkModeCallback = { darkModeCode ->
+                setThemeIcon(darkModeCode)
+            }
+        }
+        themeDialog.showSingle(childFragmentManager, ThemeDialog.THEME_DIALOG_TAG)
+    }
+
+    private fun setThemeIcon(darkModeCode: Int) {
+        val menuItem = loginMenu?.findItem(R.id.action_theme)
+        when (darkModeCode) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> {
+                menuItem?.setIcon(R.drawable.ic_mode_auto)
+            }
+            AppCompatDelegate.MODE_NIGHT_NO -> {
+                menuItem?.setIcon(R.drawable.ic_mode_light)
+            }
+            else -> {
+                menuItem?.setIcon(R.drawable.ic_mode_dark)
+            }
+        }
+    }
+
 
     private fun showAlertDialog(title: String, message: String) {
         MaterialAlertDialogBuilder(requireContext())

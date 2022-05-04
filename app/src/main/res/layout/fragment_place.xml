@@ -65,18 +65,18 @@
             app:icon="@drawable/ic_location"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:layout_constraintEnd_toStartOf="@+id/b_review"
+            app:layout_constraintEnd_toStartOf="@+id/b_check_in"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_place_title" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/b_review"
+            android:id="@+id/b_check_in"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/circle"
-            app:icon="@drawable/ic_rate_review"
+            app:icon="@drawable/ic_check"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             app:layout_constraintEnd_toEndOf="parent"

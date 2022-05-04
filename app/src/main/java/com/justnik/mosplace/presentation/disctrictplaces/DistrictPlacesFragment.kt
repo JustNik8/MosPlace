@@ -1,6 +1,9 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +16,8 @@ import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.parsePlaceType
 import com.justnik.mosplace.data.prefs.PlaceTypePrefs
+import com.justnik.mosplace.helpers.setTitle
+import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,10 +39,31 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
-        setupToolBar()
+        setHasOptionsMenu(true)
         observeViewModel()
         viewModel.loadPlacesByDistrictId(district.id)
         setClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setTitle(R.string.places)
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_district_places, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_filter_list -> {
+                showAlertDialog()
+
+            }
+            else -> findNavController().popBackStack()
+        }
+        return true
     }
 
     private fun setClickListener() {
@@ -64,23 +90,6 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
         }
     }
 
-    private fun setupToolBar() {
-        val toolbar = binding.toolbarPlaces
-        toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_filter_list -> {
-                    showAlertDialog()
-                    true
-                }
-                else -> false
-            }
-        }
-
-    }
 
     private fun setupRecyclerView() {
         binding.rvPlaces.adapter = rvAdapter

@@ -75,5 +75,8 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="automatically">Automatically</string>
+    <string name="leave_account_message">Are you sure you want out of the account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

@@ -66,5 +66,8 @@
     <string name="light">Светлая</string>
     <string name="automatically">Автоматически</string>
     <string name="logout">Выйти</string>
+    <string name="leave_account_message">Вы уверены, что хотите выйти из аккаунта?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
 </resources>

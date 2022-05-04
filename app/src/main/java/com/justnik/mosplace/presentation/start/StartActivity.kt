@@ -34,10 +34,10 @@ class StartActivity : AppCompatActivity() {
     private val navController: NavController by lazy { navHostFragment.navController }
 
     private val navGraph: NavGraph by lazy {
-        navController.navInflater.inflate(R.navigation.login_graph)
+        navController.navInflater.inflate(R.navigation.onboarding_graph)
     }
 
-    val authorizedCallback = {
+    val onBoardingFinishedCallback = {
         openMainActivity()
     }
 
@@ -54,41 +54,23 @@ class StartActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+        checkOnBoardingFinished()
+    }
 
-        checkAuthorization()
+    private fun checkOnBoardingFinished() {
+        if (userPrefs.isOnBoardingFinished){
+            openMainActivity()
+        }
+        showSplashScreen = false
     }
 
     private fun setDarkMode() {
         AppCompatDelegate.setDefaultNightMode(settingsPrefs.darkModeCode)
     }
 
-
-
-    private fun checkAuthorization() {
-        if (userPrefs.jwtAccessToken != null) {
-            openMainActivity()
-        } else {
-            setStartDestination()
-        }
-        showSplashScreen = false
-    }
-
-    private fun setStartDestination() {
-        if (userPrefs.isOnBoardingFinished) {
-            navGraph.setStartDestination(R.id.loginFragment)
-        } else {
-            navGraph.setStartDestination(R.id.onBoardingFragment)
-        }
-        navController.graph = navGraph
-    }
-
     private fun openMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    companion object {
-        const val AUTHORIZED_KEY = "authorized"
     }
 }

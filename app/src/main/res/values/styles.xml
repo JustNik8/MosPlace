@@ -16,4 +16,11 @@
     <style name="Widget.Mosplace.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@color/transparent</item>
     </style>
+
+    <style name="Widget.Mosplace.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/colorOnPrimary</item>
+    </style>
+
+
 </resources>

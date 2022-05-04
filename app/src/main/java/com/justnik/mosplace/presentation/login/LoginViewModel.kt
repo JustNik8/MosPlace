@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.start.login
+package com.justnik.mosplace.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +27,8 @@ class LoginViewModel @Inject constructor(
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
 
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState = _uiState.asStateFlow()
 
     fun onEvent(event: LoginFormEvent) {
         when (event) {
@@ -63,11 +65,13 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginUser() {
-        val email = loginFormState.value.email
-        val password = loginFormState.value.password
-        val loginInfo = LoginInfo(email, password)
         viewModelScope.launch {
+            _uiState.value = UiState(isLoading = true)
+            val email = loginFormState.value.email
+            val password = loginFormState.value.password
+            val loginInfo = LoginInfo(email, password)
             val response = loginUserUseCase(loginInfo)
+            _uiState.value = UiState(isLoading = false)
             when (response) {
                 is Resource.Success -> {
                     validationEventChannel.send(ValidationEvent.Success(UiText.DynamicText("Success")))
@@ -84,9 +88,12 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-
     sealed class ValidationEvent {
         class Success(val successMessage: UiText) : ValidationEvent()
         class Error(val errorMessage: UiText) : ValidationEvent()
     }
+
+    data class UiState(
+        val isLoading: Boolean = false
+    )
 }

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.start.registration
+package com.justnik.mosplace.presentation.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,7 +23,6 @@ class RegistrationViewModel @Inject constructor(
     private val validateUsername: ValidateUsername,
     private val validatePassword: ValidatePassword,
     private val validateRepeatedPassword: ValidateRepeatedPassword,
-    private val jsonMapper: JsonMapper
 ) : ViewModel() {
 
     private var _registrationFormState = MutableStateFlow(RegistrationFormState())
@@ -114,9 +113,9 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
-
     sealed class ValidationEvent {
         class Success(val successMessage: UiText) : ValidationEvent()
         class Error(val errorMessage: UiText) : ValidationEvent()
     }
+
 }

@@ -2,12 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/account"
-    app:startDestination="@id/accountFragment">
+    android:id="@+id/account">
 
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.justnik.mosplace.presentation.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.justnik.mosplace.presentation.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.justnik.mosplace.presentation.account.AccountFragment"
-        android:label="AccountFragment"
-        tools:layout="@layout/fragment_account"/>
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>

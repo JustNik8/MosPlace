@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_container"
+    app:startDestination="@id/accountContainerFragment">
+
+    <fragment
+        android:id="@+id/accountContainerFragment"
+        android:name="com.justnik.mosplace.presentation.account.AccountContainerFragment"
+        android:label="fragment_account_container"
+        tools:layout="@layout/fragment_account_container" />
+</navigation>

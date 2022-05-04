@@ -1,12 +1,9 @@
 package com.justnik.mosplace.presentation.review
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +28,8 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
         observeViewModel()
         addTextChangeListeners()
     }
+
+
 
     private fun readInput() {
         val rating = binding.rbPlace.rating
