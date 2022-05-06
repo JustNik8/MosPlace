@@ -144,36 +144,36 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
     }
 
     override fun onObjectAdded(userLocationView: UserLocationView) {
-        userLocationLayer.setAnchor(
-            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.5).toFloat()),
-            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.83).toFloat())
-        )
-
-        userLocationView.arrow.setIcon(
-            ImageProvider.fromResource(
-                requireContext(), R.drawable.ic_arrow_back
-            )
-        )
-
-        val pinIcon: CompositeIcon = userLocationView.pin.useCompositeIcon()
-
-        pinIcon.setIcon(
-            "icon",
-            ImageProvider.fromResource(requireContext(), R.drawable.ic_account),
-            IconStyle().setAnchor(PointF(0f, 0f))
-                .setRotationType(RotationType.ROTATE)
-                .setZIndex(0f)
-                .setScale(1f)
-        )
-
-        pinIcon.setIcon(
-            "pin",
-            ImageProvider.fromResource(requireContext(), R.drawable.ic_check),
-            IconStyle().setAnchor(PointF(0.5f, 0.5f))
-                .setRotationType(RotationType.ROTATE)
-                .setZIndex(1f)
-                .setScale(0.5f)
-        )
+//        userLocationLayer.setAnchor(
+//            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.5).toFloat()),
+//            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.83).toFloat())
+//        )
+//
+//        userLocationView.arrow.setIcon(
+//            ImageProvider.fromResource(
+//                requireContext(), R.drawable.ic_arrow_back
+//            )
+//        )
+//
+//        val pinIcon: CompositeIcon = userLocationView.pin.useCompositeIcon()
+//
+//        pinIcon.setIcon(
+//            "icon",
+//            ImageProvider.fromResource(requireContext(), R.drawable.ic_account),
+//            IconStyle().setAnchor(PointF(0f, 0f))
+//                .setRotationType(RotationType.ROTATE)
+//                .setZIndex(0f)
+//                .setScale(1f)
+//        )
+//
+//        pinIcon.setIcon(
+//            "pin",
+//            ImageProvider.fromResource(requireContext(), R.drawable.ic_check),
+//            IconStyle().setAnchor(PointF(0.5f, 0.5f))
+//                .setRotationType(RotationType.ROTATE)
+//                .setZIndex(1f)
+//                .setScale(0.5f)
+//        )
 
         userLocationView.accuracyCircle.fillColor = Color.BLUE and -0x66000001
     }
