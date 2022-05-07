@@ -22,7 +22,7 @@ Each user has a profile. In the profile, he can see achievements, progress indic
   * [Navigation Component](https://developer.android.com/guide/navigation) - Allows you to simplify the implementation of navigation between screens in the application.
   * [Flow](https://kotlinlang.org/docs/flow.html) - A flow is an asynchronous version of a Sequence, a type of collection whose values are lazily produced.
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Class is designed to store and manage UI-related data in a lifecycle conscious way.
-  * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) - is an Android Jetpack library that makes it easy to schedule deferrable, asynchronous tasks that must be run reliably.
+  * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) - Is an Android Jetpack library that makes it easy to schedule deferrable, asynchronous tasks that must be run reliably.
 * [Glide](https://github.com/bumptech/glide) - Is a fast and efficient open source media management and image loading framework for Android.
 * [Yandex MapKit](https://yandex.ru/dev/maps/mapkit/?from=mapsapi) - A software library that allows you to use Yandex cartographic data and technologies in mobile applications.
 * [ViewBindingPropertyDelegate](https://github.com/androidbroadcast/ViewBindingPropertyDelegate) - A library, that makes work with Android View Binding simpler.
