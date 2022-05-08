@@ -1,7 +1,9 @@
 package com.justnik.mosplace.data.network.apiservices
 
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import com.justnik.mosplace.data.network.authmodel.LoginInfo
+import com.justnik.mosplace.data.network.authmodel.RefreshToken
 import com.justnik.mosplace.data.network.authmodel.UserInfo
 import com.justnik.mosplace.data.network.authmodel.UserResponse
 import retrofit2.Response
@@ -20,7 +22,14 @@ interface AuthService {
     ): Response<JsonElement>
 
     @GET("auth/users/me")
-    suspend fun getUser(@Header(AUTHORIZATION_HEADER_KEY) accessToken: String): Response<UserResponse>
+    suspend fun getUser(
+        @Header(AUTHORIZATION_HEADER_KEY) accessToken: String
+    ): Response<UserResponse>
+
+    @POST("auth/jwt/refresh")
+    suspend fun refreshJwtAccessToken(
+        @Body refreshToken: RefreshToken
+    ) : Response<JsonObject>
 
     companion object {
         private const val AUTHORIZATION_HEADER_KEY = "Authorization"

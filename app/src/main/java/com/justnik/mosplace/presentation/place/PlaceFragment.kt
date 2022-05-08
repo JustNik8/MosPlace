@@ -2,6 +2,7 @@ package com.justnik.mosplace.presentation.place
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
 import com.justnik.mosplace.helpers.hideSupportActionBar
+import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.showSupportActionBar
 import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +39,17 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         setupImageSlider()
         setClickListeners()
         setCheckInButton()
+        observeEvents()
+    }
+
+    private fun observeEvents() {
+        viewModel.checkInEvents.observeFlow(viewLifecycleOwner) { event ->
+            val message = when (event) {
+                is PlaceViewModel.CheckInEvent.Success -> event.successMessage.asString(requireContext())
+                is PlaceViewModel.CheckInEvent.Error -> event.errorMessage.asString(requireContext())
+            }
+            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onDestroy() {
@@ -47,6 +60,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     private fun setCheckInButton() {
         binding.bCheckIn.isEnabled = viewModel.isUserAuthorized()
         binding.bCheckIn.setOnClickListener {
+            viewModel.addPlaceToProfile(place.id.toLong())
             findNavController().navigate(PlaceFragmentDirections.actionPlaceFragmentToReviewFragment())
         }
     }
