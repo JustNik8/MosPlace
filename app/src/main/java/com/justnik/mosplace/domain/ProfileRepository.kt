@@ -1,7 +1,7 @@
 package com.justnik.mosplace.domain
 
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.entities.profile.Profile
 
 interface ProfileRepository {

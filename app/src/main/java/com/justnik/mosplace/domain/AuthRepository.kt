@@ -3,7 +3,7 @@ package com.justnik.mosplace.domain
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.network.authmodels.UserResponse
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
 
 interface AuthRepository {
     suspend fun createUser(userInfo: UserInfo): Resource<Unit>

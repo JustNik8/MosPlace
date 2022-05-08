@@ -1,5 +1,6 @@
 package com.justnik.mosplace.data.repositories
 
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.ProfileMapper
 import com.justnik.mosplace.data.network.apiservices.ProfileService
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse

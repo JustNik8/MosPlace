@@ -1,6 +1,7 @@
 package com.justnik.mosplace.data.repositories
 
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.apiservices.DataService

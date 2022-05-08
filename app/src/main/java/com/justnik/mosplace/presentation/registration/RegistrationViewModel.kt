@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.authmodels.UserInfo
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -102,11 +102,7 @@ class RegistrationViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     val message = response.message
-                    if (message != null){
-                        validationEventChannel.send(ValidationEvent.Error(message))
-                        return@launch
-                    }
-                    validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
+                    validationEventChannel.send(ValidationEvent.Error(message))
                 }
             }
         }

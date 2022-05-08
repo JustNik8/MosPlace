@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.place.FilterPlacesByTypeUseCase
 import com.justnik.mosplace.domain.usecases.place.LoadPlacesUseCase
@@ -33,7 +33,7 @@ class DistrictPlacesViewModel @Inject constructor(
                 _uiState.value = UiState(isLoading = true)
                 when (val resource = loadPlacesUseCase(id)) {
                     is Resource.Success -> {
-                        val places = resource.data ?: listOf()
+                        val places = resource.data
                         if (allDistrictPlaces.isEmpty()) {
                             allDistrictPlaces.addAll(places)
                         }

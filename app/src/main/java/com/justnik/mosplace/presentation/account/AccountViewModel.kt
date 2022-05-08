@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.profile.Profile
 import com.justnik.mosplace.domain.usecases.auth.LoadUserUseCase
@@ -43,7 +43,7 @@ class AccountViewModel @Inject constructor(
 
             when (response) {
                 is Resource.Success -> {
-                    loadProfile(accessToken, response.data!!.id)
+                    loadProfile(accessToken, response.data.id)
                 }
                 is Resource.Error -> {
 
@@ -57,7 +57,7 @@ class AccountViewModel @Inject constructor(
             val response = getProfileUseCase(accessToken, id)
             when (response) {
                 is Resource.Success -> {
-                    _uiState.value = UiState(profile = response.data!!)
+                    _uiState.value = UiState(profile = response.data)
                 }
                 is Resource.Error -> {
                 }
