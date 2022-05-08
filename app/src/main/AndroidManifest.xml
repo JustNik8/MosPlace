@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.justnik.mosplace">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,6 +33,13 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
         </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="androidx.startup.InitializationProvider"
+            tools:replace="android:authorities"
+            tools:node="remove">
+        </provider>
 
     </application>
 
