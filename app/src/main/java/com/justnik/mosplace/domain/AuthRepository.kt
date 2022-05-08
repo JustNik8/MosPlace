@@ -1,8 +1,8 @@
 package com.justnik.mosplace.domain
 
-import com.justnik.mosplace.data.network.authmodel.LoginInfo
-import com.justnik.mosplace.data.network.authmodel.UserInfo
-import com.justnik.mosplace.data.network.authmodel.UserResponse
+import com.justnik.mosplace.data.network.authmodels.LoginInfo
+import com.justnik.mosplace.data.network.authmodels.UserInfo
+import com.justnik.mosplace.data.network.authmodels.UserResponse
 import com.justnik.mosplace.data.repositories.Resource
 
 interface AuthRepository {

@@ -3,8 +3,7 @@ package com.justnik.mosplace.presentation.registration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.mappers.JsonMapper
-import com.justnik.mosplace.data.network.authmodel.UserInfo
+import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.repositories.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.*

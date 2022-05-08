@@ -57,14 +57,13 @@ class DistrictPlacesViewModel @Inject constructor(
         }
     }
 
-}
-
-data class UiState(
-    val isLoading: Boolean = false,
-    val error: Error? = null,
-    val places: List<Place> = listOf()
-) {
-    sealed class Error(@StringRes val errorResId: Int) {
-        class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
+    data class UiState(
+        val isLoading: Boolean = false,
+        val error: Error? = null,
+        val places: List<Place> = listOf()
+    ) {
+        sealed class Error(@StringRes val errorResId: Int) {
+            class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
+        }
     }
 }
