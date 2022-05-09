@@ -59,10 +59,7 @@ class LoginViewModel @Inject constructor(
             )
             return
         }
-
-
         loginUser()
-
     }
 
     private fun loginUser() {

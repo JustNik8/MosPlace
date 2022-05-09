@@ -2,45 +2,69 @@ package com.justnik.mosplace.presentation.review
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.domain.usecases.common.ValidateFieldNotBlank
+import com.justnik.mosplace.domain.usecases.review.ValidateRating
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ReviewViewModel @Inject constructor() : ViewModel() {
+class ReviewViewModel @Inject constructor(
+    private val validateFieldNotBlank: ValidateFieldNotBlank,
+    private val validateRating: ValidateRating
+) : ViewModel() {
 
-    private var _errorRating = MutableSharedFlow<Boolean>()
-    val errorRating = _errorRating.asSharedFlow()
+    private var _reviewFormState = MutableStateFlow(ReviewFormState())
+    val reviewFormState = _reviewFormState.asStateFlow()
 
-    private var _errorReviewText = MutableStateFlow(false)
-    val errorReviewText = _errorReviewText.asStateFlow()
+    private val validationEventChannel = Channel<ValidationEvent>()
+    val validationEvents = validationEventChannel.receiveAsFlow()
 
-    private var _shouldCloseScreen = MutableSharedFlow<Unit>()
-    val shouldCloseScreen = _shouldCloseScreen.asSharedFlow()
-
-    fun validateInputReview(rating: Float, reviewText: String) {
-        viewModelScope.launch {
-            var isInputValid = true
-            if (rating == 0f) {
-                _errorRating.emit(true)
-                isInputValid = false
+    fun onEvent(event: ReviewFormEvent) {
+        when (event) {
+            is ReviewFormEvent.ReviewChanged -> {
+                _reviewFormState.value =
+                    _reviewFormState.value.copy(review = event.review, reviewError = null)
             }
-            if (reviewText.isEmpty()) {
-                _errorReviewText.value = true
-                isInputValid = false
+            is ReviewFormEvent.RatingChanged -> {
+                _reviewFormState.value =
+                    _reviewFormState.value.copy(ratingCount = event.ratingCount, ratingCountError = null)
             }
-
-            if (isInputValid) {
-                _shouldCloseScreen.emit(Unit)
+            is ReviewFormEvent.Submit -> {
+                submitData()
             }
         }
     }
 
-    fun resetErrorReviewText() {
-        _errorReviewText.value = false
+    private fun submitData() {
+        val reviewResult = validateFieldNotBlank(reviewFormState.value.review)
+        val starsCountResult = validateRating(reviewFormState.value.ratingCount)
+
+        val hasError = listOf(reviewResult, starsCountResult).any { !it.successful }
+        if (hasError) {
+            _reviewFormState.value = reviewFormState.value.copy(
+                reviewError = reviewResult.errorMessage,
+                ratingCountError = starsCountResult.errorMessage
+            )
+            return
+        }
+
+        saveReview()
+    }
+
+    private fun saveReview() {
+        viewModelScope.launch {
+            validationEventChannel.send(ValidationEvent.Success(UiText.DynamicText("Success")))
+        }
+    }
+
+    sealed class ValidationEvent {
+        data class Success(val message: UiText) : ValidationEvent()
+        data class Error(val message: UiText) : ValidationEvent()
     }
 }

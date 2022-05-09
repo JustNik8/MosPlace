@@ -69,5 +69,6 @@
     <string name="leave_account_message">Вы уверены, что хотите выйти из аккаунта?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="field_blank_error">Это поле не может быть пустым</string>
 
 </resources>

@@ -12,12 +12,11 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.prefs.PlaceTypePrefs
 import com.justnik.mosplace.databinding.FragmentDistrictPlacesBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.parsePlaceType
-import com.justnik.mosplace.data.prefs.PlaceTypePrefs
 import com.justnik.mosplace.helpers.setTitle
-import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,12 +72,12 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
     }
 
     private fun observeViewModel() {
-        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+        viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
             val isLoading = uiState.isLoading
             binding.pbDistrictPlaces.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-            when (uiState.error){
-                is UiState.Error.NetworkError -> {
+            when (uiState.error) {
+                is DistrictPlacesViewModel.UiState.Error.NetworkError -> {
                     val errorText = requireActivity().getString(uiState.error.errorResId)
                     showErrorUi(errorText)
                 }
@@ -138,7 +137,7 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             .show()
     }
 
-    private fun showMainUi(){
+    private fun showMainUi() {
         //Hide error views
         binding.ivNoInternet.visibility = View.GONE
         binding.tvError.visibility = View.GONE

@@ -4,6 +4,7 @@ import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.ProfileMapper
 import com.justnik.mosplace.data.network.apiservices.ProfileService
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse
+import com.justnik.mosplace.data.network.profilemodels.VisitedPlaces
 import com.justnik.mosplace.data.prefs.ProfilePrefs
 import com.justnik.mosplace.domain.ProfileRepository
 import com.justnik.mosplace.domain.UiText
@@ -35,6 +36,16 @@ class ProfileRepositoryImpl @Inject constructor(
         return try {
             val status = profileService.addPlaceToProfile("JWT $accessToken", profileId, placeId)
             Resource.Success(status)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Error(message = UiText.DynamicText("Error"))
+        }
+    }
+
+    override suspend fun loadProfileVisitedPlaces(id: Long): Resource<VisitedPlaces> {
+        return try {
+            val visitedPlaces = profileService.loadProfileVisitedPlaces(id)
+            Resource.Success(visitedPlaces[0])
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.Error(message = UiText.DynamicText("Error"))

@@ -49,6 +49,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setHasOptionsMenu(true)
     }
 
+    override fun onStart() {
+        super.onStart()
+        setTitle(R.string.account)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         loginMenu = menu
         inflater.inflate(R.menu.menu_not_authorized, menu)
@@ -61,11 +66,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
         return true
-    }
-
-    override fun onStart() {
-        super.onStart()
-        setTitle(R.string.account)
     }
 
     private fun observeViewModel() {
