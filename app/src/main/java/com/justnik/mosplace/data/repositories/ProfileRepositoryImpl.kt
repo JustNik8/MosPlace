@@ -19,8 +19,10 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun loadProfile(accessToken: String, id: Long): Resource<Profile> {
         return try {
             val profileDto = profileService.loadProfile("JWT $accessToken", id)
+            profilePrefs.profileId = profileDto[0].id
+            profilePrefs.visitedPlaceId = profileDto[0].visitedPlaceId
+
             val profile = profileMapper.dtoToEntity(profileDto[0])
-            profilePrefs.profileId = profile.id
             Resource.Success(profile)
         } catch (e: Exception) {
             e.printStackTrace()

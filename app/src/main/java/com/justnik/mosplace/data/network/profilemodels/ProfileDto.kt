@@ -10,5 +10,8 @@ data class ProfileDto(
     val name: String,
 
     @SerializedName("image")
-    val imageUrl: String
+    val imageUrl: String,
+
+    @SerializedName("visited_place")
+    val visitedPlaceId: Long
 )

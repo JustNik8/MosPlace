@@ -13,8 +13,13 @@ class ProfilePrefs @Inject constructor(@ApplicationContext private val context: 
         get() = prefs.getLong(PROFILE_ID_KEY, -1)
         set(value) = prefs.edit().putLong(PROFILE_ID_KEY, value).apply()
 
+    var visitedPlaceId: Long
+        get() = prefs.getLong(VISITED_PLACE_ID_KEY, -1)
+        set(value) = prefs.edit().putLong(VISITED_PLACE_ID_KEY, value).apply()
+
     companion object {
         private const val PREFS_NAME = "com.justnik.mosplace.profile"
         private const val PROFILE_ID_KEY = "profile_id"
+        private const val VISITED_PLACE_ID_KEY = "visited_place_id"
     }
 }
