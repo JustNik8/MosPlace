@@ -4,12 +4,13 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.justnik.mosplace.R
+import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.JsonMapper
 import com.justnik.mosplace.data.network.apiservices.AuthService
-import com.justnik.mosplace.data.network.authmodel.JWT
-import com.justnik.mosplace.data.network.authmodel.LoginInfo
-import com.justnik.mosplace.data.network.authmodel.UserInfo
-import com.justnik.mosplace.data.network.authmodel.UserResponse
+import com.justnik.mosplace.data.network.authmodels.JWT
+import com.justnik.mosplace.data.network.authmodels.LoginInfo
+import com.justnik.mosplace.data.network.authmodels.UserInfo
+import com.justnik.mosplace.data.network.authmodels.UserResponse
 import com.justnik.mosplace.domain.AuthRepository
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.data.prefs.UserPrefs
@@ -65,8 +66,6 @@ class AuthRepositoryImpl @Inject constructor(
             val response = authService.getUser("JWT $accessToken")
             if (response.isSuccessful){
                 val json = response.body()
-                Log.d("RRR", json.toString())
-
                 Resource.Success(json ?: throw RuntimeException())
             }
             else {

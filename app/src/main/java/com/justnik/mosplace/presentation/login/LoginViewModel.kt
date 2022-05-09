@@ -2,16 +2,17 @@ package com.justnik.mosplace.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.R
-import com.justnik.mosplace.data.network.authmodel.LoginInfo
-import com.justnik.mosplace.data.repositories.Resource
+import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
 import com.justnik.mosplace.domain.usecases.auth.ValidatePassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,10 +59,7 @@ class LoginViewModel @Inject constructor(
             )
             return
         }
-
-
         loginUser()
-
     }
 
     private fun loginUser() {
@@ -78,11 +76,8 @@ class LoginViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     val message = response.message
-                    message?.let {
-                        validationEventChannel.send(ValidationEvent.Error(it))
-                        return@launch
-                    }
-                    validationEventChannel.send(ValidationEvent.Error(UiText.StringResource(R.string.unknown_error)))
+
+                    validationEventChannel.send(ValidationEvent.Error(message))
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.data.network.model
+package com.justnik.mosplace.data.network.datamodels
 
 import com.google.gson.annotations.Expose
 

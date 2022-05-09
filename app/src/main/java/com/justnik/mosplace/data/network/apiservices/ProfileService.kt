@@ -3,6 +3,7 @@ package com.justnik.mosplace.data.network.apiservices
 import com.justnik.mosplace.data.network.profilemodels.AddPlaceToProfileBody
 import com.justnik.mosplace.data.network.profilemodels.ProfileDto
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse
+import com.justnik.mosplace.data.network.profilemodels.VisitedPlaces
 import retrofit2.http.*
 
 interface ProfileService {
@@ -19,6 +20,10 @@ interface ProfileService {
         @Query(QUERY_PARAM_PLACE_ID) placeID: Long
     ) : StatusResponse
 
+    @GET("api/v1/profile_places")
+    suspend fun loadProfileVisitedPlaces(
+        @Query(QUERY_PARAM_ID) id: Long
+    ) : List<VisitedPlaces>
 
     companion object{
         private const val AUTHORIZATION_HEADER_KEY = "Authorization"

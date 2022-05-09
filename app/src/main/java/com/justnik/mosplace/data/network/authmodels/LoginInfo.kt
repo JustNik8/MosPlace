@@ -1,4 +1,4 @@
-package com.justnik.mosplace.data.network.authmodel
+package com.justnik.mosplace.data.network.authmodels
 
 data class LoginInfo(
     val username: String,

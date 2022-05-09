@@ -24,7 +24,7 @@
     <string name="save">Save</string>
 
     <!-- ReviewFragment -->
-    <string name="error_rating">"Choose correct rating"</string>
+    <string name="error_rating">Choose correct rating</string>
     <string name="error_empty_field">Empty field</string>
     <string name="filter_list">Filter list</string>
 
@@ -59,6 +59,7 @@
     <!-- Errors -->
     <string name="email_blank_error">Email can\'t be blank</string>
     <string name="email_invalid_error">Invalid email</string>
+    <string name="field_blank_error">This field can\'t be blank</string>
     <string name="password_length_error">The password needs to consist of at least %d characters</string>
     <string name="passwords_dont_match_error">The passwords don\'t match</string>
     <string name="username_blank_error">Username can\'t be blank</string>
@@ -78,5 +79,8 @@
     <string name="leave_account_message">Are you sure you want out of the account?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    
+    <string name="turn_on_gps">Turn on GSP</string>
+    <string name="user_location_far">You are far from this place.</string>
 
 </resources>

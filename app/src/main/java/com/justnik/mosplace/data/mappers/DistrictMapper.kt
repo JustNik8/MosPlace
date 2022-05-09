@@ -1,6 +1,6 @@
 package com.justnik.mosplace.data.mappers
 
-import com.justnik.mosplace.data.network.model.DistrictDto
+import com.justnik.mosplace.data.network.datamodels.DistrictDto
 import com.justnik.mosplace.domain.entities.District
 import javax.inject.Inject
 

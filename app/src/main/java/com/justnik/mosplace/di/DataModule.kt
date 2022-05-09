@@ -1,10 +1,10 @@
 package com.justnik.mosplace.di
 
 import com.justnik.mosplace.data.repositories.AuthRepositoryImpl
-import com.justnik.mosplace.data.repositories.MosRepositoryImpl
+import com.justnik.mosplace.data.repositories.DataRepositoryImpl
 import com.justnik.mosplace.data.repositories.ProfileRepositoryImpl
 import com.justnik.mosplace.domain.AuthRepository
-import com.justnik.mosplace.domain.MosRepository
+import com.justnik.mosplace.domain.DataRepository
 import com.justnik.mosplace.domain.ProfileRepository
 import dagger.Binds
 import dagger.Module
@@ -18,7 +18,7 @@ interface DataModule {
 
     @Binds
     @Singleton
-    fun bindMosRepository(impl: MosRepositoryImpl): MosRepository
+    fun bindDataRepository(impl: DataRepositoryImpl): DataRepository
 
     @Binds
     @Singleton

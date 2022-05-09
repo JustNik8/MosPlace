@@ -8,7 +8,7 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkerParameters
 import com.justnik.mosplace.data.network.apiservices.AuthService
-import com.justnik.mosplace.data.network.authmodel.RefreshToken
+import com.justnik.mosplace.data.network.authmodels.RefreshToken
 import com.justnik.mosplace.data.prefs.UserPrefs
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject

@@ -1,9 +1,8 @@
 package com.justnik.mosplace.data.mappers
 
-import com.justnik.mosplace.data.network.model.PlaceDto
+import com.justnik.mosplace.data.network.datamodels.PlaceDto
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.entities.PlaceImage
-import com.yandex.mapkit.geometry.Point
 import javax.inject.Inject
 
 class PlaceMapper @Inject constructor(){

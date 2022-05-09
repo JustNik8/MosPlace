@@ -42,23 +42,22 @@ class ThemeDialog : BottomSheetDialogFragment() {
             bLightMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_NO)
                 settingsPrefs.darkModeCode = MODE_NIGHT_NO
-                closeDialog()
+                closeDialog(MODE_NIGHT_NO)
             }
             bDarkMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_YES)
                 settingsPrefs.darkModeCode = MODE_NIGHT_YES
-                closeDialog()
+                closeDialog(MODE_NIGHT_YES)
             }
             bAutoMode.setOnClickListener {
                 setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
                 settingsPrefs.darkModeCode = MODE_NIGHT_FOLLOW_SYSTEM
-                closeDialog()
+                closeDialog(MODE_NIGHT_FOLLOW_SYSTEM)
             }
         }
     }
 
-    private fun closeDialog(){
-        val darkModeCode = AppCompatDelegate.getDefaultNightMode()
+    private fun closeDialog(darkModeCode: Int){
         darkModeCallback?.invoke(darkModeCode)
         dismiss()
     }

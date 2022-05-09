@@ -1,12 +1,12 @@
 package com.justnik.mosplace.data.network.apiservices
 
-import com.justnik.mosplace.data.network.model.DistrictDto
-import com.justnik.mosplace.data.network.model.PlaceDto
+import com.justnik.mosplace.data.network.datamodels.DistrictDto
+import com.justnik.mosplace.data.network.datamodels.PlaceDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface ApiService {
+interface DataService {
     @GET("api/v1/districts")
     suspend fun getDistrictList(
         @Query(QUERY_PARAM_FORMAT) format: String = JSON
