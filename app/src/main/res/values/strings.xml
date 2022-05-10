@@ -83,4 +83,7 @@
     <string name="turn_on_gps">Turn on GSP</string>
     <string name="user_location_far">You are far from this place.</string>
 
+    <string name="description">Description</string>
+    <string name="all_reviews">All reviews</string>
+
 </resources>

@@ -72,5 +72,7 @@
     <string name="field_blank_error">Это поле не может быть пустым</string>
     <string name="turn_on_gps">Включите геолокаию</string>
     <string name="user_location_far">Вы далеко от этого места</string>
+    <string name="description">Описание</string>
+    <string name="all_reviews">Все отзывы</string>
 
 </resources>
