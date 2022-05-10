@@ -50,6 +50,8 @@
         android:layout_marginTop="16dp"
         style="?android:attr/ratingBarStyleSmall"
         android:isIndicator="true"
+        android:progressTint="@color/colorSecondary"
+        tools:rating="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_item_review_avatar" />
 
