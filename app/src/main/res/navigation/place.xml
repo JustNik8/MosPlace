@@ -16,10 +16,22 @@
         <action
             android:id="@+id/action_placeFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_placeFragment_to_placeDescriptionFragment"
+            app:destination="@id/placeDescriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.justnik.mosplace.presentation.review.ReviewFragment"
         tools:layout="@layout/fragment_review"
         android:label="ReviewFragment" />
+    <fragment
+        android:id="@+id/placeDescriptionFragment"
+        android:name="com.justnik.mosplace.presentation.place.PlaceDescriptionFragment"
+        android:label="fragment_place_description"
+        tools:layout="@layout/fragment_place_description" >
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
 </navigation>
