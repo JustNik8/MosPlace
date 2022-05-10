@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.data.prefs.SettingsPrefs
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.profile.Profile
 import com.justnik.mosplace.domain.usecases.auth.LoadUserUseCase
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val getUserUseCase: LoadUserUseCase,
     private val getProfileUseCase: LoadProfileUseCase,
-    private val userPrefs: UserPrefs
+    private val userPrefs: UserPrefs,
+    private val settingsPrefs: SettingsPrefs
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -64,6 +66,8 @@ class AccountViewModel @Inject constructor(
             }
         }
     }
+
+    fun getDarkModeCode() = settingsPrefs.darkModeCode
 
     data class UiState(
         val isLoading: Boolean = false,

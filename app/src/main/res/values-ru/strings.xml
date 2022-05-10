@@ -74,5 +74,8 @@
     <string name="user_location_far">Вы далеко от этого места</string>
     <string name="description">Описание</string>
     <string name="all_reviews">Все отзывы</string>
+    <string name="ratings_and_reviews">Оценки и отзывы</string>
+    <string name="mark_as_spam">Отметить как спам</string>
+    <string name="review_spam_marked">Отзыв отмечен как спам</string>
 
 </resources>

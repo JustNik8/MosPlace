@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
+import com.justnik.mosplace.data.prefs.SettingsPrefs
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword,
-    private val loginUserUseCase: LoginUserUseCase
+    private val loginUserUseCase: LoginUserUseCase,
+    private val settingsPrefs: SettingsPrefs
 ) : ViewModel() {
     private var _loginFormState = MutableStateFlow(LoginFormState())
     val loginFormState = _loginFormState.asStateFlow()
@@ -82,6 +84,8 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    fun getDarkModeCode() = settingsPrefs.darkModeCode
 
     sealed class ValidationEvent {
         class Success(val successMessage: UiText) : ValidationEvent()

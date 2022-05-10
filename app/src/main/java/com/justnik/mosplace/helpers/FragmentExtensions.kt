@@ -15,3 +15,7 @@ fun Fragment.hideSupportActionBar() {
 fun Fragment.setTitle(@StringRes stringRes: Int) {
     (this.requireActivity() as AppCompatActivity).setTitle(stringRes)
 }
+
+fun Fragment.setTitle(title: String){
+    (this.requireActivity() as AppCompatActivity).title = title
+}

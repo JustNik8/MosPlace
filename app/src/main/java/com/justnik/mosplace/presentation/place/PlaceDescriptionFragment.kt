@@ -30,7 +30,7 @@ class PlaceDescriptionFragment : Fragment(R.layout.fragment_place_description) {
 
     override fun onResume() {
         super.onResume()
-        setTitle(R.string.description)
+        setTitle(place.title)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -39,12 +39,12 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeViewModel()
         setHasOptionsMenu(true)
-        setThemeIcon(AppCompatDelegate.getDefaultNightMode())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         accountMenu = menu
         inflater.inflate(R.menu.menu_authorized, menu)
+        setThemeIcon()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -66,16 +66,16 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun showThemeDialog() {
         val themeDialog = ThemeDialog().apply {
-            darkModeCallback = { darkModeCode ->
-                setThemeIcon(darkModeCode)
+            darkModeCallback = {
+                setThemeIcon()
             }
         }
         themeDialog.showSingle(childFragmentManager, ThemeDialog.THEME_DIALOG_TAG)
     }
 
-    private fun setThemeIcon(darkModeCode: Int) {
+    private fun setThemeIcon() {
         val menuItem = accountMenu?.findItem(R.id.action_theme)
-        when (darkModeCode) {
+        when (viewModel.getDarkModeCode()) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> {
                 menuItem?.setIcon(R.drawable.ic_mode_auto)
             }
