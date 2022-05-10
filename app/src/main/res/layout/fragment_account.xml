@@ -6,35 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".presentation.account.AccountFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_avatar"
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_account_avatar"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        app:cardCornerRadius="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/no_image"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MosPlace.CornerSize50Percent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_account_avatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/no_image" />
-    </com.google.android.material.card.MaterialCardView>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/iv_account_avatar"
         tools:text="UserName" />
 
 

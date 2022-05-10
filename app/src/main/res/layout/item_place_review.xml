@@ -11,7 +11,7 @@
         android:id="@+id/iv_item_review_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MosPlace.CornerSize50Percent"
         app:layout_constraintStart_toStartOf="parent"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
