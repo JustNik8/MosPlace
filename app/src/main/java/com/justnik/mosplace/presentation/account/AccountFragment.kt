@@ -110,7 +110,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             val profile = uiState.profile
             with(binding) {
                 tvUsername.text = profile.name
-                Glide.with(requireActivity()).load(profile.imageUrl).into(ivAvatar)
+                Glide.with(requireActivity()).load(profile.imageUrl).into(ivAccountAvatar)
             }
         }
     }

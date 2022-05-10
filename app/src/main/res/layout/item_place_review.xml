@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_item_review_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_item_review_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_item_review_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_review_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_item_review_avatar"
+        tools:text="Alexander Ivanov" />
+
+    <RatingBar
+        android:id="@+id/rb_item_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:layout_marginTop="16dp"
+        style="?android:attr/ratingBarStyleSmall"
+        android:isIndicator="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_item_review_avatar" />
+
+    <TextView
+        android:id="@+id/tv_item_review_date"
+        android:layout_width="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rb_item_review"
+        app:layout_constraintStart_toEndOf="@+id/rb_item_review"
+        app:layout_constraintTop_toTopOf="@+id/rb_item_review"
+        tools:text="10.05.2022" />
+
+    <TextView
+        android:id="@+id/tv_item_review_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rb_item_review"
+        tools:text="Some review" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

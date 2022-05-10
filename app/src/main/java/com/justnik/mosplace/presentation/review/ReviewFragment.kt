@@ -1,6 +1,7 @@
 package com.justnik.mosplace.presentation.review
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.setTitle
 import com.justnik.mosplace.presentation.helpers.TextWatcherWrapper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,17 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
         observeViewModel()
         addTextChangeListeners()
         addRatingChangeListener()
+        setHasOptionsMenu(true)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setTitle(R.string.review)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().popBackStack()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addRatingChangeListener() {
