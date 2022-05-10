@@ -79,8 +79,11 @@
     <string name="leave_account_message">Are you sure you want out of the account?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    
+
     <string name="turn_on_gps">Turn on GSP</string>
     <string name="user_location_far">You are far from this place.</string>
+
+    <string name="description">Description</string>
+    <string name="all_reviews">All reviews</string>
 
 </resources>

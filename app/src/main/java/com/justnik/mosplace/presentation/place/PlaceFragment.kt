@@ -51,9 +51,14 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         currentLocation = location
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         hideSupportActionBar()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        showSupportActionBar()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,11 +120,6 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        showSupportActionBar()
-    }
-
 
     @SuppressLint("MissingPermission")
     private fun onGotPermissionsLocationResult(grantResult: Map<String, Boolean>) {
@@ -158,7 +158,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     private fun setupPlaceText() {
         with(binding) {
             tvPlaceTitle.text = place.title
-            tvPlaceDesc.text = place.fullDescription
+            tvPlaceDesc.text = place.shortDescription
         }
     }
 
@@ -175,6 +175,16 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
 
         binding.bBackPlace.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.bDescription.setOnClickListener {
+            val direction = PlaceFragmentDirections.actionPlaceFragmentToPlaceDescriptionFragment(place)
+            findNavController().navigate(direction)
+        }
+
+        binding.bAllReviews.setOnClickListener {
+            val direction = PlaceFragmentDirections.actionPlaceFragmentToPlaceReviewsFragment(place)
+            findNavController().navigate(direction)
         }
     }
 

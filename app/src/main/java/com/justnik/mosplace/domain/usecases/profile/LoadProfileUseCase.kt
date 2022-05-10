@@ -1,6 +1,6 @@
 package com.justnik.mosplace.domain.usecases.profile
 
-import com.justnik.mosplace.domain.ProfileRepository
+import com.justnik.mosplace.domain.repositories.ProfileRepository
 import javax.inject.Inject
 
 class LoadProfileUseCase @Inject constructor(

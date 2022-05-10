@@ -1,7 +1,7 @@
 package com.justnik.mosplace.domain.usecases.auth
 
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
-import com.justnik.mosplace.domain.AuthRepository
+import com.justnik.mosplace.domain.repositories.AuthRepository
 import javax.inject.Inject
 
 class LoginUserUseCase @Inject constructor(

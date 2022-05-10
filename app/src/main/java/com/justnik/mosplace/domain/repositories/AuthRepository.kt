@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain
+package com.justnik.mosplace.domain.repositories
 
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.network.authmodels.UserInfo

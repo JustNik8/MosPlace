@@ -16,10 +16,34 @@
         <action
             android:id="@+id/action_placeFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_placeFragment_to_placeDescriptionFragment"
+            app:destination="@id/placeDescriptionFragment" />
+        <action
+            android:id="@+id/action_placeFragment_to_placeReviewsFragment"
+            app:destination="@id/placeReviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.justnik.mosplace.presentation.review.ReviewFragment"
         tools:layout="@layout/fragment_review"
         android:label="ReviewFragment" />
+    <fragment
+        android:id="@+id/placeDescriptionFragment"
+        android:name="com.justnik.mosplace.presentation.place.PlaceDescriptionFragment"
+        android:label="fragment_place_description"
+        tools:layout="@layout/fragment_place_description" >
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeReviewsFragment"
+        android:name="com.justnik.mosplace.presentation.placereviews.PlaceReviewsFragment"
+        android:label="fragment_place_reviews"
+        tools:layout="@layout/fragment_place_reviews" >
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
 </navigation>

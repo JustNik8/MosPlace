@@ -37,7 +37,6 @@ class PlaceAdapter(private val context: Context) :
         with(binding) {
             tvItemPlaceTitle.text = place.title
             tvItemPlaceType.text = parsePlaceType(place.type, context)
-            tvItemPlaceDesc.text = place.shortDescription
 
             val randomRating = Random.nextDouble(2.0, 5.0)
             tvItemPlaceRating.text = String.format("%.2f", randomRating)
