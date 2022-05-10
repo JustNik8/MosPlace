@@ -158,7 +158,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     private fun setupPlaceText() {
         with(binding) {
             tvPlaceTitle.text = place.title
-            tvPlaceDesc.text = place.fullDescription.repeat(10)
+            tvPlaceDesc.text = place.fullDescription
         }
     }
 
