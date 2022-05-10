@@ -45,5 +45,9 @@
         <argument
             android:name="place"
             app:argType="com.justnik.mosplace.domain.entities.Place" />
+        <argument
+            android:name="placeReviews"
+            app:argType="com.justnik.mosplace.domain.entities.Review[]"
+            app:nullable="true" />
     </fragment>
 </navigation>

@@ -14,6 +14,7 @@ import com.justnik.mosplace.domain.usecases.auth.IsUserAuthorizedUseCase
 import com.justnik.mosplace.domain.usecases.place.OpenPlaceInMapUseCase
 import com.justnik.mosplace.domain.usecases.profile.AddPlaceToProfileUseCase
 import com.justnik.mosplace.domain.usecases.profile.LoadVisitedProfilePlacesUseCase
+import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

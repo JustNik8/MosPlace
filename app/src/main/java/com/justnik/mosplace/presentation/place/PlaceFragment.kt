@@ -6,7 +6,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,12 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
+import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.showSupportActionBar
+import com.justnik.mosplace.presentation.placereviews.PlaceReviewsAdapter
+import com.justnik.mosplace.presentation.placereviews.PlaceReviewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +43,12 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         args.place
     }
 
-    private val viewModel: PlaceViewModel by viewModels()
+    private val reviewRvAdapter by lazy { PlaceReviewsAdapter(requireContext()) }
+
+    private var reviews: Array<Review>? = null
+
+    private val placeViewModel: PlaceViewModel by viewModels()
+    private val reviewsViewModel: PlaceReviewsViewModel by viewModels()
 
     private var currentLocation: Location? = null
 
@@ -62,7 +71,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.setCurrentPlace(place)
+        placeViewModel.setCurrentPlace(place)
         setupPlaceText()
         setupImageSlider()
         setClickListeners()
@@ -71,6 +80,9 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         setCheckInButton {
             checkLocationPermissions()
         }
+
+        observeReviewViewModel()
+        setupReviewRecyclerView()
     }
 
     private fun checkLocationPermissions() {
@@ -83,7 +95,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     }
 
     private fun observeEvents() {
-        viewModel.checkInEvents.observeFlow(viewLifecycleOwner) { event ->
+        placeViewModel.checkInEvents.observeFlow(viewLifecycleOwner) { event ->
             when (event) {
                 is PlaceViewModel.CheckInEvent.Success -> {
                     navigateToReviewFragment()
@@ -101,7 +113,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
             }
         }
 
-        viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
+        placeViewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
             binding.bCheckIn.icon = when {
                 uiState.isLoading -> {
                     null
@@ -115,11 +127,24 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
             }
 
             binding.pbPlace.visibility = if (uiState.isLoading) View.VISIBLE else View.GONE
-            binding.bCheckIn.isEnabled = !uiState.isLoading && viewModel.isUserAuthorized()
+            binding.bCheckIn.isEnabled = !uiState.isLoading && placeViewModel.isUserAuthorized()
         }
-
     }
 
+    private fun observeReviewViewModel() {
+        reviewsViewModel.loadPlaceReviews(place.id.toLong())
+        reviewsViewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
+            reviews = uiState.data?.toTypedArray()
+            reviewRvAdapter.submitList(reviews?.slice(0..2))
+        }
+    }
+
+    private fun setupReviewRecyclerView() {
+        binding.rvPlacesLastReviews.adapter = reviewRvAdapter
+
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
+        binding.rvPlacesLastReviews.addItemDecoration(dividerItemDecoration)
+    }
 
     @SuppressLint("MissingPermission")
     private fun onGotPermissionsLocationResult(grantResult: Map<String, Boolean>) {
@@ -136,14 +161,14 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
                 )
             }
 
-            setCheckInButton{
+            setCheckInButton {
                 currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                viewModel.checkIn(place, currentLocation)
+                placeViewModel.checkIn(place, currentLocation)
             }
             binding.bCheckIn.performClick()
         } else {
             Toast.makeText(requireContext(), "Permissions denied", Toast.LENGTH_LONG).show()
-            setCheckInButton{
+            setCheckInButton {
                 checkLocationPermissions()
             }
         }
@@ -170,7 +195,7 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
 
     private fun setClickListeners() {
         binding.bLocatePlace.setOnClickListener {
-            viewModel.openPlaceInMap(place)
+            placeViewModel.openPlaceInMap(place)
         }
 
         binding.bBackPlace.setOnClickListener {
@@ -178,13 +203,15 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         }
 
         binding.bDescription.setOnClickListener {
-            val direction = PlaceFragmentDirections.actionPlaceFragmentToPlaceDescriptionFragment(place)
-            findNavController().navigate(direction)
+            navigateToPlaceDescriptionFragment()
         }
 
         binding.bAllReviews.setOnClickListener {
-            val direction = PlaceFragmentDirections.actionPlaceFragmentToPlaceReviewsFragment(place)
-            findNavController().navigate(direction)
+            navigateToPlaceReviewsFragment()
+        }
+
+        binding.bRatingAndReviews.setOnClickListener {
+            navigateToPlaceReviewsFragment()
         }
     }
 
@@ -192,4 +219,15 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         findNavController().navigate(R.id.action_placeFragment_to_reviewFragment)
     }
 
+    private fun navigateToPlaceReviewsFragment() {
+        val direction =
+            PlaceFragmentDirections.actionPlaceFragmentToPlaceReviewsFragment(place, reviews)
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToPlaceDescriptionFragment(){
+        val direction =
+            PlaceFragmentDirections.actionPlaceFragmentToPlaceDescriptionFragment(place)
+        findNavController().navigate(direction)
+    }
 }

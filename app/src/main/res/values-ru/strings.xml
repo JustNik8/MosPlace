@@ -74,5 +74,6 @@
     <string name="user_location_far">Вы далеко от этого места</string>
     <string name="description">Описание</string>
     <string name="all_reviews">Все отзывы</string>
+    <string name="ratings_and_reviews">Оценки и отзывы</string>
 
 </resources>

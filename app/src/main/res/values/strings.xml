@@ -85,5 +85,6 @@
 
     <string name="description">Description</string>
     <string name="all_reviews">All reviews</string>
+    <string name="ratings_and_reviews">Ratings and reviews</string>
 
 </resources>

@@ -2,7 +2,6 @@ package com.justnik.mosplace.presentation.placereviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.viewbinding.ViewBinding
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.Review
@@ -11,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Error
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +32,6 @@ class PlaceReviewsViewModel @Inject constructor(
                 }
             }
         }
-
     }
 
     data class UiState<T>(

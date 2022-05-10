@@ -8,19 +8,19 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_back_place"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/circle"
         app:icon="@drawable/ic_arrow_back_ios"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
-        app:iconSize="16dp"
+        app:iconSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_place"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,11 +34,26 @@
             android:layout_height="wrap_content"
             tools:context=".presentation.place.PlaceFragment">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="8dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="8dp" />
+
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/place_image_slider"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:sliderAnimationDuration="600"
@@ -104,12 +119,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/b_description"
-                style="@style/Widget.Mosplace.DescriptionButton"
+                style="@style/Widget.Mosplace.ArrowButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/description"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/b_locate_place" />
@@ -124,35 +138,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/b_description"
                 tools:text="Red Square is one of the oldest and largest squares in Moscow." />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/left_guideline"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/b_rating_and_reviews"
+                style="@style/Widget.Mosplace.ArrowButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="8dp" />
+                android:layout_marginTop="20dp"
+                android:text="@string/ratings_and_reviews"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_place_desc" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/right_guideline"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_places_last_reviews"
+                android:layout_width="0dp"
+                android:overScrollMode="never"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="8dp" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/b_rating_and_reviews" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/b_all_reviews"
                 android:layout_width="0dp"
+                style="@style/Widget.Mosplace.TextButton"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/all_reviews"
                 app:cornerRadius="@dimen/button_corner_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/right_guideline"
                 app:layout_constraintStart_toStartOf="@+id/left_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_place_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_places_last_reviews" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
