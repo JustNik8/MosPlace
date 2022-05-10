@@ -86,5 +86,7 @@
     <string name="description">Description</string>
     <string name="all_reviews">All reviews</string>
     <string name="ratings_and_reviews">Ratings and reviews</string>
+    <string name="mark_as_spam">Mark as spam</string>
+    <string name="review_spam_marked">Review marked as spam</string>
 
 </resources>
