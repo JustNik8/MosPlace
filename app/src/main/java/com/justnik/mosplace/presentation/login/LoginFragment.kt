@@ -57,6 +57,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         loginMenu = menu
         inflater.inflate(R.menu.menu_not_authorized, menu)
+        setThemeIcon()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -107,16 +108,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun showThemeDialog() {
         val themeDialog = ThemeDialog().apply {
-            darkModeCallback = { darkModeCode ->
-                setThemeIcon(darkModeCode)
+            darkModeCallback = {
+                setThemeIcon()
             }
         }
         themeDialog.showSingle(childFragmentManager, ThemeDialog.THEME_DIALOG_TAG)
     }
 
-    private fun setThemeIcon(darkModeCode: Int) {
+    private fun setThemeIcon() {
         val menuItem = loginMenu?.findItem(R.id.action_theme)
-        when (darkModeCode) {
+        when (viewModel.getDarkModeCode()) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> {
                 menuItem?.setIcon(R.drawable.ic_mode_auto)
             }

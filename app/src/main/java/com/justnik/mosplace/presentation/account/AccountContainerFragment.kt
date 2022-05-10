@@ -33,7 +33,6 @@ class AccountContainerFragment : Fragment(R.layout.fragment_account_container),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setStartDestination()
-        setHasOptionsMenu(true)
         navController.addOnDestinationChangedListener(this)
     }
 
