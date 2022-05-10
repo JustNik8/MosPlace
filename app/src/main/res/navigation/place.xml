@@ -41,5 +41,9 @@
         android:id="@+id/placeReviewsFragment"
         android:name="com.justnik.mosplace.presentation.placereviews.PlaceReviewsFragment"
         android:label="fragment_place_reviews"
-        tools:layout="@layout/fragment_place_reviews" />
+        tools:layout="@layout/fragment_place_reviews" >
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
 </navigation>

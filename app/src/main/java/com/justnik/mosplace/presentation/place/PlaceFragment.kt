@@ -183,7 +183,8 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         }
 
         binding.bAllReviews.setOnClickListener {
-            findNavController().navigate(R.id.action_placeFragment_to_placeReviewsFragment)
+            val direction = PlaceFragmentDirections.actionPlaceFragmentToPlaceReviewsFragment(place)
+            findNavController().navigate(direction)
         }
     }
 
