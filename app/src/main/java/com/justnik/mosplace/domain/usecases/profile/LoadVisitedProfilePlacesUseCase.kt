@@ -1,7 +1,6 @@
 package com.justnik.mosplace.domain.usecases.profile
 
-import com.justnik.mosplace.data.network.apiservices.ProfileService
-import com.justnik.mosplace.domain.ProfileRepository
+import com.justnik.mosplace.domain.repositories.ProfileRepository
 import javax.inject.Inject
 
 class LoadVisitedProfilePlacesUseCase @Inject constructor(

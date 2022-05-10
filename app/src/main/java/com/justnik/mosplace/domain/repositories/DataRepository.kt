@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain
+package com.justnik.mosplace.domain.repositories
 
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.entities.District

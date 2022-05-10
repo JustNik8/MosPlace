@@ -5,7 +5,7 @@ import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.apiservices.DataService
-import com.justnik.mosplace.domain.DataRepository
+import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
