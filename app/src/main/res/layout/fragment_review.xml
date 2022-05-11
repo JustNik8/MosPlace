@@ -51,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:inputType="textCapSentences"
                 android:hint="@string/review" />
 
         </com.google.android.material.textfield.TextInputLayout>

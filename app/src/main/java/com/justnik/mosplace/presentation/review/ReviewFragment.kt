@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.justnik.mosplace.R
@@ -19,6 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class ReviewFragment : Fragment(R.layout.fragment_review) {
 
     private val binding: FragmentReviewBinding by viewBinding()
+
+    private val args by navArgs<ReviewFragmentArgs>()
+    private val place by lazy { args.place }
 
     private val viewModel: ReviewViewModel by viewModels()
 
@@ -54,6 +58,7 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
     }
 
     private fun observeViewModel() {
+        viewModel.setCurrentPlace(place)
         viewModel.validationEvents.observeFlow(viewLifecycleOwner){ event ->
             when (event){
                 is ReviewViewModel.ValidationEvent.Success -> {

@@ -27,7 +27,11 @@
         android:id="@+id/reviewFragment"
         android:name="com.justnik.mosplace.presentation.review.ReviewFragment"
         tools:layout="@layout/fragment_review"
-        android:label="ReviewFragment" />
+        android:label="ReviewFragment" >
+        <argument
+            android:name="place"
+            app:argType="com.justnik.mosplace.domain.entities.Place" />
+    </fragment>
     <fragment
         android:id="@+id/placeDescriptionFragment"
         android:name="com.justnik.mosplace.presentation.place.PlaceDescriptionFragment"

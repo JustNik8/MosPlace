@@ -1,9 +1,6 @@
 package com.justnik.mosplace.di
 
-import com.justnik.mosplace.data.repositories.AuthRepositoryImpl
-import com.justnik.mosplace.data.repositories.DataRepositoryImpl
-import com.justnik.mosplace.data.repositories.MockReviewRepositoryImpl
-import com.justnik.mosplace.data.repositories.ProfileRepositoryImpl
+import com.justnik.mosplace.data.repositories.*
 import com.justnik.mosplace.domain.repositories.AuthRepository
 import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.domain.repositories.ProfileRepository
@@ -14,9 +11,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
-
-@Qualifier
-annotation class MockReviewRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,6 +30,5 @@ interface DataModule {
 
     @Binds
     @Singleton
-    @MockReviewRepository
-    fun bindMockReviewRepository(impl: MockReviewRepositoryImpl): ReviewRepository
+    fun bindReviewRepository(impl: ReviewRepositoryImpl): ReviewRepository
 }
