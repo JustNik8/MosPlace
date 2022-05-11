@@ -239,7 +239,8 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
     }
 
     private fun navigateToReviewFragment() {
-        findNavController().navigate(R.id.action_placeFragment_to_reviewFragment)
+        val direction = PlaceFragmentDirections.actionPlaceFragmentToReviewFragment(place)
+        findNavController().navigate(direction)
     }
 
     private fun navigateToPlaceReviewsFragment() {
