@@ -7,6 +7,7 @@ import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.usecases.auth.*
+import com.justnik.mosplace.presentation.helpers.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +30,9 @@ class RegistrationViewModel @Inject constructor(
 
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
+
+    private val _uiState = MutableStateFlow(UiState<Unit>())
+    val uiState = _uiState.asStateFlow()
 
     fun onEvent(event: RegistrationFormEvent) {
         when (event) {
@@ -90,12 +94,19 @@ class RegistrationViewModel @Inject constructor(
             )
             return
         }
+
+        createAccount()
+    }
+
+    private fun createAccount(){
         viewModelScope.launch {
+            _uiState.value = UiState(isLoading = true)
             val email = registrationFormState.value.email
             val username = registrationFormState.value.username
             val password = registrationFormState.value.password
             val userFullInfo = UserInfo(email, password, username)
             val response = createUserUseCase(userFullInfo)
+            _uiState.value = UiState(isLoading = false)
             when (response) {
                 is Resource.Success -> {
                     validationEventChannel.send(ValidationEvent.Success(UiText.StringResource(R.string.confirm_email)))

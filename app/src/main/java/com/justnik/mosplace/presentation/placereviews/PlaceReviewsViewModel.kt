@@ -6,6 +6,7 @@ import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
+import com.justnik.mosplace.presentation.helpers.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,15 +40,5 @@ class PlaceReviewsViewModel @Inject constructor(
         val size = reviews.size
         val maxSizeToSlice = if (size < 3) size else 3
         return reviews.slice(0 until maxSizeToSlice)
-    }
-
-    data class UiState<T>(
-        val isLoading: Boolean = false,
-        val data: T? = null,
-        val error: Error? = null
-    ) {
-        sealed class Error {
-            data class NetworkError(val message: UiText) : Error()
-        }
     }
 }

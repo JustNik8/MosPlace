@@ -77,6 +77,17 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 tilRepeatedPassword.error = it.repeatedPasswordError?.asString(requireContext())
             }
         }
+
+        viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
+            if (uiState.isLoading){
+                binding.bCreateAccount.isEnabled = false
+                binding.bCreateAccount.setIconResource(R.drawable.ic_person_add)
+            }
+            else {
+                binding.bCreateAccount.isEnabled = true
+                binding.bCreateAccount.icon = null
+            }
+        }
     }
 
     private fun showAlertDialog(title: String, message: String, successful: Boolean = false) {

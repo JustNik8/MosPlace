@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:iconGravity="top"
+            app:iconGravity="end"
             android:text="@string/log_in"
             app:cornerRadius="16dp" />
 
