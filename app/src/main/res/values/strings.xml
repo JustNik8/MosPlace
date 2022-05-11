@@ -88,5 +88,6 @@
     <string name="ratings_and_reviews">Ratings and reviews</string>
     <string name="mark_as_spam">Mark as spam</string>
     <string name="review_spam_marked">Review marked as spam</string>
+    <string name="no_reviews">No reviews</string>
 
 </resources>

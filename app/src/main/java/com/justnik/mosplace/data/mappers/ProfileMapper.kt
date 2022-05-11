@@ -9,7 +9,9 @@ class ProfileMapper @Inject constructor() {
         return Profile(
             id = dto.id,
             name = dto.name,
-            imageUrl = dto.imageUrl
+            imageUrl = dto.imageUrl,
+            userId = dto.userId,
+            visitedPlaceId = dto.visitedPlaceId
         )
     }
 }

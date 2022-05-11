@@ -15,15 +15,15 @@ import javax.inject.Inject
 @HiltViewModel
 class PlaceReviewsViewModel @Inject constructor(
     private val loadPlaceReviewsUseCase: LoadPlaceReviewsUseCase
-) : ViewModel(){
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState<List<Review>>())
     val uiState = _uiState.asStateFlow()
 
-    fun loadPlaceReviews(placeId: Long){
+    fun loadPlaceReviews(placeId: Long) {
         viewModelScope.launch {
             _uiState.value = UiState(isLoading = true)
-            when(val resource = loadPlaceReviewsUseCase(placeId)){
+            when (val resource = loadPlaceReviewsUseCase(placeId)) {
                 is Resource.Success -> {
                     _uiState.value = UiState(data = resource.data)
                 }
@@ -34,13 +34,20 @@ class PlaceReviewsViewModel @Inject constructor(
         }
     }
 
+    fun getLastReviews(): List<Review>? {
+        val reviews = uiState.value.data ?: return null
+        val size = reviews.size
+        val maxSizeToSlice = if (size < 3) size else 3
+        return reviews.slice(0 until maxSizeToSlice)
+    }
+
     data class UiState<T>(
         val isLoading: Boolean = false,
         val data: T? = null,
         val error: Error? = null
-    ){
-        sealed class Error{
-            data class NetworkError(val message: UiText): Error()
+    ) {
+        sealed class Error {
+            data class NetworkError(val message: UiText) : Error()
         }
     }
 }

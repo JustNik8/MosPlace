@@ -32,12 +32,12 @@ class PlaceReviewsAdapter(private val context: Context) :
         val review = getItem(position)
 
         with(binding) {
-            tvItemReviewName.text = review.profileName
-            rbItemReview.rating = review.rating.toFloat()
-            tvItemReviewDate.text = review.date
+            tvItemReviewName.text = review.profile.name
+            rbItemReview.rating = review.stars.toFloat()
+            tvItemReviewDate.text = review.createdDate
             tvItemReviewText.text = review.text
 
-            Glide.with(context).load(review.profileImageUrl).into(ivItemReviewAvatar)
+            Glide.with(context).load(review.profile.imageUrl).into(ivItemReviewAvatar)
 
             tvViewOptions.setOnClickListener {
                 showPopupMenu(binding)

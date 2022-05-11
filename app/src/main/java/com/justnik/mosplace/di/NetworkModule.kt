@@ -3,6 +3,7 @@ package com.justnik.mosplace.di
 import com.justnik.mosplace.data.network.apiservices.DataService
 import com.justnik.mosplace.data.network.apiservices.AuthService
 import com.justnik.mosplace.data.network.apiservices.ProfileService
+import com.justnik.mosplace.data.network.apiservices.ReviewApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,5 +69,11 @@ object NetworkModule {
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileService {
         return retrofit.create(ProfileService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideReviewApiService(retrofit: Retrofit): ReviewApiService {
+        return retrofit.create(ReviewApiService::class.java)
     }
 }

@@ -19,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
+import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.helpers.showSnackbar
 import com.justnik.mosplace.helpers.showSupportActionBar
 import com.justnik.mosplace.presentation.placereviews.PlaceReviewsAdapter
 import com.justnik.mosplace.presentation.placereviews.PlaceReviewsViewModel
@@ -135,7 +137,20 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         reviewsViewModel.loadPlaceReviews(place.id.toLong())
         reviewsViewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
             reviews = uiState.data?.toTypedArray()
-            reviewRvAdapter.submitList(reviews?.slice(0..2))
+            binding.pbLastReviews.visibility = if (uiState.isLoading) View.VISIBLE else View.GONE
+
+            if (uiState.isLoading){
+                return@observeFlow
+            }
+
+            val lastReviews = reviewsViewModel.getLastReviews()
+            if (lastReviews == null || lastReviews.isEmpty()){
+                showNoReviewsUi()
+                return@observeFlow
+            }
+
+            showReviewsUi()
+            reviewRvAdapter.submitList(lastReviews)
         }
     }
 
@@ -211,6 +226,14 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
         }
 
         binding.bRatingAndReviews.setOnClickListener {
+            if (reviews == null){
+                binding.root.showSnackbar(UiText.DynamicText("Is loading"))
+                return@setOnClickListener
+            }
+            if (reviews?.isEmpty() == true){
+                binding.root.showSnackbar(UiText.StringResource(R.string.no_reviews))
+                return@setOnClickListener
+            }
             navigateToPlaceReviewsFragment()
         }
     }
@@ -230,4 +253,21 @@ class PlaceFragment : Fragment(R.layout.fragment_place) {
             PlaceFragmentDirections.actionPlaceFragmentToPlaceDescriptionFragment(place)
         findNavController().navigate(direction)
     }
+
+    private fun showReviewsUi(){
+        binding.rvPlacesLastReviews.visibility = View.VISIBLE
+        binding.bAllReviews.visibility = View.VISIBLE
+
+        binding.tvNoReviews.visibility = View.GONE
+        binding.ivNoReviews.visibility = View.GONE
+    }
+
+    private fun showNoReviewsUi(){
+        binding.rvPlacesLastReviews.visibility = View.GONE
+        binding.bAllReviews.visibility = View.GONE
+
+        binding.tvNoReviews.visibility = View.VISIBLE
+        binding.ivNoReviews.visibility = View.VISIBLE
+    }
+
 }

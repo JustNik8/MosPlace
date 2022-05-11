@@ -72,7 +72,7 @@ class AccountViewModel @Inject constructor(
     data class UiState(
         val isLoading: Boolean = false,
         val error: Error? = null,
-        val profile: Profile = Profile(0, "", "")
+        val profile: Profile = Profile(0, "", "", 0, 0)
     ) {
         sealed class Error(val uiText: UiText) {
             class NetworkError(uiText: UiText = UiText.StringResource(R.string.error_network)) :

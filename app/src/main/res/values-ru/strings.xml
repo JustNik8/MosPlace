@@ -77,5 +77,6 @@
     <string name="ratings_and_reviews">Оценки и отзывы</string>
     <string name="mark_as_spam">Отметить как спам</string>
     <string name="review_spam_marked">Отзыв отмечен как спам</string>
+    <string name="no_reviews">Нет отзывов</string>
 
 </resources>
