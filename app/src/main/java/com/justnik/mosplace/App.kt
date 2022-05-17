@@ -19,8 +19,17 @@ class App : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        MapKitFactory.setApiKey(ApiKeys.mapKit)
+        setupMapKitFactory()
         enqueuePeriodicWork()
+    }
+
+    private fun setupMapKitFactory(){
+        try{
+            MapKitFactory.setApiKey(ApiKeys.mapKit)
+        }
+        catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun enqueuePeriodicWork(){

@@ -1,5 +1,6 @@
 package com.justnik.mosplace.presentation.districts
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -58,14 +59,14 @@ class DistrictsViewModel @Inject constructor(
         }
     }
 
-}
-
-data class UiState(
-    val isLoading: Boolean = false,
-    val error: Error? = null,
-    val districts: List<District> = listOf()
-) {
-    sealed class Error(@StringRes val errorResId: Int){
-        class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
+    data class UiState(
+        val isLoading: Boolean = false,
+        val error: Error? = null,
+        val districts: List<District> = listOf()
+    ) {
+        sealed class Error(@StringRes val errorResId: Int){
+            class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
+        }
     }
+
 }

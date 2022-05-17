@@ -24,7 +24,7 @@ class DataRepositoryImpl @Inject constructor(
             val districts = districtsDto.map { dto ->  districtMapper.dtoToEntity(dto)}
             Resource.Success(districts)
         }
-        catch (e: HttpException){
+        catch (e: Exception){
             Resource.Error(UiText.StringResource(R.string.unknown_error))
         }
     }

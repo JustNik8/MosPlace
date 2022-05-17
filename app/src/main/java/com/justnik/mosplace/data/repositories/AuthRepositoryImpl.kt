@@ -11,9 +11,9 @@ import com.justnik.mosplace.data.network.authmodels.JWT
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.network.authmodels.UserResponse
-import com.justnik.mosplace.domain.repositories.AuthRepository
-import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.data.prefs.UserPrefs
+import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.domain.repositories.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -25,15 +25,14 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun createUser(userInfo: UserInfo): Resource<Unit> {
         return try {
             val response = authService.createUser(userInfo)
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 Resource.Success(Unit)
-            }
-            else{
+            } else {
                 val errorBody = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
                 val string = jsonMapper.registrationJsonToMessage(errorBody)
                 Resource.Error(message = UiText.DynamicText(string))
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             Resource.Error(message = UiText.StringResource(R.string.unknown_error))
         }
@@ -64,19 +63,17 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun loadUser(accessToken: String): Resource<UserResponse> {
         return try {
             val response = authService.getUser("JWT $accessToken")
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val json = response.body()
                 Resource.Success(json ?: throw RuntimeException())
-            }
-            else {
+            } else {
                 val json = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
                 Log.d("RRR", json.toString())
                 Resource.Error(message = UiText.DynamicText("Error"))
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             Resource.Error(message = UiText.DynamicText("Error"))
         }
     }
-
 }
