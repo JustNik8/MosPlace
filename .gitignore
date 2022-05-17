@@ -9,3 +9,4 @@ app/src/main/java/ApiKeys
 .externalNativeBuild
 .cxx
 local.properties
+apikey.properties

@@ -25,7 +25,7 @@ class App : Application(), Configuration.Provider {
 
     private fun setupMapKitFactory(){
         try{
-            MapKitFactory.setApiKey(ApiKeys.mapKit)
+            MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
         }
         catch (e: Exception){
             e.printStackTrace()
