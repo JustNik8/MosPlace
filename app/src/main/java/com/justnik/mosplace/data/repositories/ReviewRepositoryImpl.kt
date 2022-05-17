@@ -4,7 +4,7 @@ import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.mappers.ReviewMapper
 import com.justnik.mosplace.data.network.apiservices.ReviewApiService
 import com.justnik.mosplace.data.network.reviewmodels.AddReviewBody
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.repositories.ReviewRepository
 import javax.inject.Inject

@@ -2,7 +2,7 @@ package com.justnik.mosplace.domain.usecases.auth
 
 import android.util.Patterns
 import com.justnik.mosplace.R
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.usecases.ValidationResult
 import javax.inject.Inject
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.Resource
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.usecases.auth.*
 import com.justnik.mosplace.presentation.helpers.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.prefs.SettingsPrefs
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
 import com.justnik.mosplace.domain.usecases.auth.ValidatePassword

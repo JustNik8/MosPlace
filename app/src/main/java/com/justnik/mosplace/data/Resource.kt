@@ -1,6 +1,6 @@
 package com.justnik.mosplace.data
 
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 
 sealed class Resource<T> {
     class Success<T>(val data: T) : Resource<T>()

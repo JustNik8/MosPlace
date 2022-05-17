@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.network.reviewmodels.AddReviewBody
 import com.justnik.mosplace.data.prefs.ProfilePrefs
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.common.ValidateFieldNotBlank
 import com.justnik.mosplace.domain.usecases.review.AddReviewUseCase

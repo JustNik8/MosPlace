@@ -7,7 +7,7 @@ import com.justnik.mosplace.data.network.profilemodels.StatusResponse
 import com.justnik.mosplace.data.network.profilemodels.VisitedPlaces
 import com.justnik.mosplace.data.prefs.ProfilePrefs
 import com.justnik.mosplace.domain.repositories.ProfileRepository
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.profile.Profile
 import javax.inject.Inject
 

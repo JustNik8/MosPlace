@@ -3,7 +3,6 @@ package com.justnik.mosplace.presentation.placereviews
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.data.Resource
-import com.justnik.mosplace.domain.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
 import com.justnik.mosplace.presentation.helpers.UiState

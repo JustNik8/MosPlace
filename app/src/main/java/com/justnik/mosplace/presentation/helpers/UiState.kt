@@ -1,7 +1,5 @@
 package com.justnik.mosplace.presentation.helpers
 
-import com.justnik.mosplace.domain.UiText
-
 data class UiState<T>(
     val isLoading: Boolean = false,
     val data: T? = null,

@@ -12,7 +12,7 @@ import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.network.authmodels.UserResponse
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.repositories.AuthRepository
 import javax.inject.Inject
 

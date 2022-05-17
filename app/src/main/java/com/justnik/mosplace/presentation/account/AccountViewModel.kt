@@ -6,7 +6,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.data.Resource
 import com.justnik.mosplace.data.prefs.SettingsPrefs
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.profile.Profile
 import com.justnik.mosplace.domain.usecases.auth.LoadUserUseCase
 import com.justnik.mosplace.domain.usecases.profile.LoadProfileUseCase
