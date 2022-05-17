@@ -1,11 +1,9 @@
 # MosPlace
-List of districts | List of places| Map | Place
---- | --- | --- | ---
-![](./assets/List_of_districts.jpg) | ![](./assets/List_of_places.jpg) | ![](./assets/Map.jpg) | ![](./assets/Place.jpg) |
+## Light theme
+![Light theme](./assets/screens_light_theme.jpg)
 
-Review | Account
---- | ---
-![](./assets/Review.jpg) | ![](./assets/Account.jpg) |
+## Dark theme
+![Dark theme](./assets/screens_dark_theme.jpg)
 
 # About
 An application was created for users, that likes achievements. The application contains various places, like landmarks, restaurants, parks, that are grouped by districts
