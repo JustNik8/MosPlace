@@ -24,17 +24,25 @@ class RefreshJwtWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         Log.d("RRR", "do work: ${userPrefs.jwtAccessToken}")
-        val refreshToken = userPrefs.jwtRefreshToken
 
-        if (refreshToken != null) {
+        val refreshToken = userPrefs.jwtRefreshToken ?: return Result.failure()
+
+        return try {
             val response = authService.refreshJwtAccessToken(RefreshToken(refreshToken))
             if (response.isSuccessful) {
                 userPrefs.jwtAccessToken = response.body()?.get("access")?.asString
-                return Result.success()
+                Log.d("RRR", "do work: 1")
+                Result.success()
             }
+            Log.d("RRR", "do work: 2")
+            Result.failure()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("RRR", "do work: 3")
+            Result.failure()
         }
-        return Result.failure()
     }
+
 
     companion object {
         const val NAME = "RefreshJwtWorker"

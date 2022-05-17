@@ -14,7 +14,6 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentDistrictsBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.setTitle
-import com.justnik.mosplace.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +47,7 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
+        when (item.itemId) {
             R.id.action_search -> {
                 val searchView = item.actionView as SearchView
                 setupSearchView(searchView)
@@ -57,7 +56,7 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         return true
     }
 
-    private fun setupSearchView(searchView: SearchView){
+    private fun setupSearchView(searchView: SearchView) {
         searchView.queryHint = requireContext().resources.getString(R.string.hint_search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
@@ -96,12 +95,12 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
     }
 
     private fun observeViewModel() {
-        viewModel.uiState.observeFlow(viewLifecycleOwner){ uiState ->
+        viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
             val isLoading = uiState.isLoading
             binding.pbDistricts.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-            when (uiState.error){
-                is UiState.Error.NetworkError -> {
+            when (uiState.error) {
+                is DistrictsViewModel.UiState.Error.NetworkError -> {
                     val errorText = requireActivity().getString(uiState.error.errorResId)
                     showErrorUi(errorText)
                 }
@@ -113,7 +112,7 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
         }
     }
 
-    private fun showMainUi(){
+    private fun showMainUi() {
         //Hide error views
         binding.ivNoInternet.visibility = View.GONE
         binding.tvError.visibility = View.GONE
