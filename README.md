@@ -29,6 +29,12 @@ Each user has a profile. In the profile, he can see achievements, progress indic
 This app uses [MVVM](https://developer.android.com/jetpack/guide#recommended-app-arch) architecture.
 ![MVVM](https://miro.medium.com/max/960/0*-ZJZfLhup-7rg0cy.png)
 
+# How to build
+1. Create free api key for Mapkit - Mobile SDK: https://developer.tech.yandex.ru/
+2. Create a file apikey.properties in root project directory
+3. Add following line to file apikey.properties: ```MAPKIT_API_KEY="your_api_key"```
+4. Build project
+
 # License
 ```
 Copyright 2022 Nikita Leontev 
