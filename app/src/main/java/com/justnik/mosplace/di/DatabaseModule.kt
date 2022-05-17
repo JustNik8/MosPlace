@@ -7,7 +7,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 object DatabaseModule {
-    const val DB_NAME = "mosplace.db"
+    private const val DB_NAME = "mosplace.db"
 
     @Provides
     @Singleton
