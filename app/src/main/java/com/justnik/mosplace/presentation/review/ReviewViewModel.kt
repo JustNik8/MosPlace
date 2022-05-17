@@ -115,7 +115,6 @@ class ReviewViewModel @Inject constructor(
     }
 
     companion object {
-//        private const val DATE_FORMAT = "dd.MM.yyyy HH:mm:ss"
         private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     }
 }
