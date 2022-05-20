@@ -90,5 +90,6 @@
     <string name="review_spam_marked">Review marked as spam</string>
     <string name="no_reviews">No reviews</string>
     <string name="gps_turned_off">GPS turned off</string>
+    <string name="permission_geo_error">Permission for geolocation is not given</string>
 
 </resources>

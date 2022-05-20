@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".presentation.map.MapFragment">
 
+    <TextView
+        android:id="@+id/tv_permission_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:gravity="center"
+        android:elevation="6dp"
+        android:text="@string/permission_geo_error"
+        android:textColor="@color/colorOnBackground"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"

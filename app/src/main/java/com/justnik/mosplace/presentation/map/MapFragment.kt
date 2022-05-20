@@ -119,6 +119,10 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
     private fun onGotPermissionsLocationResult(grantResult: Map<String, Boolean>) {
         if (grantResult.entries.all { it.value }) {
             setupUserLocationLayer()
+            binding.tvPermissionError.visibility = View.GONE
+        }
+        else {
+            binding.tvPermissionError.visibility = View.VISIBLE
         }
     }
 
