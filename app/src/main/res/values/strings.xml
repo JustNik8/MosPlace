@@ -89,5 +89,6 @@
     <string name="mark_as_spam">Mark as spam</string>
     <string name="review_spam_marked">Review marked as spam</string>
     <string name="no_reviews">No reviews</string>
+    <string name="gps_turned_off">GPS turned off</string>
 
 </resources>

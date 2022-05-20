@@ -1,11 +1,15 @@
 package com.justnik.mosplace.presentation.map
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -18,6 +22,7 @@ import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.showSupportActionBar
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
@@ -56,6 +61,11 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
         true
     }
 
+    private val locationManager by lazy {
+        requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MapKitFactory.initialize(requireActivity())
@@ -75,6 +85,7 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpMapView()
         checkLocationPermissions()
+
     }
 
     override fun onStart() {
@@ -118,12 +129,36 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
         addPlacemarks()
     }
 
+    @SuppressLint("MissingPermission")
     private fun setupUserLocationLayer() {
         val mapKit = MapKitFactory.getInstance()
         userLocationLayer = mapKit.createUserLocationLayer(mapView.mapWindow)
         userLocationLayer.isVisible = true
         userLocationLayer.isHeadingEnabled = true
         userLocationLayer.setObjectListener(this)
+
+        binding.fabCurrentLocation.setOnClickListener {
+            val hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+            if (hasGps) {
+                val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (location != null){
+                    val point = Point(location.latitude, location.longitude)
+                    mapView.map.move(
+                        CameraPosition(point, 14.5f, 0f, 0f),
+                        Animation(Animation.Type.SMOOTH, 0.8f),
+                        null
+                    )
+                }
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.gps_turned_off),
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+        }
     }
 
     private fun addPlacemarks() {
@@ -159,37 +194,6 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
     }
 
     override fun onObjectAdded(userLocationView: UserLocationView) {
-//        userLocationLayer.setAnchor(
-//            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.5).toFloat()),
-//            PointF((mapView.width * 0.5).toFloat(), (mapView.height * 0.83).toFloat())
-//        )
-//
-//        userLocationView.arrow.setIcon(
-//            ImageProvider.fromResource(
-//                requireContext(), R.drawable.ic_arrow_back
-//            )
-//        )
-//
-//        val pinIcon: CompositeIcon = userLocationView.pin.useCompositeIcon()
-//
-//        pinIcon.setIcon(
-//            "icon",
-//            ImageProvider.fromResource(requireContext(), R.drawable.ic_account),
-//            IconStyle().setAnchor(PointF(0f, 0f))
-//                .setRotationType(RotationType.ROTATE)
-//                .setZIndex(0f)
-//                .setScale(1f)
-//        )
-//
-//        pinIcon.setIcon(
-//            "pin",
-//            ImageProvider.fromResource(requireContext(), R.drawable.ic_check),
-//            IconStyle().setAnchor(PointF(0.5f, 0.5f))
-//                .setRotationType(RotationType.ROTATE)
-//                .setZIndex(1f)
-//                .setScale(0.5f)
-//        )
-
         userLocationView.accuracyCircle.fillColor = Color.BLUE and -0x66000001
     }
 
