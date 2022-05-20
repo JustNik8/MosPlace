@@ -1,16 +1,16 @@
 package com.justnik.mosplace.presentation.map
 
 import android.graphics.Color
-import android.graphics.PointF
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.PlaceTypes
 import com.justnik.mosplace.databinding.FragmentMapBinding
@@ -21,19 +21,23 @@ import com.justnik.mosplace.helpers.showSupportActionBar
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
-import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.MapObjectCollection
+import com.yandex.mapkit.map.MapObjectTapListener
+import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.user_location.UserLocationLayer
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
-import com.yandex.runtime.image.ImageProvider
 import com.yandex.runtime.ui_view.ViewProvider
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.jar.Manifest
 
 @AndroidEntryPoint
 class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener {
 
-    private val binding: FragmentMapBinding by viewBinding()
+    private var _binding: FragmentMapBinding? = null
+    private val binding: FragmentMapBinding
+        get() = _binding!!
+
     private val viewModel: MapViewModel by viewModels()
 
     private val locationPermissionRequestLauncher = registerForActivityResult(
@@ -41,8 +45,8 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
         this::onGotPermissionsLocationResult
     )
 
-    private val mapView by lazy { binding.mapView }
-    private val mapObjects by lazy { mapView.map.mapObjects.addCollection() }
+    private lateinit var mapView: MapView
+    private lateinit var mapObjects: MapObjectCollection
 
     private lateinit var userLocationLayer: UserLocationLayer
 
@@ -54,13 +58,42 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSupportActionBar()
-        MapKitFactory.initialize(requireContext())
+        MapKitFactory.initialize(requireActivity())
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMapBinding.inflate(inflater, container, false)
+        mapView = binding.mapView
+        mapObjects = mapView.map.mapObjects.addCollection()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpMapView()
         checkLocationPermissions()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+        MapKitFactory.getInstance().onStart()
+        hideSupportActionBar()
+    }
+
+    override fun onStop() {
+        mapView.onStop()
+        MapKitFactory.getInstance().onStop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showSupportActionBar()
+        _binding = null
     }
 
     private fun checkLocationPermissions() {
@@ -72,23 +105,11 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
         )
     }
 
-    override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-        MapKitFactory.getInstance().onStart()
+    private fun onGotPermissionsLocationResult(grantResult: Map<String, Boolean>) {
+        if (grantResult.entries.all { it.value }) {
+            setupUserLocationLayer()
+        }
     }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-        MapKitFactory.getInstance().onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        showSupportActionBar()
-    }
-
 
     private fun setUpMapView() {
         mapView.map.move(
@@ -97,13 +118,7 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
         addPlacemarks()
     }
 
-    private fun onGotPermissionsLocationResult(grantResult: Map<String, Boolean>){
-        if (grantResult.entries.all { it.value }){
-            setupUserLocationLayer()
-        }
-    }
-
-    private fun setupUserLocationLayer(){
+    private fun setupUserLocationLayer() {
         val mapKit = MapKitFactory.getInstance()
         userLocationLayer = mapKit.createUserLocationLayer(mapView.mapWindow)
         userLocationLayer.isVisible = true
