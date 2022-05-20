@@ -21,4 +21,7 @@
     <color name="AppIconBackground">#C3DDF4</color>
 
     <color name="colorRating">#FDCC0D</color>
+
+    <color name="fabBackground">#FFFFFF</color>
+    <color name="fabIconTint">#171717</color>
 </resources>
