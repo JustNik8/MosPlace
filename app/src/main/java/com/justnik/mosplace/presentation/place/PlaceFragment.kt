@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentPlaceBinding
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.helpers.hideSupportActionBar
 import com.justnik.mosplace.helpers.observeFlow

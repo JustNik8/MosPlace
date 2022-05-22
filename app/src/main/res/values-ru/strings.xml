@@ -80,5 +80,7 @@
     <string name="no_reviews">Нет отзывов</string>
     <string name="gps_turned_off">Геолокация не включена</string>
     <string name="permission_geo_error">Разрешение на геолокацию не дано</string>
+    <string name="should_remember">Вспоминай, бро</string>
+
 
 </resources>

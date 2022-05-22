@@ -31,4 +31,6 @@ interface DataModule {
     @Binds
     @Singleton
     fun bindReviewRepository(impl: ReviewRepositoryImpl): ReviewRepository
+
+
 }

@@ -1,4 +1,4 @@
-package com.justnik.mosplace.domain
+package com.justnik.mosplace.presentation.helpers
 
 import android.content.Context
 import androidx.annotation.StringRes

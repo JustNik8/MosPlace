@@ -1,20 +1,18 @@
 package com.justnik.mosplace.presentation.place
 
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.prefs.ProfilePrefs
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.auth.IsUserAuthorizedUseCase
 import com.justnik.mosplace.domain.usecases.place.OpenPlaceInMapUseCase
 import com.justnik.mosplace.domain.usecases.profile.AddPlaceToProfileUseCase
 import com.justnik.mosplace.domain.usecases.profile.LoadVisitedProfilePlacesUseCase
-import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -112,7 +110,7 @@ class PlaceViewModel @Inject constructor(
                 val resource = loadVisitedProfilePlacesUseCase(profilePrefs.visitedPlaceId)
                 when (resource) {
                     is Resource.Success -> {
-                        visitedProfilePlaces = resource.data.visitedPlaces
+                        visitedProfilePlaces = resource.data!!.visitedPlaces
                         checkPlaceAlreadyVisited(visitedProfilePlaces)
                     }
                     is Resource.Error -> {

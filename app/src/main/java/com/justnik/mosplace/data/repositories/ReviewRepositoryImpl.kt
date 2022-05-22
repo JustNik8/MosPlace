@@ -1,10 +1,10 @@
 package com.justnik.mosplace.data.repositories
 
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.mappers.ReviewMapper
 import com.justnik.mosplace.data.network.apiservices.ReviewApiService
 import com.justnik.mosplace.data.network.reviewmodels.AddReviewBody
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.repositories.ReviewRepository
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class ReviewRepositoryImpl @Inject constructor(
             Resource.Success(placeReviews)
         } catch (e: Exception){
             e.printStackTrace()
-            Resource.Error(UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
 
     }
@@ -32,7 +32,7 @@ class ReviewRepositoryImpl @Inject constructor(
             Resource.Success(Unit)
         } catch (e: Exception){
             e.printStackTrace()
-            Resource.Error(UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
     }
 }

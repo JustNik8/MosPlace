@@ -15,6 +15,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentRegistrationBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.setTitle
+import com.justnik.mosplace.presentation.helpers.TextWatcherWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -126,15 +127,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         }
     }
 
-    private class TextWatcherWrapper(private val block: () -> Unit) : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            block()
-        }
-
-        override fun afterTextChanged(p0: Editable?) {}
-    }
 }
 
 

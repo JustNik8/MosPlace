@@ -160,7 +160,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.bForgotPass.setOnClickListener {
-            Snackbar.make(binding.root, getText(R.string.forgot_password), Snackbar.LENGTH_SHORT)
+            Snackbar.make(binding.root, getText(R.string.should_remember), Snackbar.LENGTH_SHORT)
                 .show()
         }
 

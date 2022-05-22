@@ -1,7 +1,7 @@
 package com.justnik.mosplace.domain.repositories
 
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.network.profilemodels.VisitedPlaces
 import com.justnik.mosplace.domain.entities.profile.Profile
 

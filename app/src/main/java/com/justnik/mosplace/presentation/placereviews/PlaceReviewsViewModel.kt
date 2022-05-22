@@ -2,11 +2,11 @@ package com.justnik.mosplace.presentation.placereviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.data.Resource
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
 import com.justnik.mosplace.presentation.helpers.UiState
+import com.justnik.mosplace.presentation.helpers.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +29,7 @@ class PlaceReviewsViewModel @Inject constructor(
                     _uiState.value = UiState(data = resource.data)
                 }
                 is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError(resource.message))
+                    _uiState.value = UiState(error = UiState.Error.NetworkError(UiText.DynamicText("Error")))
                 }
             }
         }

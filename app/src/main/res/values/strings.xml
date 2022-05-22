@@ -92,4 +92,5 @@
     <string name="gps_turned_off">GPS turned off</string>
     <string name="permission_geo_error">Permission for geolocation is not given</string>
 
+    <string name="should_remember">You should remember bro</string>
 </resources>

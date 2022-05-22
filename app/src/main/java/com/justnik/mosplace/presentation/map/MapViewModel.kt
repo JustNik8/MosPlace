@@ -2,7 +2,7 @@ package com.justnik.mosplace.presentation.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.place.LoadAllPlacesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +27,7 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch {
             when (val resource = loadAllPlacesUseCase()) {
                 is Resource.Success -> {
-                    _uiState.value = UiState(places = resource.data)
+                    _uiState.value = UiState(places = resource.data!!)
                 }
                 is Resource.Error -> {
                     _uiState.value = UiState(error = UiState.Error.NetworkError)

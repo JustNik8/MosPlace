@@ -1,15 +1,14 @@
 package com.justnik.mosplace.data.repositories
 
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.apiservices.DataService
 import com.justnik.mosplace.domain.repositories.DataRepository
-import com.justnik.mosplace.domain.UiText
+import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.entities.Place
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class DataRepositoryImpl @Inject constructor(
@@ -25,7 +24,7 @@ class DataRepositoryImpl @Inject constructor(
             Resource.Success(districts)
         }
         catch (e: Exception){
-            Resource.Error(UiText.StringResource(R.string.unknown_error))
+            Resource.Error(e)
         }
     }
 
@@ -35,7 +34,7 @@ class DataRepositoryImpl @Inject constructor(
             val places = placesDto.map { placeMapper.dtoToEntity(it) }
             Resource.Success(places)
         } catch (e: Exception){
-            Resource.Error(UiText.StringResource(R.string.unknown_error))
+            Resource.Error(e)
         }
     }
 
@@ -45,7 +44,7 @@ class DataRepositoryImpl @Inject constructor(
             val places = placesDto.map { placeMapper.dtoToEntity(it) }
             Resource.Success(places)
         } catch (e: Exception){
-            Resource.Error(UiText.StringResource(R.string.unknown_error))
+            Resource.Error(e)
         }
     }
 }
