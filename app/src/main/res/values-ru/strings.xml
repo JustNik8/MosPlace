@@ -82,4 +82,5 @@
     <string name="permission_geo_error">Разрешение на геолокацию не дано</string>
     <string name="should_remember">Вспоминай, бро</string>
 
+
 </resources>

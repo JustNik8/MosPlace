@@ -6,9 +6,8 @@
 ![Dark theme](./assets/screens_dark_theme.jpg)
 
 # About
-An application was created for users, that likes achievements. The application contains various places, like landmarks, restaurants, parks, that are grouped by districts
-of Moscow. The user can interact with a place. For example, he can mark the place as visited, rate, leave a review, attach photos. 
-Each user has a profile. In the profile, he can see achievements, progress indicator of visited places, etc.
+An application was created for users, that likes achievements. The application contains various places, like landmarks, restaurants, parks, that are grouped by districts of Moscow. The user can interact with a place. For example, he can mark the place as visited, rate. In the future, the ability to leave a review and attach a photo will be added.
+Each user has a profile. In the plans: in the profile, user can see achievements, progress indicator of visited places, etc.
 
 # Technolohies
 * [Kotlin](https://kotlinlang.org/) - Modern, concise and safe programming language. Recommended by Google for building Android apps.
@@ -28,6 +27,12 @@ Each user has a profile. In the profile, he can see achievements, progress indic
 # Architecture
 This app uses [MVVM](https://developer.android.com/jetpack/guide#recommended-app-arch) architecture.
 ![MVVM](https://miro.medium.com/max/960/0*-ZJZfLhup-7rg0cy.png)
+
+# How to build
+1. Create free api key for Mapkit - Mobile SDK: https://developer.tech.yandex.ru/
+2. Create a file apikey.properties in root project directory
+3. Add following line to file apikey.properties: ```MAPKIT_API_KEY="your_api_key"```
+4. Build project
 
 # License
 ```

@@ -149,6 +149,7 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
                 if (location != null){
                     val point = Point(location.latitude, location.longitude)
                     mapView.map.move(
+
                         CameraPosition(point, 16f, 0f, 0f),
                         Animation(Animation.Type.SMOOTH, 0.8f),
                         null
