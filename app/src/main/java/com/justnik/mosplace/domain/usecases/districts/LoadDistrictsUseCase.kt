@@ -1,6 +1,6 @@
 package com.justnik.mosplace.domain.usecases.districts
 
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.domain.entities.District
 import javax.inject.Inject

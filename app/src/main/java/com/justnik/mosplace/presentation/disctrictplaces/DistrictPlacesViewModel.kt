@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.prefs.PlaceTypePrefs
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.place.FilterPlacesByTypeUseCase
@@ -35,7 +35,7 @@ class DistrictPlacesViewModel @Inject constructor(
                     is Resource.Success -> {
                         val places = resource.data
                         if (allDistrictPlaces.isEmpty()) {
-                            allDistrictPlaces.addAll(places)
+                            allDistrictPlaces.addAll(places!!)
                         }
                         val selectedTypes = placeTypePrefs.selectedPrefsTypes
                             .filter { it.selected }

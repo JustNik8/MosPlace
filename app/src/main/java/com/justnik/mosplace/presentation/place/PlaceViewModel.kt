@@ -4,7 +4,7 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.prefs.ProfilePrefs
 import com.justnik.mosplace.data.prefs.UserPrefs
 import com.justnik.mosplace.presentation.helpers.UiText
@@ -110,7 +110,7 @@ class PlaceViewModel @Inject constructor(
                 val resource = loadVisitedProfilePlacesUseCase(profilePrefs.visitedPlaceId)
                 when (resource) {
                     is Resource.Success -> {
-                        visitedProfilePlaces = resource.data.visitedPlaces
+                        visitedProfilePlaces = resource.data!!.visitedPlaces
                         checkPlaceAlreadyVisited(visitedProfilePlaces)
                     }
                     is Resource.Error -> {

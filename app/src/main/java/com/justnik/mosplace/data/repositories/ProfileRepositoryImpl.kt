@@ -1,6 +1,6 @@
 package com.justnik.mosplace.data.repositories
 
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.mappers.ProfileMapper
 import com.justnik.mosplace.data.network.apiservices.ProfileService
 import com.justnik.mosplace.data.network.profilemodels.StatusResponse
@@ -26,7 +26,7 @@ class ProfileRepositoryImpl @Inject constructor(
             Resource.Success(profile)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
     }
 
@@ -40,7 +40,7 @@ class ProfileRepositoryImpl @Inject constructor(
             Resource.Success(status)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
     }
 
@@ -50,7 +50,7 @@ class ProfileRepositoryImpl @Inject constructor(
             Resource.Success(visitedPlaces[0])
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
     }
 }

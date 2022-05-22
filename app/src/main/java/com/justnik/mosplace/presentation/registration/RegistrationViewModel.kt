@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.authmodels.UserInfo
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.usecases.auth.*
 import com.justnik.mosplace.presentation.helpers.UiState
@@ -112,7 +112,7 @@ class RegistrationViewModel @Inject constructor(
                     validationEventChannel.send(ValidationEvent.Success(UiText.StringResource(R.string.confirm_email)))
                 }
                 is Resource.Error -> {
-                    val message = response.message
+                    val message = UiText.DynamicText("Error")
                     validationEventChannel.send(ValidationEvent.Error(message))
                 }
             }

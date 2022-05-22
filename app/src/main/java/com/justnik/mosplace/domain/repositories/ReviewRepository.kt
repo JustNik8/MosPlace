@@ -1,6 +1,6 @@
 package com.justnik.mosplace.domain.repositories
 
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.network.reviewmodels.AddReviewBody
 import com.justnik.mosplace.domain.entities.Review
 

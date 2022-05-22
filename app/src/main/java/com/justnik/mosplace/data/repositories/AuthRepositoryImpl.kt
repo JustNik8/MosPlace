@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.justnik.mosplace.R
-import com.justnik.mosplace.data.Resource
+import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.mappers.JsonMapper
 import com.justnik.mosplace.data.network.apiservices.AuthService
 import com.justnik.mosplace.data.network.authmodels.JWT
@@ -30,11 +30,11 @@ class AuthRepositoryImpl @Inject constructor(
             } else {
                 val errorBody = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
                 val string = jsonMapper.registrationJsonToMessage(errorBody)
-                Resource.Error(message = UiText.DynamicText(string))
+                Resource.Error(Throwable())
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.StringResource(R.string.unknown_error))
+            Resource.Error(e)
         }
     }
 
@@ -52,11 +52,11 @@ class AuthRepositoryImpl @Inject constructor(
             } else {
                 val json = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
                 val string = jsonMapper.loginJsonToMessage(json)
-                Resource.Error(message = UiText.DynamicText(string))
+                Resource.Error(Throwable())
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.StringResource(R.string.unknown_error))
+            Resource.Error(e)
         }
     }
 
@@ -69,11 +69,11 @@ class AuthRepositoryImpl @Inject constructor(
             } else {
                 val json = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
                 Log.d("RRR", json.toString())
-                Resource.Error(message = UiText.DynamicText("Error"))
+                Resource.Error(Throwable())
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(message = UiText.DynamicText("Error"))
+            Resource.Error(e)
         }
     }
 }
