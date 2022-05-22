@@ -9,4 +9,5 @@ data class DistrictDbModel (
     val id: Int,
     val title: String,
     val abbreviation: String,
+    val imageUrl: String?
 )

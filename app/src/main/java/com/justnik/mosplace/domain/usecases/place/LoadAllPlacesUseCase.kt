@@ -8,5 +8,5 @@ import javax.inject.Inject
 class LoadAllPlacesUseCase @Inject constructor(
     private val repository: DataRepository
 ) {
-    suspend operator fun invoke(): Resource<List<Place>> = repository.loadAllPlaces()
+    suspend operator fun invoke(): Resource<List<Place>> = repository.getAllPlaces()
 }

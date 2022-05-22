@@ -1,28 +1,37 @@
 package com.justnik.mosplace.presentation.districts
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.domain.entities.District
+import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.domain.usecases.districts.FilterDistrictsUseCase
 import com.justnik.mosplace.domain.usecases.districts.LoadDistrictsUseCase
+import com.justnik.mosplace.helpers.observeFlow
+import com.justnik.mosplace.presentation.helpers.UiState
+import com.justnik.mosplace.presentation.helpers.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okio.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class DistrictsViewModel @Inject constructor(
-    private val loadDistrictsUseCase: LoadDistrictsUseCase,
+    private val dataRepository: DataRepository,
     private val filterDistrictsUseCase: FilterDistrictsUseCase
 ) : ViewModel() {
+    val districts = dataRepository.getDistricts()
 
     private val allDistricts = mutableListOf<District>()
 
-    private val _uiState = MutableStateFlow(UiState())
+    private val _uiState = MutableStateFlow(UiState<List<District>>())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -32,40 +41,52 @@ class DistrictsViewModel @Inject constructor(
     fun filterDistricts(substring: String?) {
         viewModelScope.launch {
             if (substring == null) {
-                _uiState.value = UiState(districts = allDistricts)
+                _uiState.value = UiState(data = allDistricts)
             } else {
                 val filteredDistricts = filterDistrictsUseCase(allDistricts, substring)
-                _uiState.value = UiState(districts = filteredDistricts)
+                _uiState.value = UiState(data = filteredDistricts)
             }
         }
     }
 
-    fun loadDistricts(){
+//    fun loadDistricts(){
+//        viewModelScope.launch {
+//            _uiState.value = UiState(isLoading = true)
+//            when (val resource = loadDistrictsUseCase()){
+//                is Resource.Success -> {
+//                    val districts = resource.data
+//                    _uiState.value = UiState(districts = districts!!)
+//                    if (allDistricts.isEmpty()) {
+//                        allDistricts.addAll(resource.data)
+//                    }
+//                }
+//                is Resource.Error -> {
+//                    _uiState.value = UiState(error = UiState.Error.NetworkError())
+//                }
+//            }
+//        }
+//    }
+
+
+    fun loadDistricts() {
         viewModelScope.launch {
-            _uiState.value = UiState(isLoading = true)
-            when (val resource = loadDistrictsUseCase()){
-                is Resource.Success -> {
-                    val districts = resource.data
-                    _uiState.value = UiState(districts = districts!!)
-                    if (allDistricts.isEmpty()) {
-                        allDistricts.addAll(resource.data)
+            dataRepository.getDistricts().collect { resource ->
+                val error = if (resource is Resource.Error && resource.data.isNullOrEmpty()){
+                    when (resource.error){
+                        is IOException -> UiText.StringResource(R.string.error_network)
+                        else -> UiText.StringResource(R.string.unknown_error)
                     }
+
                 }
-                is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError())
-                }
+                else null
+                _uiState.value = UiState(
+                    data = resource.data,
+                    isLoading = resource is Resource.Loading && resource.data.isNullOrEmpty(),
+                    errorMessage = error
+                )
+
+                Log.d("RRR", uiState.toString())
             }
         }
     }
-
-    data class UiState(
-        val isLoading: Boolean = false,
-        val error: Error? = null,
-        val districts: List<District> = listOf()
-    ) {
-        sealed class Error(@StringRes val errorResId: Int){
-            class NetworkError(errorResId: Int = R.string.error_network) : Error(errorResId)
-        }
-    }
-
 }

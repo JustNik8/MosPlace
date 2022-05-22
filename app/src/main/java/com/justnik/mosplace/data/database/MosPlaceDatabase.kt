@@ -6,5 +6,5 @@ import com.justnik.mosplace.data.database.enteties.DistrictDbModel
 
 @Database(entities = [DistrictDbModel::class], version = 1)
 abstract class MosPlaceDatabase : RoomDatabase() {
-    abstract fun mosPlaceDao(): MosPlaceDao
+    abstract fun dataDao(): DataDao
 }

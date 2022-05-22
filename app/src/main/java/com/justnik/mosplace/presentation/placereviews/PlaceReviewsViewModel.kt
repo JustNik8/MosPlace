@@ -29,7 +29,7 @@ class PlaceReviewsViewModel @Inject constructor(
                     _uiState.value = UiState(data = resource.data)
                 }
                 is Resource.Error -> {
-                    _uiState.value = UiState(error = UiState.Error.NetworkError(UiText.DynamicText("Error")))
+                    _uiState.value = UiState()
                 }
             }
         }

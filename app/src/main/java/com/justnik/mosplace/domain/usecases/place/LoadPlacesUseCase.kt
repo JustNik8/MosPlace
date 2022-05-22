@@ -9,6 +9,6 @@ class LoadPlacesUseCase @Inject constructor(
     private val repository: DataRepository
 ) {
     suspend operator fun invoke(id: Int): Resource<List<Place>> =
-        repository.loadPlacesByDistrictId(id)
+        repository.getPlacesByDistrictId(id)
 
 }

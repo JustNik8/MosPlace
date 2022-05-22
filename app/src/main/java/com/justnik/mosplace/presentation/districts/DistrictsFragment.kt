@@ -99,16 +99,14 @@ class DistrictsFragment : Fragment(R.layout.fragment_districts) {
             val isLoading = uiState.isLoading
             binding.pbDistricts.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-            when (uiState.error) {
-                is DistrictsViewModel.UiState.Error.NetworkError -> {
-                    val errorText = requireActivity().getString(uiState.error.errorResId)
-                    showErrorUi(errorText)
-                }
-                else -> {
-                    rvAdapter.submitList(uiState.districts)
-                    showMainUi()
-                }
+            rvAdapter.submitList(uiState.data)
+
+            if (uiState.errorMessage == null){
+                showMainUi()
+            } else {
+                showErrorUi(uiState.errorMessage.asString(requireContext()))
             }
+
         }
     }
 
