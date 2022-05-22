@@ -85,7 +85,6 @@ class DistrictsViewModel @Inject constructor(
                     errorMessage = error
                 )
 
-                Log.d("RRR", uiState.toString())
             }
         }
     }

@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataRepository {
     fun getDistricts(): Flow<Resource<List<District>>>
-    suspend fun getPlacesByDistrictId(id: Int): Resource<List<Place>>
+    fun getPlacesByDistrictId(id: Int): Flow<Resource<List<Place>>>
     suspend fun getAllPlaces(): Resource<List<Place>>
 }

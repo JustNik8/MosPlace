@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PlaceImage (
-    var id: Int,
-    var imageUrl: String,
-    var place: Int
+    val id: Int,
+    val imageUrl: String,
+    val place: Int
 ): Parcelable

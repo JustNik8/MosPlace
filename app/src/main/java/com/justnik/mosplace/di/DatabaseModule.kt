@@ -17,6 +17,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(app: Application): MosPlaceDatabase {
-        return Room.databaseBuilder(app, MosPlaceDatabase::class.java, DB_NAME).build()
+        return Room.databaseBuilder(app, MosPlaceDatabase::class.java, DB_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }
