@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.helpers
+package com.justnik.mosplace.helpers.ui
 
 data class UiState<T>(
     val data: T? = null,

@@ -3,11 +3,11 @@ package com.justnik.mosplace.presentation.map
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.repositories.DataRepository
-import com.justnik.mosplace.presentation.helpers.UiState
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiState
+import com.justnik.mosplace.helpers.ui.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

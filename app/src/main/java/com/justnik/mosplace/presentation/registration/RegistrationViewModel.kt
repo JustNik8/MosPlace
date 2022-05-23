@@ -4,21 +4,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.authmodels.UserInfo
-import com.justnik.mosplace.helpers.Resource
-import com.justnik.mosplace.presentation.helpers.UiText
-import com.justnik.mosplace.domain.usecases.auth.*
-import com.justnik.mosplace.presentation.helpers.UiState
+import com.justnik.mosplace.domain.repositories.AuthRepository
+import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
+import com.justnik.mosplace.domain.usecases.auth.ValidatePassword
+import com.justnik.mosplace.domain.usecases.auth.ValidateRepeatedPassword
+import com.justnik.mosplace.domain.usecases.auth.ValidateUsername
+import com.justnik.mosplace.helpers.getThrowableMessage
+import com.justnik.mosplace.helpers.network.Resource
+import com.justnik.mosplace.helpers.ui.UiState
+import com.justnik.mosplace.helpers.ui.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
-    private val createUserUseCase: CreateUserUseCase,
+    private val authRepository: AuthRepository,
     private val validateEmail: ValidateEmail,
     private val validateUsername: ValidateUsername,
     private val validatePassword: ValidatePassword,
@@ -98,23 +104,27 @@ class RegistrationViewModel @Inject constructor(
         createAccount()
     }
 
-    private fun createAccount(){
+    private fun createAccount() {
         viewModelScope.launch {
             _uiState.value = UiState(isLoading = true)
             val email = registrationFormState.value.email
             val username = registrationFormState.value.username
             val password = registrationFormState.value.password
             val userFullInfo = UserInfo(email, password, username)
-            val response = createUserUseCase(userFullInfo)
             _uiState.value = UiState(isLoading = false)
+            val response = authRepository.createUser(userFullInfo)
             when (response) {
                 is Resource.Success -> {
                     validationEventChannel.send(ValidationEvent.Success(UiText.StringResource(R.string.confirm_email)))
                 }
                 is Resource.Error -> {
-                    val message = UiText.DynamicText("Error")
-                    validationEventChannel.send(ValidationEvent.Error(message))
+                    val errorMessage = when (response.error) {
+                        is HttpException -> UiText.DynamicText(response.data ?: "")
+                        else -> getThrowableMessage(response.error)
+                    }
+                    validationEventChannel.send(ValidationEvent.Error(errorMessage))
                 }
+                else -> {}
             }
         }
     }
@@ -123,5 +133,4 @@ class RegistrationViewModel @Inject constructor(
         class Success(val successMessage: UiText) : ValidationEvent()
         class Error(val errorMessage: UiText) : ValidationEvent()
     }
-
 }

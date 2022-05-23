@@ -1,7 +1,7 @@
 package com.justnik.mosplace.domain.usecases.auth
 
 import com.justnik.mosplace.R
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 import com.justnik.mosplace.domain.usecases.ValidationResult
 import javax.inject.Inject
 

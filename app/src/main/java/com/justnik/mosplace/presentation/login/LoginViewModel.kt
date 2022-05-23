@@ -2,10 +2,10 @@ package com.justnik.mosplace.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.prefs.SettingsPrefs
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 import com.justnik.mosplace.domain.usecases.auth.LoginUserUseCase
 import com.justnik.mosplace.domain.usecases.auth.ValidateEmail
 import com.justnik.mosplace.domain.usecases.auth.ValidatePassword

@@ -13,7 +13,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentReviewBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.setTitle
-import com.justnik.mosplace.presentation.helpers.TextWatcherWrapper
+import com.justnik.mosplace.helpers.ui.TextChangeWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,8 +59,8 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
 
     private fun observeViewModel() {
         viewModel.setCurrentPlace(place)
-        viewModel.validationEvents.observeFlow(viewLifecycleOwner){ event ->
-            when (event){
+        viewModel.validationEvents.observeFlow(viewLifecycleOwner) { event ->
+            when (event) {
                 is ReviewViewModel.ValidationEvent.Success -> {
                     findNavController().popBackStack()
                 }
@@ -71,7 +71,7 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
         }
 
         viewModel.reviewFormState.observeFlow(viewLifecycleOwner) { state ->
-            with(binding){
+            with(binding) {
                 tilReview.error = state.reviewError?.asString(requireContext())
                 etRatingError.text = state.ratingCountError?.asString(requireContext())
             }
@@ -79,8 +79,8 @@ class ReviewFragment : Fragment(R.layout.fragment_review) {
     }
 
     private fun addTextChangeListeners() {
-        with (binding) {
-            etReview.addTextChangedListener(TextWatcherWrapper{
+        with(binding) {
+            etReview.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(ReviewFormEvent.ReviewChanged(etReview.text.toString()))
             })
         }

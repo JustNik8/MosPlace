@@ -3,8 +3,6 @@ package com.justnik.mosplace.data.repositories
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.justnik.mosplace.R
-import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.data.mappers.JsonMapper
 import com.justnik.mosplace.data.network.apiservices.AuthService
 import com.justnik.mosplace.data.network.authmodels.JWT
@@ -12,8 +10,10 @@ import com.justnik.mosplace.data.network.authmodels.LoginInfo
 import com.justnik.mosplace.data.network.authmodels.UserInfo
 import com.justnik.mosplace.data.network.authmodels.UserResponse
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.presentation.helpers.UiText
 import com.justnik.mosplace.domain.repositories.AuthRepository
+import com.justnik.mosplace.helpers.network.Resource
+import okio.IOException
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -22,17 +22,33 @@ class AuthRepositoryImpl @Inject constructor(
     private val jsonMapper: JsonMapper
 ) : AuthRepository {
 
-    override suspend fun createUser(userInfo: UserInfo): Resource<Unit> {
-        return try {
-            val response = authService.createUser(userInfo)
-            if (response.isSuccessful) {
-                Resource.Success(Unit)
-            } else {
-                val errorBody = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
-                val string = jsonMapper.registrationJsonToMessage(errorBody)
-                Resource.Error(Throwable())
-            }
-        } catch (e: Exception) {
+//    override suspend fun createUser(userInfo: UserInfo): Resource<Unit> {
+//        return try {
+//            val response = authService.createUser(userInfo)
+//            if (response.isSuccessful) {
+//                Resource.Success(Unit)
+//            } else {
+//                val errorBody = JsonParser.parseString(response.errorBody()?.string()).asJsonObject
+//                val string = jsonMapper.registrationJsonToMessage(errorBody)
+//                Resource.Error(Throwable())
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            Resource.Error(e)
+//        }
+//    }
+
+    override suspend fun createUser(userInfo: UserInfo): Resource<String> {
+        return try{
+            authService.createUser(userInfo)
+            Resource.Success("")
+        } catch (e: HttpException){
+            e.printStackTrace()
+            val errorBody = JsonParser.parseString(e.response()?.errorBody()?.string()).asJsonObject
+            val string = jsonMapper.registrationJsonToMessage(errorBody)
+            Resource.Error(e, string)
+        }
+        catch (e: Exception){
             e.printStackTrace()
             Resource.Error(e)
         }

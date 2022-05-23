@@ -1,6 +1,6 @@
 package com.justnik.mosplace.domain.usecases
 
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 
 data class ValidationResult(
     val successful: Boolean,

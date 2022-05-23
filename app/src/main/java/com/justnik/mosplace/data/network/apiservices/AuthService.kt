@@ -14,7 +14,7 @@ import retrofit2.http.POST
 
 interface AuthService {
     @POST("auth/users/")
-    suspend fun createUser(@Body userInfo: UserInfo): Response<JsonElement>
+    suspend fun createUser(@Body userInfo: UserInfo): JsonObject
 
     @POST("auth/jwt/create")
     suspend fun loginUser(

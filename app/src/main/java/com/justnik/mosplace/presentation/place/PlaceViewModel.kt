@@ -4,10 +4,10 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.data.prefs.ProfilePrefs
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.auth.IsUserAuthorizedUseCase
 import com.justnik.mosplace.domain.usecases.place.OpenPlaceInMapUseCase

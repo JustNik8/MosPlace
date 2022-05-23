@@ -1,4 +1,4 @@
-package com.justnik.mosplace.helpers
+package com.justnik.mosplace.helpers.network
 
 import kotlinx.coroutines.flow.*
 

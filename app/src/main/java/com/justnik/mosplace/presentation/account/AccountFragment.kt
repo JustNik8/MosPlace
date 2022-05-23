@@ -107,10 +107,10 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun observeViewModel() {
         viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
-            val profile = uiState.profile
+            val profile = uiState.data
             with(binding) {
-                tvUsername.text = profile.name
-                Glide.with(requireActivity()).load(profile.imageUrl).into(ivAccountAvatar)
+                tvUsername.text = profile?.name
+                Glide.with(requireActivity()).load(profile?.imageUrl).into(ivAccountAvatar)
             }
         }
     }

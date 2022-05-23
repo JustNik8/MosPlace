@@ -1,6 +1,6 @@
 package com.justnik.mosplace.presentation.review
 
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 
 data class ReviewFormState(
     val review: String = "",

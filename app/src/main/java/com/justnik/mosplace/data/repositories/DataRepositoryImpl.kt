@@ -6,11 +6,10 @@ import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceImageMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.apiservices.DataService
-import com.justnik.mosplace.data.network.datamodels.PlaceDto
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.repositories.DataRepository
-import com.justnik.mosplace.helpers.Resource
-import com.justnik.mosplace.helpers.networkBounceResource
+import com.justnik.mosplace.helpers.network.Resource
+import com.justnik.mosplace.helpers.network.networkBounceResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

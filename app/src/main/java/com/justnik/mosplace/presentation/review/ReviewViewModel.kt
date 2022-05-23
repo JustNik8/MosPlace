@@ -3,10 +3,10 @@ package com.justnik.mosplace.presentation.review
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.data.network.reviewmodels.AddReviewBody
 import com.justnik.mosplace.data.prefs.ProfilePrefs
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.usecases.common.ValidateFieldNotBlank
 import com.justnik.mosplace.domain.usecases.review.AddReviewUseCase

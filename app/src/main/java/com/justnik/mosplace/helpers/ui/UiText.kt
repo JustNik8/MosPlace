@@ -1,4 +1,4 @@
-package com.justnik.mosplace.presentation.helpers
+package com.justnik.mosplace.helpers.ui
 
 import android.content.Context
 import androidx.annotation.StringRes

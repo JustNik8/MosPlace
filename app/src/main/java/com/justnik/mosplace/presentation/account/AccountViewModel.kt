@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.prefs.UserPrefs
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.data.prefs.SettingsPrefs
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 import com.justnik.mosplace.domain.entities.profile.Profile
 import com.justnik.mosplace.domain.usecases.auth.LoadUserUseCase
 import com.justnik.mosplace.domain.usecases.profile.LoadProfileUseCase
+import com.justnik.mosplace.helpers.ui.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +25,7 @@ class AccountViewModel @Inject constructor(
     private val settingsPrefs: SettingsPrefs
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(UiState())
+    private val _uiState = MutableStateFlow(UiState<Profile>())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -59,7 +60,7 @@ class AccountViewModel @Inject constructor(
             val response = getProfileUseCase(accessToken, id)
             when (response) {
                 is Resource.Success -> {
-                    _uiState.value = UiState(profile = response.data!!)
+                    _uiState.value = UiState(data = response.data)
                 }
                 is Resource.Error -> {
                 }
@@ -68,15 +69,4 @@ class AccountViewModel @Inject constructor(
     }
 
     fun getDarkModeCode() = settingsPrefs.darkModeCode
-
-    data class UiState(
-        val isLoading: Boolean = false,
-        val error: Error? = null,
-        val profile: Profile = Profile(0, "", "", 0, 0)
-    ) {
-        sealed class Error(val uiText: UiText) {
-            class NetworkError(uiText: UiText = UiText.StringResource(R.string.error_network)) :
-                Error(uiText)
-        }
-    }
 }

@@ -22,6 +22,7 @@ import com.justnik.mosplace.databinding.FragmentLoginBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.setTitle
 import com.justnik.mosplace.helpers.showSingle
+import com.justnik.mosplace.helpers.ui.TextChangeWatcher
 import com.justnik.mosplace.presentation.account.ThemeDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -144,11 +145,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun addTextChangeListeners() {
         with(binding) {
-            etEmail.addTextChangedListener(TextWatcherWrapper {
+            etEmail.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(LoginFormEvent.EmailChanged(etEmail.text.toString()))
             })
 
-            etPassword.addTextChangedListener(TextWatcherWrapper {
+            etPassword.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(LoginFormEvent.PasswordChanged(etPassword.text.toString()))
             })
         }
@@ -167,16 +168,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.bLogIn.setOnClickListener {
             viewModel.onEvent(LoginFormEvent.Submit)
         }
-    }
-
-    private class TextWatcherWrapper(private val block: () -> Unit) : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            block()
-        }
-
-        override fun afterTextChanged(p0: Editable?) {}
     }
 
 }

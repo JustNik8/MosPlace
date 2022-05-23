@@ -1,18 +1,20 @@
-package com.justnik.mosplace.presentation.helpers
+package com.justnik.mosplace.helpers.ui
 
 import android.text.Editable
 import android.text.TextWatcher
 
-class TextWatcherWrapper(private val block: () -> Unit) : TextWatcher {
+class TextChangeWatcher(
+    private val onTextChange: () -> Unit
+) : TextWatcher {
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        //Do noting
+        //Do nothing
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        block()
+        onTextChange()
     }
 
     override fun afterTextChanged(s: Editable?) {
-        //Do noting
+        //Do nothing
     }
 }

@@ -2,11 +2,10 @@ package com.justnik.mosplace.presentation.placereviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.justnik.mosplace.helpers.Resource
+import com.justnik.mosplace.helpers.network.Resource
 import com.justnik.mosplace.domain.entities.Review
 import com.justnik.mosplace.domain.usecases.review.LoadPlaceReviewsUseCase
-import com.justnik.mosplace.presentation.helpers.UiState
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

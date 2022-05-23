@@ -1,6 +1,6 @@
 package com.justnik.mosplace.presentation.registration
 
-import com.justnik.mosplace.presentation.helpers.UiText
+import com.justnik.mosplace.helpers.ui.UiText
 
 data class RegistrationFormState (
     val email: String = "",

@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.annotation.StringRes
 import com.justnik.mosplace.R
 import com.justnik.mosplace.data.network.PlaceTypes
+import com.justnik.mosplace.helpers.ui.UiText
+import okio.IOException
+import java.net.SocketTimeoutException
 
 fun parsePlaceType(type: String, context: Context): String {
     val res = context.resources
@@ -25,3 +28,10 @@ fun getPlaceTypeFromStringRes(@StringRes resId: Int): String {
 }
 
 fun getAbbreviationWithName(abbreviation: String, name: String) = "$abbreviation: $name"
+
+fun getThrowableMessage(throwable: Throwable?): UiText {
+    return when (throwable){
+        is IOException ->UiText.StringResource(R.string.error_network)
+        else -> UiText.StringResource(R.string.unknown_error)
+    }
+}

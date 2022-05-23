@@ -1,8 +1,6 @@
 package com.justnik.mosplace.presentation.registration
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -15,7 +13,7 @@ import com.justnik.mosplace.R
 import com.justnik.mosplace.databinding.FragmentRegistrationBinding
 import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.helpers.setTitle
-import com.justnik.mosplace.presentation.helpers.TextWatcherWrapper
+import com.justnik.mosplace.helpers.ui.TextChangeWatcher
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -106,18 +104,18 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private fun addTextChangeListeners() {
         with(binding) {
-            etEmail.addTextChangedListener(TextWatcherWrapper {
+            etEmail.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(RegistrationFormEvent.EmailChanged(etEmail.text.toString()))
             })
 
-            etUsername.addTextChangedListener(TextWatcherWrapper {
+            etUsername.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(RegistrationFormEvent.UsernameChanged(etUsername.text.toString()))
             })
 
-            etPassword.addTextChangedListener(TextWatcherWrapper {
+            etPassword.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(RegistrationFormEvent.PasswordChanged(etPassword.text.toString()))
             })
-            etRepeatedPassword.addTextChangedListener(TextWatcherWrapper {
+            etRepeatedPassword.addTextChangedListener(TextChangeWatcher {
                 viewModel.onEvent(
                     RegistrationFormEvent.RepeatedPasswordChanged(
                         etRepeatedPassword.text.toString()
