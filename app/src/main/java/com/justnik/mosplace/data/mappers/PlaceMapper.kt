@@ -11,30 +11,7 @@ class PlaceMapper @Inject constructor(
     private val placeImageMapper: PlaceImageMapper
 ) {
 
-    fun dtoToEntity(dto: PlaceDto): Place {
-        val placeImages = dto.images.map {
-            PlaceImage(
-                id = it.id,
-                imageUrl = it.imageUrl,
-                place = it.place
-            )
-        }
-
-        return Place(
-            id = dto.id,
-            images = placeImages,
-            title = dto.title,
-            shortDescription = dto.shortDescription,
-            fullDescription = dto.fullDescription,
-            longitude = dto.longitude,
-            latitude = dto.latitude,
-            type = dto.type,
-            district = dto.district
-        )
-    }
-
     fun dtoToDbModel(dto: PlaceDto): PlaceDbModel {
-
         return PlaceDbModel(
             id = dto.id,
             title = dto.title,

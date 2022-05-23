@@ -30,29 +30,6 @@ class DistrictPlacesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UiState<List<Place>>())
     val uiState = _uiState.asStateFlow()
 
-//    fun loadPlacesByDistrictId(id: Int) {
-//        if (allDistrictPlaces.isEmpty()) {
-//            viewModelScope.launch {
-//                _uiState.value = UiState(isLoading = true)
-//                when (val resource = loadPlacesUseCase(id)) {
-//                    is Resource.Success -> {
-//                        val places = resource.data
-//                        if (allDistrictPlaces.isEmpty()) {
-//                            allDistrictPlaces.addAll(places!!)
-//                        }
-//                        val selectedTypes = placeTypePrefs.selectedPrefsTypes
-//                            .filter { it.selected }
-//                            .map { it.typeName }
-//                        filterPlacesByType(selectedTypes)
-//                    }
-//                    is Resource.Error -> {
-//                        _uiState.value = UiState(error = UiState.Error.NetworkError())
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     fun loadPlacesByDistrictId(id: Int) {
         viewModelScope.launch {
             dataRepository.getPlacesByDistrictId(id).collect { resource ->

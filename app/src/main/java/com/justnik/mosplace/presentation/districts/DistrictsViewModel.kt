@@ -1,17 +1,12 @@
 package com.justnik.mosplace.presentation.districts
 
-import android.util.Log
-import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.justnik.mosplace.R
 import com.justnik.mosplace.helpers.Resource
 import com.justnik.mosplace.domain.entities.District
 import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.domain.usecases.districts.FilterDistrictsUseCase
-import com.justnik.mosplace.domain.usecases.districts.LoadDistrictsUseCase
-import com.justnik.mosplace.helpers.observeFlow
 import com.justnik.mosplace.presentation.helpers.UiState
 import com.justnik.mosplace.presentation.helpers.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,25 +43,6 @@ class DistrictsViewModel @Inject constructor(
             }
         }
     }
-
-//    fun loadDistricts(){
-//        viewModelScope.launch {
-//            _uiState.value = UiState(isLoading = true)
-//            when (val resource = loadDistrictsUseCase()){
-//                is Resource.Success -> {
-//                    val districts = resource.data
-//                    _uiState.value = UiState(districts = districts!!)
-//                    if (allDistricts.isEmpty()) {
-//                        allDistricts.addAll(resource.data)
-//                    }
-//                }
-//                is Resource.Error -> {
-//                    _uiState.value = UiState(error = UiState.Error.NetworkError())
-//                }
-//            }
-//        }
-//    }
-
 
     fun loadDistricts() {
         viewModelScope.launch {

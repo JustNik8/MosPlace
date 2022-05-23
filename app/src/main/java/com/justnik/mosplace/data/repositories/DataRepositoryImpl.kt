@@ -6,6 +6,7 @@ import com.justnik.mosplace.data.mappers.DistrictMapper
 import com.justnik.mosplace.data.mappers.PlaceImageMapper
 import com.justnik.mosplace.data.mappers.PlaceMapper
 import com.justnik.mosplace.data.network.apiservices.DataService
+import com.justnik.mosplace.data.network.datamodels.PlaceDto
 import com.justnik.mosplace.domain.entities.Place
 import com.justnik.mosplace.domain.repositories.DataRepository
 import com.justnik.mosplace.helpers.Resource
@@ -23,16 +24,6 @@ class DataRepositoryImpl @Inject constructor(
 ) : DataRepository {
 
     private val dataDao = db.dataDao()
-
-//    override suspend fun getDistricts(): Resource<List<District>> {
-//        return try {
-//            val districtsDto = dataService.getDistrictList()
-//            val districts = districtsDto.map { dto -> districtMapper.dtoToEntity(dto) }
-//            Resource.Success(districts)
-//        } catch (e: Exception) {
-//            Resource.Error(e)
-//        }
-//    }
 
     override fun getDistricts() =
         networkBounceResource(
@@ -81,6 +72,7 @@ class DataRepositoryImpl @Inject constructor(
                     dataDao.deleteAllPlacesByDistrictId(id)
                     dataDao.insertPlaces(placeDbModels)
 
+                    //save place image urls
                     placesDto.forEach { dto ->
                         val imageDbModels =
                             dto.images.map { imageDto -> placeImageMapper.dtoToDbModel(imageDto) }
@@ -91,24 +83,40 @@ class DataRepositoryImpl @Inject constructor(
             }
         )
 
+    override suspend fun getAllPlaces(): Flow<Resource<List<Place>>> =
+        networkBounceResource(
+            query = {
+                val placesFlow = dataDao.getAllPlaces()
+                placesFlow.map { dbModels ->
+                    dbModels.map { dbModel ->
+                        val imageDbModels = dataDao.getPlaceImagesByPlaceId(dbModel.id)
+                        placeMapper.dbModelToEntity(dbModel, imageDbModels)
+                    }
+                }
+            },
+            fetch = {
+                dataService.getAllPlaces()
+            },
+            saveFetchResult = { placesDto ->
+                db.withTransaction {
+                    val placeDbModels = placesDto.map { dto -> placeMapper.dtoToDbModel(dto) }
 
-//    override fun getPlacesByDistrictId(id: Int): Resource<List<Place>> {
-//        return try {
-//            val placesDto = dataService.getPlacesByDistrictId(id)
-//            val places = placesDto.map { placeMapper.dtoToEntity(it) }
-//            Resource.Success(places)
-//        } catch (e: Exception) {
-//            Resource.Error(e)
-//        }
-//    }
+                    //Delete all place images by place id
+                    placeDbModels.forEach { placeDbModel ->
+                        dataDao.deleteAllPlacesByDistrictId(placeDbModel.id)
+                    }
 
-    override suspend fun getAllPlaces(): Resource<List<Place>> {
-        return try {
-            val placesDto = dataService.getAllPlaces()
-            val places = placesDto.map { placeMapper.dtoToEntity(it) }
-            Resource.Success(places)
-        } catch (e: Exception) {
-            Resource.Error(e)
-        }
-    }
+                    //refresh list of places
+                    dataDao.deleteAllPlaces()
+                    dataDao.insertPlaces(placeDbModels)
+
+                    //save place image urls
+                    placesDto.forEach { dto ->
+                        val imageDbModels =
+                            dto.images.map { imageDto -> placeImageMapper.dtoToDbModel(imageDto) }
+                        dataDao.insertPlaceImages(imageDbModels)
+                    }
+                }
+            }
+        )
 }

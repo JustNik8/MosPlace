@@ -28,8 +28,14 @@ interface DataDao {
     @Query("SELECT * FROM places WHERE district=:districtId")
     fun getPlacesByDistrictId(districtId: Int): Flow<List<PlaceDbModel>>
 
+    @Query("SELECT * FROM places")
+    fun getAllPlaces(): Flow<List<PlaceDbModel>>
+
     @Query("DELETE FROM places WHERE district=:districtId")
     suspend fun deleteAllPlacesByDistrictId(districtId: Int)
+
+    @Query("DELETE FROM places")
+    suspend fun deleteAllPlaces()
 
     //PlaceImages
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -85,7 +85,6 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpMapView()
         checkLocationPermissions()
-
     }
 
     override fun onStart() {
@@ -168,7 +167,7 @@ class MapFragment : Fragment(R.layout.fragment_map), UserLocationObjectListener 
 
     private fun addPlacemarks() {
         viewModel.uiState.observeFlow(viewLifecycleOwner) { uiState ->
-            uiState.places.forEach { place ->
+            uiState.data?.forEach { place ->
                 val point = Point(place.latitude, place.longitude)
                 val viewProvider = ViewProvider(getImageViewByPlaceType(place.type))
                 val mark = mapObjects.addPlacemark(point, viewProvider)
