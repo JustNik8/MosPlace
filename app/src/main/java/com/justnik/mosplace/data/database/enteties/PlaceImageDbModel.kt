@@ -3,11 +3,10 @@ package com.justnik.mosplace.data.database.enteties
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "districts")
-data class DistrictDbModel (
+@Entity(tableName = "place_images")
+data class PlaceImageDbModel (
     @PrimaryKey
     val id: Int,
-    val title: String,
-    val abbreviation: String,
-    val imageUrl: String?
+    val imageUrl: String,
+    val place: Int
 )

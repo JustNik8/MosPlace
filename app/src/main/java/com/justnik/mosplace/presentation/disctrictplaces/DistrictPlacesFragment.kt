@@ -1,6 +1,7 @@
 package com.justnik.mosplace.presentation.disctrictplaces
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -76,15 +77,13 @@ class DistrictPlacesFragment : Fragment(R.layout.fragment_district_places) {
             val isLoading = uiState.isLoading
             binding.pbDistrictPlaces.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-            when (uiState.error) {
-                is DistrictPlacesViewModel.UiState.Error.NetworkError -> {
-                    val errorText = requireActivity().getString(uiState.error.errorResId)
-                    showErrorUi(errorText)
-                }
-                else -> {
-                    rvAdapter.submitList(uiState.places)
-                    showMainUi()
-                }
+            rvAdapter.submitList(uiState.data)
+
+            Log.d("RRR", "ERROR: ${uiState.errorMessage?.asString(requireContext())}")
+            if (uiState.errorMessage == null){
+                showMainUi()
+            } else {
+                showErrorUi(uiState.errorMessage.asString(requireContext()))
             }
         }
     }
